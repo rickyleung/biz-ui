@@ -1,0 +1,74 @@
+<h3>Textarea</h3>
+
+<div class="example">
+<textarea class="t1">123
+456</textarea>
+<button>get length</button>
+<br><br>
+<textarea class="t2" placeholder="789"></textarea>
+<br><br>
+<textarea class="t3">disabled</textarea>
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;textarea class="t1"&gt;123
+    456&lt;/textarea&gt;
+    &lt;button&gt;get length&lt;/button&gt;
+    &lt;br&gt;&lt;br&gt;
+    &lt;textarea class="t2" placeholder="789"&gt;&lt;/textarea&gt;
+    &lt;br&gt;&lt;br&gt;
+    &lt;textarea class="t3"&gt;disabled&lt;/textarea&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('textarea').bizTextarea();
+    $('.t3').bizTextarea('disable');
+
+    $('button').bizButton().click(function() {
+        alert($('.t1').bizTextarea('length'));
+    });
+
+</code></pre>
+
+<h4>Options</h4>
+<table>
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>theme</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>disabled</td>
+        <td>Boolean</td>
+        <td>是否禁用</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>disable()</h4>
+<p class="des">禁用</p>
+</div>
+
+<div class="methods">
+<h4>enable()</h4>
+<p class="des">激活</p>
+</div>
+
+<div class="methods">
+<h4>length()</h4>
+<p class="des">获取文本长度（不计回车）</p>
+</div>

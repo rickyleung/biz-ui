@@ -1,0 +1,35 @@
+{
+  "name": "biz-ui",
+  "description": "A jQuery plugin for business UI components",
+  "authors": "BizFE",
+  "main": "dist/jquery.bizui.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bizdevfe/biz-ui.git"
+  },
+  "moduleType": ["node"],
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.0",
+    "gulp-jsbeautifier": "^2.0.4",
+    "gulp-jsdoc3": "^1.0.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-less": "^3.3.0",
+    "gulp-pure-cjs": "^0.1.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-sequence": "^0.4.6",
+    "gulp-uglify": "^2.0.1",
+    "jshint": "^2.9.4",
+    "jshint-stylish": "^2.2.1"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "jquery-placeholder": "^2.3.1"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "license": "MIT"
+}
