@@ -40,7 +40,6 @@ If you're not using a build system, just include the css file and the js file to
 Use it in any module or global environment as a common jQuery plugin:
 
     $('button').bizButton();
-
     $('button').bizButton('destroy');
 
 Themes
@@ -60,7 +59,6 @@ Iconfonts
 Supported iconfonts via [Google Material Design Icons](https://material.io/icons/), for example:
 
     <i class="biz-icon">3d_rotation</i>
-    <i class="biz-icon">&amp;#xE84D;</i>
 
 Build
 --------
