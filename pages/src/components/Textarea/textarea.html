@@ -1,34 +1,27 @@
 <h3>Textarea</h3>
 
 <div class="example">
-<textarea class="t1">123
-456</textarea>
+<textarea class="content1" placeholder="default content"></textarea>
 <button>get length</button>
 <br><br>
-<textarea class="t2" placeholder="789"></textarea>
-<br><br>
-<textarea class="t3">disabled</textarea>
+<textarea class="content2">disabled</textarea>
 </div>
 
 <h4>HTML</h4>
 <pre><code class="xml">
-    &lt;textarea class="t1"&gt;123
-    456&lt;/textarea&gt;
+    &lt;textarea class="content1" placeholder="default content"&gt;&lt;/textarea&gt;
     &lt;button&gt;get length&lt;/button&gt;
     &lt;br&gt;&lt;br&gt;
-    &lt;textarea class="t2" placeholder="789"&gt;&lt;/textarea&gt;
-    &lt;br&gt;&lt;br&gt;
-    &lt;textarea class="t3"&gt;disabled&lt;/textarea&gt;
+    &lt;textarea class="content2"&gt;disabled&lt;/textarea&gt;
 
 </code></pre>
 
 <h4>JavaScript</h4>
 <pre><code class="js">
     $('textarea').bizTextarea();
-    $('.t3').bizTextarea('disable');
-
+    $('.content2').bizTextarea('disable');
     $('button').bizButton().click(function() {
-        alert($('.t1').bizTextarea('length'));
+        alert($('.content1').bizTextarea('length'));
     });
 
 </code></pre>

@@ -122,3 +122,10 @@
 <h4>enable()</h4>
 <p class="des">激活</p>
 </div>
+
+<h3>兼容性问题</h3>
+<p class="issues">对于 IE 浏览器，icon 字段要使用 codepoints，例如：</p>
+<pre><code class="js">
+    $('.done').bizButton({icon: '&amp;#xE876;'});
+
+</code></pre>

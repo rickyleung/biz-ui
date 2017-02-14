@@ -217,7 +217,8 @@
             var bizui = {
                     theme: 'blue',
                     Button: _require(3),
-                    Textarea: _require(4)
+                    Input: _require(4),
+                    Textarea: _require(5)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -303,6 +304,86 @@
         },
         function (module, exports) {
             _require(0);
+            function Input(input, options) {
+                this.main = input;
+                this.$main = $(this.main);
+                this.$main.placeholder();
+                var defaultOption = { theme: bizui.theme };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-input', disableClass = 'biz-input-disable', hoverClass = 'biz-input-hover', focusClass = 'biz-input-focus-', dataKey = 'bizInput';
+            Input.prototype = {
+                init: function (options) {
+                    this.$main.addClass(defaultClass);
+                    if (options.disabled) {
+                        this.disable();
+                    }
+                    if (typeof options.onEnter === 'function') {
+                        var self = this;
+                        this.$main.on('keydown.bizInput', function (e) {
+                            if (e.keyCode === 13) {
+                                options.onEnter.call(self, e);
+                                return false;
+                            }
+                        });
+                    }
+                    this.$main.on('mouseover.bizInput', function (e) {
+                        $(this).addClass(hoverClass);
+                    }).on('mouseout.bizInput', function (e) {
+                        $(this).removeClass(hoverClass);
+                    }).on('focus.bizInput', function (e) {
+                        $(this).addClass(focusClass + options.theme);
+                    }).on('blur.bizInput', function (e) {
+                        $(this).removeClass(focusClass + options.theme);
+                    });
+                },
+                enable: function () {
+                    this.main.disabled = false;
+                    this.$main.removeClass(disableClass);
+                },
+                disable: function () {
+                    this.main.disabled = true;
+                    this.$main.addClass(disableClass);
+                },
+                destroy: function () {
+                    this.$main.removeClass(defaultClass + ' ' + disableClass);
+                    this.$main.off('keydown.bizInput').off('mouseover.bizInput').off('mouseout.bizInput').off('focus.bizInput').off('blur.bizInput');
+                    this.$main.data(dataKey, null);
+                }
+            };
+            function isInput(elem) {
+                return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && (!elem.getAttribute('type') || elem.getAttribute('type').toLowerCase() === 'text');
+            }
+            $.extend($.fn, {
+                bizInput: function (method) {
+                    var internal_return;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(arguments, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (isInput(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                                $(this).data(dataKey, new Input(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = Input;
+        },
+        function (module, exports) {
+            _require(0);
             function Textarea(textarea, options) {
                 this.main = textarea;
                 this.$main = $(this.main);
@@ -337,7 +418,7 @@
                     this.$main.addClass(disableClass);
                 },
                 length: function () {
-                    return this.main.value.replace(/\r?\n/g, '').length;
+                    return this.$main.val().replace(/\r?\n/g, '').length;
                 },
                 destroy: function () {
                     this.$main.removeClass(defaultClass + ' ' + disableClass);
@@ -349,7 +430,7 @@
                 return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'textarea';
             }
             $.extend($.fn, {
-                bizTextarea: function (method, options) {
+                bizTextarea: function (method) {
                     var internal_return;
                     this.each(function () {
                         var instance = $(this).data(dataKey);

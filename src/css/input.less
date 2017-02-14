@@ -1,16 +1,16 @@
 /**
- * textarea
+ * input
  */
 
-.biz-textarea {
+.biz-input {
     padding: 5px;
     border-radius: 2px;
     border-width: 1px;
     border-style: solid;
     outline: none;
     vertical-align: middle;
-    line-height: 20px;
-    resize: none;
+    height: 18px;
+    line-height: 18px;
     font-family: @font-family;
     font-size: @font-size;
     color: @dark-text;
@@ -18,21 +18,21 @@
     background-color: @background;
 }
 
-.biz-textarea-hover {
+.biz-input-hover {
     border-color: @border-hover;
 }
 
-.biz-textarea-disable {
+.biz-input-disable {
     background-color: @input-disable-background;
     color: @disable-text;
 }
 
 
 /**
- * textarea themes
+ * input themes
  */
 
-@textarea-themes: blue,
+@input-themes: blue,
 light-blue,
 cyan,
 teal,
@@ -51,12 +51,12 @@ pink,
 purple,
 deep-purple,
 indigo;
-.generate-textarea-themes(@i: length(@textarea-themes)) when (@i > 0) {
-    @name: extract(@textarea-themes, @i);
-    .biz-textarea-focus-@{name} {
+.generate-input-themes(@i: length(@input-themes)) when (@i > 0) {
+    @name: extract(@input-themes, @i);
+    .biz-input-focus-@{name} {
         border-color: @@name !important;
     }
-    .generate-textarea-themes(@i - 1);
+    .generate-input-themes(@i - 1);
 }
 
-.generate-textarea-themes();
+.generate-input-themes();

@@ -259,6 +259,91 @@
   text-shadow: 1px 1px 1px #999999;
 }
 /**
+ * input
+ */
+.biz-input {
+  padding: 5px;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
+  vertical-align: middle;
+  height: 18px;
+  line-height: 18px;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  border-color: #e2e2e2;
+  background-color: #ffffff;
+}
+.biz-input-hover {
+  border-color: #cccccc;
+}
+.biz-input-disable {
+  background-color: #f1f1f1;
+  color: #b6b6b6;
+}
+/**
+ * input themes
+ */
+.biz-input-focus-indigo {
+  border-color: #3f51b5 !important;
+}
+.biz-input-focus-deep-purple {
+  border-color: #673ab7 !important;
+}
+.biz-input-focus-purple {
+  border-color: #9c27b0 !important;
+}
+.biz-input-focus-pink {
+  border-color: #e91e63 !important;
+}
+.biz-input-focus-red {
+  border-color: #f44336 !important;
+}
+.biz-input-focus-deep-orange {
+  border-color: #ff5722 !important;
+}
+.biz-input-focus-gray {
+  border-color: #9e9e9e !important;
+}
+.biz-input-focus-blue-gray {
+  border-color: #607d8b !important;
+}
+.biz-input-focus-brown {
+  border-color: #795548 !important;
+}
+.biz-input-focus-orange {
+  border-color: #ff9800 !important;
+}
+.biz-input-focus-amber {
+  border-color: #ffc107 !important;
+}
+.biz-input-focus-yellow {
+  border-color: #ffeb3b !important;
+}
+.biz-input-focus-lime {
+  border-color: #cddc39 !important;
+}
+.biz-input-focus-light-green {
+  border-color: #8bc34a !important;
+}
+.biz-input-focus-green {
+  border-color: #4caf50 !important;
+}
+.biz-input-focus-teal {
+  border-color: #009688 !important;
+}
+.biz-input-focus-cyan {
+  border-color: #00bcd4 !important;
+}
+.biz-input-focus-light-blue {
+  border-color: #03a9f4 !important;
+}
+.biz-input-focus-blue {
+  border-color: #2196f3 !important;
+}
+/**
  * textarea
  */
 .biz-textarea {

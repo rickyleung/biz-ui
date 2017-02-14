@@ -1,3 +1,66 @@
 <h3>Input</h3>
 
-<script async src="//jsfiddle.net/bizdevfe/sx74qw4g/embed/result,js,html,css/"></script>
+<div class="example">
+<input class="item1" placeholder="default text">
+<br><br>
+<input class="item2" value="disabled">
+</div>
+
+<h4>HTML</h4>
+<pre><code class="xml">
+    &lt;input class="item1" placeholder="default text"&gt;
+    &lt;br&gt;&lt;br&gt;
+    &lt;input class="item2" value="disabled"&gt;
+
+</code></pre>
+
+<h4>JavaScript</h4>
+<pre><code class="js">
+    $('input').bizInput({
+        onEnter: function(e) {
+            alert(this.$main.val());
+        }
+    });
+    $('.item2').bizInput('disable');
+
+</code></pre>
+
+<h4>Options</h4>
+<table>
+    <tr>
+        <th>参数名称</th>
+        <th>参数类型</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td>theme</td>
+        <td>String</td>
+        <td>主题</td>
+    </tr>
+    <tr>
+        <td>disabled</td>
+        <td>Boolean</td>
+        <td>是否禁用</td>
+    </tr>
+    <tr>
+        <td>onEnter</td>
+        <td>Function</td>
+        <td>按回车回调</td>
+    </tr>
+</table>
+
+<h4>Methods</h4>
+<div class="methods">
+<h4>destroy()</h4>
+<p class="des">销毁</p>
+</div>
+
+<div class="methods">
+<h4>disable()</h4>
+<p class="des">禁用</p>
+</div>
+
+<div class="methods">
+<h4>enable()</h4>
+<p class="des">激活</p>
+</div>

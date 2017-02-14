@@ -1,15 +1,16 @@
 require('jquery-placeholder');
 
 /**
- * Textarea
+ * Input
  * @constructor
- * @param {HTMLElement} textarea - 目标元素
+ * @param {HTMLElement} input - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
  * @param {Boolean} options.disabled - 是否禁用
+ * @param {Function} options.onEnter - 按回车回调
  */
-function Textarea(textarea, options) {
-    this.main = textarea;
+function Input(input, options) {
+    this.main = input;
     this.$main = $(this.main);
     this.$main.placeholder();
 
@@ -20,13 +21,13 @@ function Textarea(textarea, options) {
     this.init(this.options);
 }
 
-var defaultClass = 'biz-textarea',
-    disableClass = 'biz-textarea-disable',
-    hoverClass = 'biz-textarea-hover',
-    focusClass = 'biz-textarea-focus-',
-    dataKey = 'bizTextarea';
+var defaultClass = 'biz-input',
+    disableClass = 'biz-input-disable',
+    hoverClass = 'biz-input-hover',
+    focusClass = 'biz-input-focus-',
+    dataKey = 'bizInput';
 
-Textarea.prototype = {
+Input.prototype = {
     /**
      * 初始化
      * @param {Object} options - 参数
@@ -39,13 +40,23 @@ Textarea.prototype = {
             this.disable();
         }
 
-        this.$main.on('mouseover.bizTextarea', function(e) {
+        if (typeof options.onEnter === 'function') {
+            var self = this;
+            this.$main.on('keydown.bizInput', function(e) {
+                if (e.keyCode === 13) {
+                    options.onEnter.call(self, e);
+                    return false; // IE10-会自动寻找第一个<button>标签并触发它的click事件
+                }
+            });
+        }
+
+        this.$main.on('mouseover.bizInput', function(e) {
             $(this).addClass(hoverClass);
-        }).on('mouseout.bizTextarea', function(e) {
+        }).on('mouseout.bizInput', function(e) {
             $(this).removeClass(hoverClass);
-        }).on('focus.bizTextarea', function(e) {
+        }).on('focus.bizInput', function(e) {
             $(this).addClass(focusClass + options.theme);
-        }).on('blur.bizTextarea', function(e) {
+        }).on('blur.bizInput', function(e) {
             $(this).removeClass(focusClass + options.theme);
         });
     },
@@ -67,32 +78,25 @@ Textarea.prototype = {
     },
 
     /**
-     * 获取文本长度（不计回车）
-     * @return {Number} - 文本长度
-     */
-    length: function() {
-        return this.$main.val().replace(/\r?\n/g, '').length;
-    },
-
-    /**
      * 销毁
      */
     destroy: function() {
         this.$main.removeClass(defaultClass + ' ' + disableClass);
-        this.$main.off('mouseover.bizTextarea')
-            .off('mouseout.bizTextarea')
-            .off('focus.bizTextarea')
-            .off('blur.bizTextarea');
+        this.$main.off('keydown.bizInput')
+            .off('mouseover.bizInput')
+            .off('mouseout.bizInput')
+            .off('focus.bizInput')
+            .off('blur.bizInput');
         this.$main.data(dataKey, null);
     }
 };
 
-function isTextarea(elem) {
-    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'textarea';
+function isInput(elem) {
+    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && (!elem.getAttribute('type') || elem.getAttribute('type').toLowerCase() === 'text');
 }
 
 $.extend($.fn, {
-    bizTextarea: function(method) {
+    bizInput: function(method) {
         var internal_return;
         this.each(function() {
             var instance = $(this).data(dataKey);
@@ -104,8 +108,8 @@ $.extend($.fn, {
                     }
                 }
             } else {
-                if (isTextarea(this) && (method === undefined || jQuery.isPlainObject(method))) {
-                    $(this).data(dataKey, new Textarea(this, method));
+                if (isInput(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                    $(this).data(dataKey, new Input(this, method));
                 }
             }
         });
@@ -118,4 +122,4 @@ $.extend($.fn, {
     }
 });
 
-module.exports = Textarea;
+module.exports = Input;

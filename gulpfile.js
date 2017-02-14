@@ -68,6 +68,7 @@ gulp.task('doc', function(cb) {
     var files = [
         'README.md',
         'src/ui/Button.js',
+        'src/ui/Input.js',
         'src/ui/Textarea.js'
     ];
     gulp.src(files, {read: false})

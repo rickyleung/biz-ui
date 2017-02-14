@@ -11,7 +11,7 @@ BizUI - A jQuery plugin for business UI components
 
 Browser support
 --------
-IE10+, Firefox, Chrome and Safari.
+IE9+, Firefox, Chrome and Safari.
 
 Dependence
 --------

@@ -28,6 +28,7 @@ var Router = Backbone.Router.extend({
         S.main = view;
         $('aside a').removeClass('active');
         S.main.render();
+        window.scrollTo(0, 0);
     },
 
     button: function() {
