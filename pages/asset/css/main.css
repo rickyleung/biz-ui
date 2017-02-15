@@ -1,4 +1,4 @@
-/*
+/**
  * common
  */
 body {
@@ -12,11 +12,35 @@ ul {
     margin: 0;
     padding: 0;
 }
-
 a {
 	color: #12a3db;
 }
+code {
+	font-family: Consolas, Monaco, monospace;
+	text-align: left;
+}
+table {
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+	margin-left: 40px;
+	margin-bottom: 40px;
+}
+th {
+    padding: 5px 8px;
+    border: 1px #212121 solid;
+	background: #212121;
+	color: #fff
+}
+td {
+	padding: 5px 8px;
+    border: 1px #ccc solid;
+	background: #fff;
+}
 
+/**
+ * nav
+ */
 .main-nav {
     height: 51px;
     padding: 0 40px;
@@ -50,17 +74,23 @@ a {
     margin-left: 20px;
     background: url(../img/github.svg) left center no-repeat;
 }
-
-.container {
-    padding-top: 51px;
-    min-height: 500px;
-}
 @media screen and (max-width: 1024px) {
     .main-nav {
         padding: 0;
     }
 }
 
+/**
+ * container
+ */
+.container {
+    padding-top: 51px;
+    min-height: 500px;
+}
+
+/**
+ * footer
+ */
 footer {
     padding: 40px;
     background: #212121;
@@ -233,10 +263,6 @@ body.index {
     padding: 0 30px;
     line-height: 30px;
 }
-code {
-	font-family: Consolas, Monaco, monospace;
-	text-align: left;
-}
 .icon-font {
 	width: 360px;
 	height: 360px;
@@ -310,7 +336,8 @@ code {
     color: #212121;
     font-size: 18px;
     font-weight: normal;
-    margin: 50px;
+    padding: 50px;
+    margin: 0;
 }
 .components .example {
 	padding: 20px 40px;
@@ -327,25 +354,7 @@ code {
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
 }
-.components table {
-    border: 0;
-    border-collapse: collapse;
-    table-layout: fixed;
-	margin-left: 40px;
-	margin-bottom: 40px;
-}
-th {
-    padding: 5px 8px;
-    border: 1px #212121 solid;
-	background: #212121;
-	color: #fff
-}
-td {
-	padding: 5px 8px;
-    border: 1px #ccc solid;
-	background: #fff;
-}
-.methods, .issues {
+.methods {
 	padding-left: 40px;
 	margin-top: 40px;
 }
@@ -353,8 +362,11 @@ td {
 	padding: 0;
 	font-style: italic;
 }
-.des {
+.methods .des {
 	color: #999;
+}
+.issues {
+	padding-left: 40px;
 }
 @media screen and (max-width: 1024px) {
     .components {

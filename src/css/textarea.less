@@ -32,27 +32,8 @@
  * textarea themes
  */
 
-@textarea-themes: blue,
-light-blue,
-cyan,
-teal,
-green,
-light-green,
-lime,
-yellow,
-amber,
-orange,
-brown,
-blue-gray,
-gray,
-deep-orange,
-red,
-pink,
-purple,
-deep-purple,
-indigo;
-.generate-textarea-themes(@i: length(@textarea-themes)) when (@i > 0) {
-    @name: extract(@textarea-themes, @i);
+.generate-textarea-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
     .biz-textarea-focus-@{name} {
         border-color: @@name !important;
     }

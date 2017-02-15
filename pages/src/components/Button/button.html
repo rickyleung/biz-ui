@@ -1,74 +1,23 @@
 <h3>Button</h3>
 
 <div class="example button-example">
-<button class="blue">blue</button>
-<button class="light-blue">light-blue</button>
-<button class="cyan">cyan</button>
-<button class="teal">teal</button>
-<button class="green">green</button>
-<button class="light-green">light-green</button>
-<button class="lime">lime</button>
-<button class="yellow">yellow</button>
-<button class="amber">amber</button>
-<button class="orange">orange</button>
-<button class="brown">brown</button>
-<button class="blue-gray">blue-gray</button>
-<button class="gray">gray</button>
-<button class="deep-orange">deep-orange</button>
-<button class="red">red</button>
-<button class="pink">pink</button>
-<button class="purple">purple</button>
-<button class="deep-purple">deep-purple</button>
-<button class="indigo">indigo</button>
+<button class="ok">OK</button>
+<button class="search">Search</button>
 <button class="disabled">disabled</button>
 </div>
 
 <h4>HTML</h4>
 <pre><code class="xml">
-    &lt;button class="blue"&gt;blue&lt;/button&gt;
-    &lt;button class="light-blue"&gt;light-blue&lt;/button&gt;
-    &lt;button class="cyan"&gt;cyan&lt;/button&gt;
-    &lt;button class="teal"&gt;teal&lt;/button&gt;
-    &lt;button class="green"&gt;green&lt;/button&gt;
-    &lt;button class="light-green"&gt;light-green&lt;/button&gt;
-    &lt;button class="lime"&gt;lime&lt;/button&gt;
-    &lt;button class="yellow"&gt;yellow&lt;/button&gt;
-    &lt;button class="amber"&gt;amber&lt;/button&gt;
-    &lt;button class="orange"&gt;orange&lt;/button&gt;
-    &lt;button class="brown"&gt;brown&lt;/button&gt;
-    &lt;button class="blue-gray"&gt;blue-gray&lt;/button&gt;
-    &lt;button class="gray"&gt;gray&lt;/button&gt;
-    &lt;button class="deep-orange"&gt;deep-orange&lt;/button&gt;
-    &lt;button class="red"&gt;red&lt;/button&gt;
-    &lt;button class="pink"&gt;pink&lt;/button&gt;
-    &lt;button class="purple"&gt;purple&lt;/button&gt;
-    &lt;button class="deep-purple"&gt;deep-purple&lt;/button&gt;
-    &lt;button class="indigo"&gt;indigo&lt;/button&gt;
+    &lt;button class="ok"&gt;OK&lt;/button&gt;
+    &lt;button class="search"&gt;Search&lt;/button&gt;
     &lt;button class="disabled"&gt;disabled&lt;/button&gt;
 
 </code></pre>
 
 <h4>JavaScript</h4>
 <pre><code class="js">
-    $('.blue').bizButton({icon: 'done'});
-    $('.light-blue').bizButton({theme: 'light-blue', icon: 'search'});
-    $('.cyan').bizButton({theme: 'cyan'});
-    $('.teal').bizButton({theme: 'teal'});
-    $('.green').bizButton({theme: 'green'});
-    $('.light-green').bizButton({theme: 'light-green'});
-    $('.lime').bizButton({theme: 'lime'});
-    $('.yellow').bizButton({theme: 'yellow'});
-    $('.amber').bizButton({theme: 'amber'});
-    $('.orange').bizButton({theme: 'orange'});
-    $('.brown').bizButton({theme: 'brown'});
-    $('.blue-gray').bizButton({theme: 'blue-gray'});
-    $('.gray').bizButton({theme: 'gray'});
-    $('.deep-orange').bizButton({theme: 'deep-orange', size: 'large', icon: 'get_app'});
-    $('.red').bizButton({theme: 'red', size: 'large', icon: 'feedback'});
-    $('.pink').bizButton({theme: 'pink', size: 'large'});
-    $('.purple').bizButton({theme: 'purple', size: 'large'});
-    $('.deep-purple').bizButton({theme: 'deep-purple', size: 'large'});
-    $('.indigo').bizButton({theme: 'indigo', size: 'large'});
+    $('.ok').bizButton();
+    $('.search').bizButton({theme: 'light-green', icon: 'search', size: 'large'});
     $('.disabled').bizButton({disabled: true});
 
 </code></pre>
@@ -122,10 +71,3 @@
 <h4>enable()</h4>
 <p class="des">激活</p>
 </div>
-
-<h3>兼容性问题</h3>
-<p class="issues">对于 IE 浏览器，icon 字段要使用 codepoints，例如：</p>
-<pre><code class="js">
-    $('.done').bizButton({icon: '&amp;#xE876;'});
-
-</code></pre>

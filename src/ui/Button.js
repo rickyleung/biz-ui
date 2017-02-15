@@ -43,7 +43,8 @@ Button.prototype = {
         }
 
         if (options.icon) {
-            this.$main.prepend('<i class="biz-icon">' + options.icon + '</i> ');
+            var iconName = !document.documentMode ? options.icon : bizui.codepoints[options.icon];
+            this.$main.prepend('<i class="biz-icon">' + iconName + '</i> ');
         }
 
         if (options.label) {
