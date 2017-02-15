@@ -67,9 +67,11 @@ gulp.task('build', sequence('lint', 'prettify', ['build-js', 'build-css']));
 gulp.task('doc', function(cb) {
     var files = [
         'README.md',
+        'src/bizui.js',
         'src/ui/Button.js',
         'src/ui/Input.js',
-        'src/ui/Textarea.js'
+        'src/ui/Textarea.js',
+        'src/ui/Tooltip.js'
     ];
     gulp.src(files, {read: false})
         .pipe(jsdoc({

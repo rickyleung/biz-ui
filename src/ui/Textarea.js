@@ -2,11 +2,11 @@ require('jquery-placeholder');
 
 /**
  * Textarea
- * @constructor
+ * @class
  * @param {HTMLElement} textarea - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
- * @param {Boolean} options.disabled - 是否禁用
+ * @param {Boolean} options.disabled - 禁用，默认 false
  */
 function Textarea(textarea, options) {
     this.main = textarea;
@@ -68,7 +68,7 @@ Textarea.prototype = {
 
     /**
      * 获取文本长度（不计回车）
-     * @return {Number} - 文本长度
+     * @return - 文本长度
      */
     length: function() {
         return this.$main.val().replace(/\r?\n/g, '').length;

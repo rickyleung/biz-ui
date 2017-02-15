@@ -325,7 +325,7 @@ body.index {
 .components aside .table {background-position: 0 -460px; background-color: #d35400;}
 .components aside .textarea {background-position: 0 -506px; background-color: #f39c12;}
 .components aside .textline {background-position: 0 -552px; background-color: #8e44ad;}
-.components aside .tooltip {background-position: 0 -599px; background-color: #2980b9;}
+.components aside .tooltips {background-position: 0 -599px; background-color: #2980b9;}
 .components aside .tree {background-position: 0 -645px; background-color: #27ae60;}
 .components aside .treetable {background-position: 0 -691px; background-color: #16a085;}
 .components .main {
@@ -341,9 +341,6 @@ body.index {
 }
 .components .example {
 	padding: 20px 40px;
-}
-.components .button-example button {
-	margin-bottom: 5px;
 }
 .components h4 {
 	padding-left: 40px;
@@ -365,8 +362,10 @@ body.index {
 .methods .des {
 	color: #999;
 }
-.issues {
-	padding-left: 40px;
+ul.issues {
+    padding-left: 40px;
+    line-height: 30px;
+	list-style: disc inside;
 }
 @media screen and (max-width: 1024px) {
     .components {

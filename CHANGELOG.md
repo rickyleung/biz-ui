@@ -16,3 +16,5 @@
 * Input, Textarea
   1. New options: `theme`.
   2. Support the `placeholder` attribute for older IE.
+* Tooltips
+  1. **Rewrite with all new options**.

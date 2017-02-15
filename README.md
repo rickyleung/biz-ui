@@ -59,7 +59,6 @@ Iconfonts
 Supported iconfonts via [Google Material Design Icons](https://material.io/icons/), for example:
 
     <i class="biz-icon">3d_rotation</i>
-	<i class="biz-icon">&#xE84D;</i> <!-- for IE -->
 
 Build
 --------

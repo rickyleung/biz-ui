@@ -1,13 +1,13 @@
 /**
  * Button
- * @constructor
+ * @class
  * @param {HTMLElement} button - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
- * @param {String} options.size - 尺寸（small|large）
- * @param {String} options.icon - 图标名称或 codepoint
+ * @param {String} options.size - 尺寸（small|large），默认 small
+ * @param {String} options.icon - 图标名称
  * @param {String} options.label - 文字
- * @param {Boolean} options.disabled - 是否禁用
+ * @param {Boolean} options.disabled - 禁用，默认 false
  */
 function Button(button, options) {
     this.main = button;

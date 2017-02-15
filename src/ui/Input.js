@@ -2,11 +2,11 @@ require('jquery-placeholder');
 
 /**
  * Input
- * @constructor
+ * @class
  * @param {HTMLElement} input - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
- * @param {Boolean} options.disabled - 是否禁用
+ * @param {Boolean} options.disabled - 禁用，默认 false
  * @param {Function} options.onEnter - 按回车回调
  */
 function Input(input, options) {
@@ -92,7 +92,8 @@ Input.prototype = {
 };
 
 function isInput(elem) {
-    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && (!elem.getAttribute('type') || elem.getAttribute('type').toLowerCase() === 'text');
+    var type = elem.getAttribute('type');
+    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && (!type || type.toLowerCase() === 'text' || type.toLowerCase() === 'password');
 }
 
 $.extend($.fn, {
