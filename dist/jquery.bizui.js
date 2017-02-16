@@ -348,7 +348,8 @@
                     Button: _require(5),
                     Input: _require(6),
                     Textarea: _require(7),
-                    Tooltip: _require(8)
+                    Textline: _require(8),
+                    Tooltip: _require(9)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -1304,7 +1305,7 @@
             Button.prototype = {
                 init: function (options) {
                     this.originHTML = this.$main.html();
-                    this.$main.addClass(defaultClass + ' ' + (prefix + this.options.theme));
+                    this.$main.addClass(defaultClass + ' ' + (prefix + options.theme));
                     if (options.size === 'large') {
                         this.$main.addClass(largeClass);
                     }
@@ -1344,12 +1345,12 @@
             }
             $.extend($.fn, {
                 bizButton: function (method) {
-                    var internal_return;
+                    var internal_return, args = arguments;
                     this.each(function () {
                         var instance = $(this).data(dataKey);
                         if (instance) {
                             if (typeof method === 'string' && typeof instance[method] === 'function') {
-                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(arguments, 1));
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
                                 if (internal_return !== undefined) {
                                     return false;
                                 }
@@ -1425,12 +1426,12 @@
             }
             $.extend($.fn, {
                 bizInput: function (method) {
-                    var internal_return;
+                    var internal_return, args = arguments;
                     this.each(function () {
                         var instance = $(this).data(dataKey);
                         if (instance) {
                             if (typeof method === 'string' && typeof instance[method] === 'function') {
-                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(arguments, 1));
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
                                 if (internal_return !== undefined) {
                                     return false;
                                 }
@@ -1499,12 +1500,12 @@
             }
             $.extend($.fn, {
                 bizTextarea: function (method) {
-                    var internal_return;
+                    var internal_return, args = arguments;
                     this.each(function () {
                         var instance = $(this).data(dataKey);
                         if (instance) {
                             if (typeof method === 'string' && typeof instance[method] === 'function') {
-                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(arguments, 1));
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
                                 if (internal_return !== undefined) {
                                     return false;
                                 }
@@ -1523,6 +1524,132 @@
                 }
             });
             module.exports = Textarea;
+        },
+        function (module, exports) {
+            function Textline(textline, options) {
+                this.main = textline;
+                this.$main = $(this.main);
+                var defaultOption = { theme: bizui.theme };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-textline', disableClass = 'biz-textline-disable', hoverClass = 'biz-textline-hover', focusClass = 'biz-textline-focus-', prefix = 'biz-textline-', dataKey = 'bizTextline';
+            Textline.prototype = {
+                init: function (options) {
+                    this.$main.addClass(defaultClass + ' ' + (prefix + options.theme)).html('<div><pre></pre></div><textarea></textarea>');
+                    var w = options.width || this.$main.width(), h = options.height || this.$main.height();
+                    w = Math.max(w, 200);
+                    h = Math.max(h, 52);
+                    this.$main.css({
+                        width: w,
+                        height: h
+                    });
+                    this.$line = this.$main.children('div').css({ height: h - 10 });
+                    this.$lineNumber = this.$main.find('pre');
+                    this.$textarea = this.$main.children('textarea').css({
+                        width: w - 36,
+                        height: h - 12
+                    });
+                    if (options.disabled) {
+                        this.disable();
+                    }
+                    var self = this;
+                    this.$textarea.on('mouseover.bizTextline', function (e) {
+                        $(this).addClass(hoverClass);
+                    }).on('mouseout.bizTextline', function (e) {
+                        $(this).removeClass(hoverClass);
+                    }).on('focus.bizTextline', function (e) {
+                        $(this).addClass(focusClass + options.theme);
+                    }).on('blur.bizTextline', function (e) {
+                        $(this).removeClass(focusClass + options.theme);
+                    }).on('keyup.bizTextline.render', function (e) {
+                        self.renderLineNumber(e.target.scrollTop);
+                    }).on('scroll.bizTextline', function (e) {
+                        self.scrollLineNumber(e.target.scrollTop);
+                    });
+                    if (parseInt(options.maxLine, 10) >= 1) {
+                        this.$textarea.on('keyup.bizTextline.maxLine', function (e) {
+                            if (e.keyCode === 13) {
+                                var valArray = self.valArray(), length = valArray.length;
+                                if (length > options.maxLine) {
+                                    valArray.splice(options.maxLine, length - options.maxLine);
+                                    self.valArray(valArray);
+                                }
+                            }
+                        });
+                    }
+                    this.renderLineNumber(0);
+                },
+                enable: function () {
+                    this.$textarea[0].disabled = false;
+                    this.$textarea.removeClass(disableClass);
+                },
+                disable: function () {
+                    this.$textarea[0].disabled = true;
+                    this.$textarea.addClass(disableClass);
+                },
+                length: function () {
+                    return this.$textarea.val().replace(/\r?\n/g, '').length;
+                },
+                val: function (value) {
+                    if (undefined === value) {
+                        return this.$textarea.val();
+                    }
+                    this.$textarea.val(value);
+                    this.renderLineNumber(0);
+                },
+                valArray: function (value) {
+                    if (undefined === value) {
+                        return this.val().split('\n');
+                    }
+                    this.$textarea.val(value.join('\n'));
+                    this.renderLineNumber(0);
+                },
+                destroy: function () {
+                    this.$textarea.off('mouseover.bizTextline').off('mouseout.bizTextline').off('focus.bizTextline').off('blur.bizTextline').off('keyup.bizTextline').off('scroll.bizTextline');
+                    this.$main.removeClass(defaultClass + ' ' + (prefix + this.options.theme)).empty();
+                },
+                renderLineNumber: function (scrollTop) {
+                    var lineCount = this.$textarea.val().split('\n').length, numbers = '1';
+                    for (var i = 2; i <= lineCount; i++) {
+                        numbers += '\n' + i;
+                    }
+                    this.$lineNumber.html(numbers);
+                    this.scrollLineNumber(scrollTop);
+                },
+                scrollLineNumber: function (scrollTop) {
+                    this.$lineNumber.css({ top: 5 - scrollTop });
+                }
+            };
+            function isTextline(elem) {
+                return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'div';
+            }
+            $.extend($.fn, {
+                bizTextline: function (method) {
+                    var internal_return, args = arguments;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (isTextline(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                                $(this).data(dataKey, new Textline(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = Textline;
         },
         function (module, exports) {
             _require(2);

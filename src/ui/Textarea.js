@@ -94,12 +94,12 @@ function isTextarea(elem) {
 
 $.extend($.fn, {
     bizTextarea: function(method) {
-        var internal_return;
+        var internal_return, args = arguments;
         this.each(function() {
             var instance = $(this).data(dataKey);
             if (instance) {
                 if (typeof method === 'string' && typeof instance[method] === 'function') {
-                    internal_return = instance[method].apply(instance, Array.prototype.slice.call(arguments, 1));
+                    internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
                     if (internal_return !== undefined) {
                         return false; // break loop
                     }

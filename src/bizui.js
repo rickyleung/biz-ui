@@ -13,6 +13,7 @@ var bizui = {
     Button: require('./ui/Button'),
     Input: require('./ui/Input'),
     Textarea: require('./ui/Textarea'),
+    Textline: require('./ui/Textline'),
     /**
      * Tooltip
      * @function

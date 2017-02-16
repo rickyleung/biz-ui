@@ -351,9 +351,9 @@
   border-width: 1px;
   border-style: solid;
   outline: none;
-  vertical-align: middle;
   line-height: 20px;
   resize: none;
+  vertical-align: middle;
   font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
   font-size: 14px;
   color: #333333;
@@ -426,6 +426,178 @@
 }
 .biz-textarea-focus-blue {
   border-color: #2196f3 !important;
+}
+/**
+ * textline
+ */
+.biz-textline {
+  overflow: hidden;
+}
+.biz-textline textarea {
+  padding: 5px;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
+  line-height: 20px;
+  resize: none;
+  vertical-align: middle;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  border-color: #e2e2e2;
+  background-color: #ffffff;
+  float: left;
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.biz-textline textarea.biz-textline-hover {
+  border-color: #cccccc;
+}
+.biz-textline textarea.biz-textline-disable {
+  background-color: #f1f1f1;
+  color: #b6b6b6;
+}
+.biz-textline div {
+  float: left;
+  width: 15px;
+  padding: 5px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.biz-textline pre {
+  font-family: Helvetica, Arial, sans-serif;
+  position: absolute;
+  margin: 0;
+  width: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 20px;
+  color: #ffffff;
+}
+/**
+ * textline themes
+ */
+.biz-textline-indigo div {
+  background-color: #3f51b5;
+}
+.biz-textline textarea.biz-textline-focus-indigo {
+  border-color: #3f51b5 !important;
+}
+.biz-textline-deep-purple div {
+  background-color: #673ab7;
+}
+.biz-textline textarea.biz-textline-focus-deep-purple {
+  border-color: #673ab7 !important;
+}
+.biz-textline-purple div {
+  background-color: #9c27b0;
+}
+.biz-textline textarea.biz-textline-focus-purple {
+  border-color: #9c27b0 !important;
+}
+.biz-textline-pink div {
+  background-color: #e91e63;
+}
+.biz-textline textarea.biz-textline-focus-pink {
+  border-color: #e91e63 !important;
+}
+.biz-textline-red div {
+  background-color: #f44336;
+}
+.biz-textline textarea.biz-textline-focus-red {
+  border-color: #f44336 !important;
+}
+.biz-textline-deep-orange div {
+  background-color: #ff5722;
+}
+.biz-textline textarea.biz-textline-focus-deep-orange {
+  border-color: #ff5722 !important;
+}
+.biz-textline-gray div {
+  background-color: #9e9e9e;
+}
+.biz-textline textarea.biz-textline-focus-gray {
+  border-color: #9e9e9e !important;
+}
+.biz-textline-blue-gray div {
+  background-color: #607d8b;
+}
+.biz-textline textarea.biz-textline-focus-blue-gray {
+  border-color: #607d8b !important;
+}
+.biz-textline-brown div {
+  background-color: #795548;
+}
+.biz-textline textarea.biz-textline-focus-brown {
+  border-color: #795548 !important;
+}
+.biz-textline-orange div {
+  background-color: #ff9800;
+}
+.biz-textline textarea.biz-textline-focus-orange {
+  border-color: #ff9800 !important;
+}
+.biz-textline-amber div {
+  background-color: #ffc107;
+}
+.biz-textline textarea.biz-textline-focus-amber {
+  border-color: #ffc107 !important;
+}
+.biz-textline-yellow div {
+  background-color: #ffe38e;
+}
+.biz-textline textarea.biz-textline-focus-yellow {
+  border-color: #ffe38e !important;
+}
+.biz-textline-lime div {
+  background-color: #cddc39;
+}
+.biz-textline textarea.biz-textline-focus-lime {
+  border-color: #cddc39 !important;
+}
+.biz-textline-light-green div {
+  background-color: #8bc34a;
+}
+.biz-textline textarea.biz-textline-focus-light-green {
+  border-color: #8bc34a !important;
+}
+.biz-textline-green div {
+  background-color: #4caf50;
+}
+.biz-textline textarea.biz-textline-focus-green {
+  border-color: #4caf50 !important;
+}
+.biz-textline-teal div {
+  background-color: #009688;
+}
+.biz-textline textarea.biz-textline-focus-teal {
+  border-color: #009688 !important;
+}
+.biz-textline-cyan div {
+  background-color: #00bcd4;
+}
+.biz-textline textarea.biz-textline-focus-cyan {
+  border-color: #00bcd4 !important;
+}
+.biz-textline-light-blue div {
+  background-color: #03a9f4;
+}
+.biz-textline textarea.biz-textline-focus-light-blue {
+  border-color: #03a9f4 !important;
+}
+.biz-textline-blue div {
+  background-color: #2196f3;
+}
+.biz-textline textarea.biz-textline-focus-blue {
+  border-color: #2196f3 !important;
+}
+.biz-textline-yellow pre {
+  color: #d0910b;
 }
 /**
  * tooltip

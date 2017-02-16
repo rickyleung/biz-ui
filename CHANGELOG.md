@@ -14,7 +14,12 @@
   1. New options: `size`, `icon`.
   2. **Deprecated theme option:** `dark`.
 * Input, Textarea
-  1. New options: `theme`.
+  1. New option: `theme`.
   2. Support the `placeholder` attribute for older IE.
+* Textline
+  1. New options: `theme`, `width`, `height`, `maxLine`.
+  2. New method: `valArray`.
+  3. **Deprecated option:** `skin`.
+  4. **Deprecated method:** `lines`.
 * Tooltips
   1. **Rewrite with all new options**.

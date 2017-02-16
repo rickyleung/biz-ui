@@ -343,6 +343,7 @@ body.index {
 }
 .components .example {
 	padding: 20px 40px;
+    overflow: hidden;
 }
 .components h4 {
 	padding-left: 40px;
@@ -352,6 +353,10 @@ body.index {
     background: #fff;
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
+}
+.components .example .textline {
+    float: left;
+    margin-right: 20px;
 }
 .methods {
 	padding-left: 40px;

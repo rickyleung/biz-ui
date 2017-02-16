@@ -36,7 +36,7 @@ Button.prototype = {
     init: function(options) {
         this.originHTML = this.$main.html();
 
-        this.$main.addClass(defaultClass + ' ' + (prefix + this.options.theme));
+        this.$main.addClass(defaultClass + ' ' + (prefix + options.theme));
 
         if (options.size === 'large') {
             this.$main.addClass(largeClass);
@@ -89,12 +89,12 @@ function isButton(elem) {
 
 $.extend($.fn, {
     bizButton: function(method) {
-        var internal_return;
+        var internal_return, args = arguments;
         this.each(function() {
             var instance = $(this).data(dataKey);
             if (instance) {
                 if (typeof method === 'string' && typeof instance[method] === 'function') {
-                    internal_return = instance[method].apply(instance, Array.prototype.slice.call(arguments, 1));
+                    internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
                     if (internal_return !== undefined) {
                         return false; // break loop
                     }
