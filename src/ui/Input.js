@@ -12,7 +12,6 @@ require('jquery-placeholder');
 function Input(input, options) {
     this.main = input;
     this.$main = $(this.main);
-    this.$main.placeholder();
 
     var defaultOption = {
         theme: bizui.theme
@@ -35,6 +34,8 @@ Input.prototype = {
      */
     init: function(options) {
         this.$main.addClass(defaultClass);
+
+        this.$main.placeholder();
 
         if (options.disabled) {
             this.disable();

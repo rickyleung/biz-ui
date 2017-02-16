@@ -11,7 +11,6 @@ require('jquery-placeholder');
 function Textarea(textarea, options) {
     this.main = textarea;
     this.$main = $(this.main);
-    this.$main.placeholder();
 
     var defaultOption = {
         theme: bizui.theme
@@ -34,6 +33,8 @@ Textarea.prototype = {
      */
     init: function(options) {
         this.$main.addClass(defaultClass);
+
+        this.$main.placeholder();
 
         if (options.disabled) {
             this.disable();

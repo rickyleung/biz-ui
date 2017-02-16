@@ -32,6 +32,8 @@ var Tooltip = Backbone.View.extend({
 	},
 
     destroy: function() {
+        $('input').bizInput('destroy');
+        $('button').bizButton('destroy');
         bizui.Tooltip({
             removeAll: true
         });

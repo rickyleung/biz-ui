@@ -1,9 +1,12 @@
+.components {
+    background: #fff;
+}
 .components aside {
     float: left;
     box-shadow: none;
-    border-bottom: 1px solid #eee;
 }
 .components .main {
     margin-left: 200px;
     border-left: 1px solid #eee;
+    background: #fafafa;
 }

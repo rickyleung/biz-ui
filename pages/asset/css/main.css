@@ -14,6 +14,7 @@ ul {
 }
 a {
 	color: #12a3db;
+    outline: none;
 }
 code {
 	font-family: Consolas, Monaco, monospace;
@@ -287,6 +288,7 @@ body.index {
     background: #fff;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.24);
     z-index: 10;
+    position: relative;
 	flex-shrink: 0;
 }
 .components aside a {

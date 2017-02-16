@@ -4,7 +4,7 @@
 <input placeholder="Username" data-tooltip="Please enter a username"><br><br>
 <input placeholder="Email" data-tooltip="Please enter a email"><br><br>
 <input placeholder="Phone" data-tooltip="Please enter a phone number"><br><br>
-<input type="password" placeholder="Password" data-tooltip="Please enter a password"><br><br>
+<input placeholder="Password" data-tooltip="Please enter a password" type="password"><br><br>
 <button data-tooltip="Please read user protocol" data-tooltip-direction="top">Sign up</button>&nbsp;&nbsp;
 <a class="protocol" data-tooltip="^Header^*bold*|~italic~{`item1 `item2 `item3}" href="#">User protocol</a>
 </div>
@@ -14,7 +14,7 @@
     &lt;input placeholder="Username" data-tooltip="Please enter a username"&gt;
     &lt;input placeholder="Email" data-tooltip="Please enter a email"&gt;
     &lt;input placeholder="Phone" data-tooltip="Please enter a phone number"&gt;
-    &lt;input type="password" placeholder="Password" data-tooltip="Please enter a password"&gt;
+    &lt;input placeholder="Password" data-tooltip="Please enter a password" type="password"&gt;
     &lt;button data-tooltip="Please read user protocol" data-tooltip-direction="top"&gt;Sign up&lt;/button&gt;
     &lt;a class="protocol" data-tooltip="^Header^*bold*|~italic~{`item1 `item2 `item3}" href="#"&gt;User protocol&lt;/a&gt;
 
@@ -81,7 +81,8 @@
 
 <h3><i class="biz-icon">&#xe88e;</i> Tips</h3>
 <ul class="issues">
-    <li>data-tooltip：提示内容，支持简单 HTML 格式。</li>
-    <li>data-tooltip-direction：提示出现位置（right|bottom|left|top），默认 right。</li>
+    <li>data-tooltip 属性：提示内容，支持简单 HTML 便捷语法。</li>
+    <li>data-tooltip-direction 属性：提示出现位置（right|bottom|left|top），默认 right。</li>
+    <li>Tooltip 的主题默认为黑色，或由参数设置，不受 bizui.theme 影响。</li>
     <li>Tooltip 的 class 为 <strong>.tooltip</strong>，请注意防止命名冲突。</li>
 </ul>

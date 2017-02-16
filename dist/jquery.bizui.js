@@ -1374,7 +1374,6 @@
             function Input(input, options) {
                 this.main = input;
                 this.$main = $(this.main);
-                this.$main.placeholder();
                 var defaultOption = { theme: bizui.theme };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
@@ -1383,6 +1382,7 @@
             Input.prototype = {
                 init: function (options) {
                     this.$main.addClass(defaultClass);
+                    this.$main.placeholder();
                     if (options.disabled) {
                         this.disable();
                     }
@@ -1455,7 +1455,6 @@
             function Textarea(textarea, options) {
                 this.main = textarea;
                 this.$main = $(this.main);
-                this.$main.placeholder();
                 var defaultOption = { theme: bizui.theme };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
@@ -1464,6 +1463,7 @@
             Textarea.prototype = {
                 init: function (options) {
                     this.$main.addClass(defaultClass);
+                    this.$main.placeholder();
                     if (options.disabled) {
                         this.disable();
                     }
