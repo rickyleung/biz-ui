@@ -14,15 +14,16 @@
 
 <h4>JavaScript</h4>
 <pre><code class="js">
-    $('.line1').bizTextline();
-    $('.line1').bizTextline('val', 'a\nb\nc');
+    $('.line1').bizTextline({
+        val: 'a\nb\nc'
+    });
     $('.line2').bizTextline({
         theme: 'gray',
         width: 300,
         height: 150,
-        maxLine: 3
+        maxLine: 3,
+        valArray: ['d', 'e', 'f', 'g', 'h']
     });
-    $('.line2').bizTextline('valArray', ['d', 'e', 'f']);
 
 </code></pre>
 
@@ -58,6 +59,16 @@
         <td>Number</td>
         <td>最大行数，大于等于 1</td>
     </tr>
+    <tr>
+        <td>val</td>
+        <td>String</td>
+        <td>初始值，字符串形式</td>
+    </tr>
+    <tr>
+        <td>valArray</td>
+        <td>Array</td>
+        <td>初始值，数组形式</td>
+    </tr>
 </table>
 
 <h4>Methods</h4>
@@ -83,10 +94,10 @@
 
 <div class="methods">
 <h4>val([String value])</h4>
-<p class="des">以字符串形式获取/设置内容</p>
+<p class="des">以字符串形式获取/设置内容，超过 maxLine 会被截断</p>
 </div>
 
 <div class="methods">
 <h4>valArray([Array value])</h4>
-<p class="des">以数组形式获取/设置内容</p>
+<p class="des">以数组形式获取/设置内容，超过 maxLine 会被截断</p>
 </div>

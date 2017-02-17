@@ -14,15 +14,16 @@ var Textline = Backbone.View.extend({
     },
 
 	initBizUI: function() {
-        $('.line1').bizTextline();
-        $('.line1').bizTextline('val', 'a\nb\nc');
+        $('.line1').bizTextline({
+            val: 'a\nb\nc'
+        });
         $('.line2').bizTextline({
             theme: 'gray',
             width: 300,
             height: 150,
-            maxLine: 3
+            maxLine: 3,
+            valArray: ['d', 'e', 'f', 'g', 'h']
         });
-        $('.line2').bizTextline('valArray', ['d', 'e', 'f']);
 	},
 
     destroy: function() {

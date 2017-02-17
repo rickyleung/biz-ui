@@ -1579,6 +1579,12 @@
                         });
                     }
                     this.renderLineNumber(0);
+                    if (typeof options.val === 'string') {
+                        this.val(options.val);
+                    }
+                    if (jQuery.isArray(options.valArray)) {
+                        this.valArray(options.valArray);
+                    }
                 },
                 enable: function () {
                     this.$textarea[0].disabled = false;
@@ -1595,12 +1601,25 @@
                     if (undefined === value) {
                         return this.$textarea.val();
                     }
+                    if (parseInt(this.options.maxLine, 10) >= 1) {
+                        var valArray = value.split('\n'), length = valArray.length;
+                        if (length > this.options.maxLine) {
+                            valArray.splice(this.options.maxLine, length - this.options.maxLine);
+                            value = valArray.join('\n');
+                        }
+                    }
                     this.$textarea.val(value);
                     this.renderLineNumber(0);
                 },
                 valArray: function (value) {
                     if (undefined === value) {
                         return this.val().split('\n');
+                    }
+                    if (parseInt(this.options.maxLine, 10) >= 1) {
+                        var length = value.length;
+                        if (length > this.options.maxLine) {
+                            value.splice(this.options.maxLine, length - this.options.maxLine);
+                        }
                     }
                     this.$textarea.val(value.join('\n'));
                     this.renderLineNumber(0);

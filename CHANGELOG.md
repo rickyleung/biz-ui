@@ -9,17 +9,18 @@
 * bizui
   1. Exposed to global environment.
   2. New property: `theme`.
-  3. **Deprecated method:** `noConflict`.
+  3. Deprecated method: `noConflict`.
 * Button
   1. New options: `size`, `icon`.
-  2. **Deprecated theme option:** `dark`.
+  2. Deprecated theme value of option: `dark`.
 * Input, Textarea
   1. New option: `theme`.
   2. Support the `placeholder` attribute for older IE.
 * Textline
-  1. New options: `theme`, `width`, `height`, `maxLine`.
+  1. New options: `theme`, `width`, `height`, `maxLine`, `val`, `valArray`.
   2. New method: `valArray`.
-  3. **Deprecated option:** `skin`.
-  4. **Deprecated method:** `lines`.
+  3. Deprecated option: `skin`.
+  4. Deprecated method: `lines`.
 * Tooltips
-  1. **Rewrite with all new options**.
+  1. Use `data-tooltip` attribute to mark target elements instead of `title`.
+  2. New options: `action`, `element`, `theme`, `preventDefault`, `removeAll`, `removeSpecific`.

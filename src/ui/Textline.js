@@ -8,6 +8,8 @@
  * @param {Number} options.width - 宽度，默认取目标对象宽度，最小 200px
  * @param {Number} options.height - 高度，默认取目标对象高度，最小 52px
  * @param {Number} options.maxLine - 最大行数，大于等于 1
+ * @param {String} options.val - 初始值，字符串形式
+ * @param {Array} options.valArray - 初始值，数组形式
  */
 function Textline(textline, options) {
     this.main = textline;
@@ -90,6 +92,14 @@ Textline.prototype = {
         }
 
         this.renderLineNumber(0);
+
+        if (typeof options.val === 'string') {
+            this.val(options.val);
+        }
+
+        if (jQuery.isArray(options.valArray)) {
+            this.valArray(options.valArray);
+        }
     },
 
     /**
@@ -117,7 +127,7 @@ Textline.prototype = {
     },
 
     /**
-     * 以字符串形式获取/设置内容
+     * 以字符串形式获取/设置内容，超过 maxLine 会被截断
      * @param {String} value - 内容
      * @return - 内容
      */
@@ -125,12 +135,22 @@ Textline.prototype = {
         if (undefined === value) {
             return this.$textarea.val();
         }
+
+        if (parseInt(this.options.maxLine, 10) >= 1) {
+            var valArray = value.split('\n'),
+                length = valArray.length;
+            if (length > this.options.maxLine) {
+                valArray.splice(this.options.maxLine, length - this.options.maxLine);
+                value = valArray.join('\n');
+            }
+        }
+
         this.$textarea.val(value);
         this.renderLineNumber(0);
     },
 
     /**
-     * 以数组形式获取/设置内容
+     * 以数组形式获取/设置内容，超过 maxLine 会被截断
      * @param {Array} value - 内容
      * @return - 内容
      */
@@ -138,6 +158,14 @@ Textline.prototype = {
         if (undefined === value) {
             return this.val().split('\n');
         }
+
+        if (parseInt(this.options.maxLine, 10) >= 1) {
+            var length = value.length;
+            if (length > this.options.maxLine) {
+                value.splice(this.options.maxLine, length - this.options.maxLine);
+            }
+        }
+
         this.$textarea.val(value.join('\n'));
         this.renderLineNumber(0);
     },
