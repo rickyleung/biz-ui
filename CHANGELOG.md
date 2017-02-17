@@ -10,6 +10,7 @@
   1. Exposed to global environment.
   2. New property: `theme`.
   3. Deprecated method: `noConflict`.
+  4. Deprecated property: `version`.
 * Button
   1. New options: `customClass`, `size`, `icon`.
   2. Deprecated theme value of option: `dark`.

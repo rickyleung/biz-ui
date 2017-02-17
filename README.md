@@ -15,7 +15,7 @@ IE9+, Firefox, Chrome and Safari.
 
 Dependence
 --------
-jQuery 1.9.1+
+jQuery 1.11.0+
 
 Usage
 --------
