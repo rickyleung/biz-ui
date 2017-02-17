@@ -1296,6 +1296,7 @@
                 this.$main = $(this.main);
                 var defaultOption = {
                         theme: bizui.theme,
+                        customClass: '',
                         size: 'small'
                     };
                 this.options = $.extend(defaultOption, options || {});
@@ -1305,7 +1306,11 @@
             Button.prototype = {
                 init: function (options) {
                     this.originHTML = this.$main.html();
-                    this.$main.addClass(defaultClass + ' ' + (prefix + options.theme));
+                    this.$main.addClass([
+                        defaultClass,
+                        options.customClass,
+                        prefix + options.theme
+                    ].join(' '));
                     if (options.size === 'large') {
                         this.$main.addClass(largeClass);
                     }
@@ -1331,6 +1336,7 @@
                 destroy: function () {
                     this.$main.removeClass([
                         defaultClass,
+                        this.options.customClass,
                         prefix + this.options.theme,
                         largeClass,
                         disableClass
@@ -1375,14 +1381,17 @@
             function Input(input, options) {
                 this.main = input;
                 this.$main = $(this.main);
-                var defaultOption = { theme: bizui.theme };
+                var defaultOption = {
+                        theme: bizui.theme,
+                        customClass: ''
+                    };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
             }
             var defaultClass = 'biz-input', disableClass = 'biz-input-disable', hoverClass = 'biz-input-hover', focusClass = 'biz-input-focus-', dataKey = 'bizInput';
             Input.prototype = {
                 init: function (options) {
-                    this.$main.addClass(defaultClass);
+                    this.$main.addClass(defaultClass + ' ' + options.customClass);
                     this.$main.placeholder();
                     if (options.disabled) {
                         this.disable();
@@ -1415,7 +1424,11 @@
                     this.$main.addClass(disableClass);
                 },
                 destroy: function () {
-                    this.$main.removeClass(defaultClass + ' ' + disableClass);
+                    this.$main.removeClass([
+                        defaultClass,
+                        this.options.customClass,
+                        disableClass
+                    ].join(' '));
                     this.$main.off('keydown.bizInput').off('mouseover.bizInput').off('mouseout.bizInput').off('focus.bizInput').off('blur.bizInput');
                     this.$main.data(dataKey, null);
                 }
@@ -1456,14 +1469,17 @@
             function Textarea(textarea, options) {
                 this.main = textarea;
                 this.$main = $(this.main);
-                var defaultOption = { theme: bizui.theme };
+                var defaultOption = {
+                        theme: bizui.theme,
+                        customClass: ''
+                    };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
             }
             var defaultClass = 'biz-textarea', disableClass = 'biz-textarea-disable', hoverClass = 'biz-textarea-hover', focusClass = 'biz-textarea-focus-', dataKey = 'bizTextarea';
             Textarea.prototype = {
                 init: function (options) {
-                    this.$main.addClass(defaultClass);
+                    this.$main.addClass(defaultClass + ' ' + options.customClass);
                     this.$main.placeholder();
                     if (options.disabled) {
                         this.disable();
@@ -1490,7 +1506,11 @@
                     return this.$main.val().replace(/\r?\n/g, '').length;
                 },
                 destroy: function () {
-                    this.$main.removeClass(defaultClass + ' ' + disableClass);
+                    this.$main.removeClass([
+                        defaultClass,
+                        this.options.customClass,
+                        disableClass
+                    ].join(' '));
                     this.$main.off('mouseover.bizTextarea').off('mouseout.bizTextarea').off('focus.bizTextarea').off('blur.bizTextarea');
                     this.$main.data(dataKey, null);
                 }
@@ -1529,14 +1549,21 @@
             function Textline(textline, options) {
                 this.main = textline;
                 this.$main = $(this.main);
-                var defaultOption = { theme: bizui.theme };
+                var defaultOption = {
+                        theme: bizui.theme,
+                        customClass: ''
+                    };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
             }
             var defaultClass = 'biz-textline', disableClass = 'biz-textline-disable', hoverClass = 'biz-textline-hover', focusClass = 'biz-textline-focus-', prefix = 'biz-textline-', dataKey = 'bizTextline';
             Textline.prototype = {
                 init: function (options) {
-                    this.$main.addClass(defaultClass + ' ' + (prefix + options.theme)).html('<div><pre></pre></div><textarea></textarea>');
+                    this.$main.addClass([
+                        defaultClass,
+                        options.customClass,
+                        prefix + options.theme
+                    ].join(' ')).html('<div><pre></pre></div><textarea></textarea>');
                     var w = options.width || this.$main.width(), h = options.height || this.$main.height();
                     w = Math.max(w, 200);
                     h = Math.max(h, 52);
@@ -1626,7 +1653,11 @@
                 },
                 destroy: function () {
                     this.$textarea.off('mouseover.bizTextline').off('mouseout.bizTextline').off('focus.bizTextline').off('blur.bizTextline').off('keyup.bizTextline').off('scroll.bizTextline');
-                    this.$main.removeClass(defaultClass + ' ' + (prefix + this.options.theme)).empty();
+                    this.$main.removeClass([
+                        defaultClass,
+                        this.options.customClass,
+                        prefix + this.options.theme
+                    ].join(' ')).empty();
                 },
                 renderLineNumber: function (scrollTop) {
                     var lineCount = this.$textarea.val().split('\n').length, numbers = '1';

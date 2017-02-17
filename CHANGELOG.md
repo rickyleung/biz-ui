@@ -11,13 +11,13 @@
   2. New property: `theme`.
   3. Deprecated method: `noConflict`.
 * Button
-  1. New options: `size`, `icon`.
+  1. New options: `customClass`, `size`, `icon`.
   2. Deprecated theme value of option: `dark`.
 * Input, Textarea
-  1. New option: `theme`.
+  1. New options: `theme`, `customClass`.
   2. Support the `placeholder` attribute for older IE.
 * Textline
-  1. New options: `theme`, `width`, `height`, `maxLine`, `val`, `valArray`.
+  1. New options: `theme`, `customClass`, `width`, `height`, `maxLine`, `val`, `valArray`.
   2. New method: `valArray`.
   3. Deprecated option: `skin`.
   4. Deprecated method: `lines`.

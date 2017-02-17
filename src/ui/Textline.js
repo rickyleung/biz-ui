@@ -4,6 +4,7 @@
  * @param {HTMLElement} textline - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
+ * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.disabled - 禁用，默认 false
  * @param {Number} options.width - 宽度，默认取目标对象宽度，最小 200px
  * @param {Number} options.height - 高度，默认取目标对象高度，最小 52px
@@ -16,7 +17,8 @@ function Textline(textline, options) {
     this.$main = $(this.main);
 
     var defaultOption = {
-        theme: bizui.theme
+        theme: bizui.theme,
+        customClass: ''
     };
     this.options = $.extend(defaultOption, options || {});
     this.init(this.options);
@@ -36,7 +38,7 @@ Textline.prototype = {
      * @private
      */
     init: function(options) {
-        this.$main.addClass(defaultClass + ' ' + (prefix + options.theme))
+        this.$main.addClass([defaultClass, options.customClass, prefix + options.theme].join(' '))
             .html('<div><pre></pre></div><textarea></textarea>');
 
         var w = options.width || this.$main.width(),
@@ -180,7 +182,7 @@ Textline.prototype = {
             .off('blur.bizTextline')
             .off('keyup.bizTextline')
             .off('scroll.bizTextline');
-        this.$main.removeClass(defaultClass + ' ' + (prefix + this.options.theme))
+        this.$main.removeClass([defaultClass, this.options.customClass, (prefix + this.options.theme)].join(' '))
             .empty();
     },
 

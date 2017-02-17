@@ -6,6 +6,7 @@ require('jquery-placeholder');
  * @param {HTMLElement} textarea - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
+ * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.disabled - 禁用，默认 false
  */
 function Textarea(textarea, options) {
@@ -13,7 +14,8 @@ function Textarea(textarea, options) {
     this.$main = $(this.main);
 
     var defaultOption = {
-        theme: bizui.theme
+        theme: bizui.theme,
+        customClass: ''
     };
     this.options = $.extend(defaultOption, options || {});
     this.init(this.options);
@@ -32,7 +34,7 @@ Textarea.prototype = {
      * @private
      */
     init: function(options) {
-        this.$main.addClass(defaultClass);
+        this.$main.addClass(defaultClass + ' ' + options.customClass);
 
         this.$main.placeholder();
 
@@ -79,7 +81,7 @@ Textarea.prototype = {
      * 销毁
      */
     destroy: function() {
-        this.$main.removeClass(defaultClass + ' ' + disableClass);
+        this.$main.removeClass([defaultClass, this.options.customClass, disableClass].join(' '));
         this.$main.off('mouseover.bizTextarea')
             .off('mouseout.bizTextarea')
             .off('focus.bizTextarea')

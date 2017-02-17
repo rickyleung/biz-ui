@@ -4,6 +4,7 @@
  * @param {HTMLElement} button - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
+ * @param {String} options.customClass - 自定义 CSS class
  * @param {String} options.size - 尺寸（small|large），默认 small
  * @param {String} options.icon - 图标名称
  * @param {String} options.label - 文字
@@ -15,6 +16,7 @@ function Button(button, options) {
 
     var defaultOption = {
         theme: bizui.theme,
+        customClass: '',
         size: 'small'
     };
     this.options = $.extend(defaultOption, options || {});
@@ -36,7 +38,7 @@ Button.prototype = {
     init: function(options) {
         this.originHTML = this.$main.html();
 
-        this.$main.addClass(defaultClass + ' ' + (prefix + options.theme));
+        this.$main.addClass([defaultClass, options.customClass, prefix + options.theme].join(' '));
 
         if (options.size === 'large') {
             this.$main.addClass(largeClass);
@@ -76,7 +78,7 @@ Button.prototype = {
      * 销毁
      */
     destroy: function() {
-        this.$main.removeClass([defaultClass, (prefix + this.options.theme), largeClass, disableClass].join(' '));
+        this.$main.removeClass([defaultClass, this.options.customClass, (prefix + this.options.theme), largeClass, disableClass].join(' '));
         this.$main.html(this.originHTML);
         this.originHTML = null;
         this.$main.data(dataKey, null);
