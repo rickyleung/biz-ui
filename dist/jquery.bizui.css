@@ -2028,6 +2028,185 @@
   border-color: #2196f3 !important;
 }
 /**
+ * Radio
+ */
+.biz-label {
+  margin-right: 10px;
+  height: 21px;
+  line-height: 21px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+}
+.biz-label .biz-icon {
+  font-size: 21px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+/**
+ * radio themes
+ */
+.biz-label-indigo.biz-radio-checked .biz-icon,
+.biz-label-indigo.biz-radio-unchecked .biz-icon {
+  color: #3f51b5;
+}
+.biz-label-indigo.biz-radio-checked-hover .biz-icon,
+.biz-label-indigo.biz-radio-unchecked-hover .biz-icon {
+  color: #606fc7;
+}
+.biz-label-deep-purple.biz-radio-checked .biz-icon,
+.biz-label-deep-purple.biz-radio-unchecked .biz-icon {
+  color: #673ab7;
+}
+.biz-label-deep-purple.biz-radio-checked-hover .biz-icon,
+.biz-label-deep-purple.biz-radio-unchecked-hover .biz-icon {
+  color: #8259cb;
+}
+.biz-label-purple.biz-radio-checked .biz-icon,
+.biz-label-purple.biz-radio-unchecked .biz-icon {
+  color: #9c27b0;
+}
+.biz-label-purple.biz-radio-checked-hover .biz-icon,
+.biz-label-purple.biz-radio-unchecked-hover .biz-icon {
+  color: #bc37d3;
+}
+.biz-label-pink.biz-radio-checked .biz-icon,
+.biz-label-pink.biz-radio-unchecked .biz-icon {
+  color: #e91e63;
+}
+.biz-label-pink.biz-radio-checked-hover .biz-icon,
+.biz-label-pink.biz-radio-unchecked-hover .biz-icon {
+  color: #ee4c83;
+}
+.biz-label-red.biz-radio-checked .biz-icon,
+.biz-label-red.biz-radio-unchecked .biz-icon {
+  color: #f44336;
+}
+.biz-label-red.biz-radio-checked-hover .biz-icon,
+.biz-label-red.biz-radio-unchecked-hover .biz-icon {
+  color: #f77066;
+}
+.biz-label-deep-orange.biz-radio-checked .biz-icon,
+.biz-label-deep-orange.biz-radio-unchecked .biz-icon {
+  color: #ff5722;
+}
+.biz-label-deep-orange.biz-radio-checked-hover .biz-icon,
+.biz-label-deep-orange.biz-radio-unchecked-hover .biz-icon {
+  color: #ff7e55;
+}
+.biz-label-gray.biz-radio-checked .biz-icon,
+.biz-label-gray.biz-radio-unchecked .biz-icon {
+  color: #9e9e9e;
+}
+.biz-label-gray.biz-radio-checked-hover .biz-icon,
+.biz-label-gray.biz-radio-unchecked-hover .biz-icon {
+  color: #b8b8b8;
+}
+.biz-label-blue-gray.biz-radio-checked .biz-icon,
+.biz-label-blue-gray.biz-radio-unchecked .biz-icon {
+  color: #607d8b;
+}
+.biz-label-blue-gray.biz-radio-checked-hover .biz-icon,
+.biz-label-blue-gray.biz-radio-unchecked-hover .biz-icon {
+  color: #7b96a3;
+}
+.biz-label-brown.biz-radio-checked .biz-icon,
+.biz-label-brown.biz-radio-unchecked .biz-icon {
+  color: #795548;
+}
+.biz-label-brown.biz-radio-checked-hover .biz-icon,
+.biz-label-brown.biz-radio-unchecked-hover .biz-icon {
+  color: #996b5b;
+}
+.biz-label-orange.biz-radio-checked .biz-icon,
+.biz-label-orange.biz-radio-unchecked .biz-icon {
+  color: #ff9800;
+}
+.biz-label-orange.biz-radio-checked-hover .biz-icon,
+.biz-label-orange.biz-radio-unchecked-hover .biz-icon {
+  color: #ffad33;
+}
+.biz-label-amber.biz-radio-checked .biz-icon,
+.biz-label-amber.biz-radio-unchecked .biz-icon {
+  color: #ffc107;
+}
+.biz-label-amber.biz-radio-checked-hover .biz-icon,
+.biz-label-amber.biz-radio-unchecked-hover .biz-icon {
+  color: #ffce3a;
+}
+.biz-label-yellow.biz-radio-checked .biz-icon,
+.biz-label-yellow.biz-radio-unchecked .biz-icon {
+  color: #ffe38e;
+}
+.biz-label-yellow.biz-radio-checked-hover .biz-icon,
+.biz-label-yellow.biz-radio-unchecked-hover .biz-icon {
+  color: #fff0c1;
+}
+.biz-label-lime.biz-radio-checked .biz-icon,
+.biz-label-lime.biz-radio-unchecked .biz-icon {
+  color: #cddc39;
+}
+.biz-label-lime.biz-radio-checked-hover .biz-icon,
+.biz-label-lime.biz-radio-unchecked-hover .biz-icon {
+  color: #d8e464;
+}
+.biz-label-light-green.biz-radio-checked .biz-icon,
+.biz-label-light-green.biz-radio-unchecked .biz-icon {
+  color: #8bc34a;
+}
+.biz-label-light-green.biz-radio-checked-hover .biz-icon,
+.biz-label-light-green.biz-radio-unchecked-hover .biz-icon {
+  color: #a4d070;
+}
+.biz-label-green.biz-radio-checked .biz-icon,
+.biz-label-green.biz-radio-unchecked .biz-icon {
+  color: #4caf50;
+}
+.biz-label-green.biz-radio-checked-hover .biz-icon,
+.biz-label-green.biz-radio-unchecked-hover .biz-icon {
+  color: #6ec071;
+}
+.biz-label-teal.biz-radio-checked .biz-icon,
+.biz-label-teal.biz-radio-unchecked .biz-icon {
+  color: #009688;
+}
+.biz-label-teal.biz-radio-checked-hover .biz-icon,
+.biz-label-teal.biz-radio-unchecked-hover .biz-icon {
+  color: #00c9b6;
+}
+.biz-label-cyan.biz-radio-checked .biz-icon,
+.biz-label-cyan.biz-radio-unchecked .biz-icon {
+  color: #00bcd4;
+}
+.biz-label-cyan.biz-radio-checked-hover .biz-icon,
+.biz-label-cyan.biz-radio-unchecked-hover .biz-icon {
+  color: #08e3ff;
+}
+.biz-label-light-blue.biz-radio-checked .biz-icon,
+.biz-label-light-blue.biz-radio-unchecked .biz-icon {
+  color: #03a9f4;
+}
+.biz-label-light-blue.biz-radio-checked-hover .biz-icon,
+.biz-label-light-blue.biz-radio-unchecked-hover .biz-icon {
+  color: #2ebcfc;
+}
+.biz-label-blue.biz-radio-checked .biz-icon,
+.biz-label-blue.biz-radio-unchecked .biz-icon {
+  color: #2196f3;
+}
+.biz-label-blue.biz-radio-checked-hover .biz-icon,
+.biz-label-blue.biz-radio-unchecked-hover .biz-icon {
+  color: #51adf6;
+}
+.biz-radio-checked-disabled,
+.biz-radio-unchecked-disabled {
+  cursor: default;
+  color: #b6b6b6;
+}
+/**
  * textarea
  */
 .biz-textarea {

@@ -7,10 +7,44 @@ var Radio = Backbone.View.extend({
         var view = this;
         $.get('src/components/Radio/radio.html', function(tpl) {
             view.$el.html(Mustache.render(tpl));
+			view.initBizUI();
+			hljs.initHighlighting.called = false;
+			hljs.initHighlighting();
         });
     },
 
+	initBizUI: function() {
+        var radioGroup = $(':radio');
+        radioGroup.bizRadio();
+        $('button').bizButton({
+            theme: 'blue-gray'
+        });
+        $('#b1').click(function() {
+            $('#apple').bizRadio('check');
+        });
+        $('#b2').click(function() {
+            $('#banana').bizRadio('check');
+        });
+        $('#b3').click(function() {
+            $('#cherry').bizRadio('check');
+        });
+        $('#b4').click(function() {
+            radioGroup.bizRadio('uncheck');
+        });
+        $('#b5').click(function() {
+            radioGroup.bizRadio('disable');
+        });
+        $('#b6').click(function() {
+            radioGroup.bizRadio('enable');
+        });
+        $('#b7').click(function() {
+            alert(radioGroup.bizRadio('val'));
+        });
+	},
+
     destroy: function() {
+        $('button').bizButton('destroy');
+        $(':radio').bizButton('destroy');
         this.$el.empty();
     }
 });

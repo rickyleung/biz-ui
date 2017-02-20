@@ -1,0 +1,46 @@
+/**
+ * Radio
+ */
+
+.biz-label {
+    margin-right: 10px;
+    height: 21px;
+    line-height: 21px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    font-family: @font-family;
+    font-size: @font-size;
+    color: @dark-text;
+}
+
+.biz-label .biz-icon {
+    font-size: 21px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+
+/**
+ * radio themes
+ */
+
+.generate-radio-themes(@i: length(@themes)) when (@i > 0) {
+    @name: extract(@themes, @i);
+    .biz-label-@{name}.biz-radio-checked .biz-icon,
+    .biz-label-@{name}.biz-radio-unchecked .biz-icon {
+        color: @@name;
+    }
+    .biz-label-@{name}.biz-radio-checked-hover .biz-icon,
+    .biz-label-@{name}.biz-radio-unchecked-hover .biz-icon {
+        color: lighten(@@name, 10%);
+    }
+    .generate-radio-themes(@i - 1);
+}
+
+.generate-radio-themes();
+.biz-radio-checked-disabled,
+.biz-radio-unchecked-disabled {
+    cursor: default;
+    color: @disable-text;
+}

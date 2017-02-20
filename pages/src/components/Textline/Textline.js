@@ -18,7 +18,7 @@ var Textline = Backbone.View.extend({
             val: 'a\nb\nc'
         });
         $('.line2').bizTextline({
-            theme: 'gray',
+            theme: 'blue-gray',
             width: 300,
             height: 150,
             maxLine: 3,

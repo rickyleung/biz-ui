@@ -29,7 +29,7 @@ var Calendar = Backbone.View.extend({
                 leftArrow: '<i class="biz-icon">&#xe314;</i>',
                 rightArrow: '<i class="biz-icon">&#xe315;</i>'
             },
-            theme: 'orange'
+            theme: 'light-green'
         }).on('changeDate', function(e) {
             $('.selected-date').html(e.format());
         });

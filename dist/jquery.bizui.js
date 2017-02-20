@@ -413,10 +413,11 @@
             _require(9);
             _require(10);
             _require(11);
+            _require(12);
             var bizui = {
                     theme: 'blue',
                     codepoints: _require(5),
-                    Tooltip: _require(12)
+                    Tooltip: _require(13)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -3279,6 +3280,114 @@
                 }
             });
             module.exports = Input;
+        },
+        function (module, exports) {
+            function Radio(radio, options) {
+                this.main = radio;
+                this.$main = $(this.main);
+                this.$group = $('input[name="' + this.$main.attr('name') + '"]');
+                var defaultOption = { theme: bizui.theme };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-label', unchecked = 'biz-radio-unchecked', uncheckedHover = 'biz-radio-unchecked-hover', checked = 'biz-radio-checked', checkedHover = 'biz-radio-checked-hover', uncheckedDisabled = 'biz-radio-unchecked-disabled', checkedDisabled = 'biz-radio-checked-disabled', dataKey = 'bizRadio', checkCodepoint = '&#xe837;', uncheckCodepoint = '&#xe836;';
+            Radio.prototype = {
+                init: function (options) {
+                    var title = this.$main.attr('title'), id = this.$main.attr('id');
+                    this.$main.after('<label for="' + id + '"><i class="biz-icon"></i>' + title + '</label>').hide();
+                    this.$label = this.$main.next();
+                    this.defaultClass = defaultClass + ' biz-label-' + options.theme;
+                    this.$label.addClass(this.defaultClass);
+                    this.$icon = this.$label.children('i');
+                    if (this.main.checked) {
+                        this.$label.addClass(this.main.disabled ? checkedDisabled : checked);
+                        this.$icon.html(checkCodepoint);
+                    } else {
+                        this.$label.addClass(this.main.disabled ? uncheckedDisabled : unchecked);
+                        this.$icon.html(uncheckCodepoint);
+                    }
+                    var self = this;
+                    this.$label.on('mouseover.bizRadio', function (e) {
+                        if (!self.main.disabled) {
+                            $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
+                        }
+                    }).on('mouseout.bizRadio', function (e) {
+                        if (!self.main.disabled) {
+                            $(this).removeClass(self.main.checked ? checkedHover : uncheckedHover);
+                        }
+                    }).on('click.bizRadio', function (e) {
+                        if (!self.main.disabled) {
+                            self.$group.bizRadio('uncheck');
+                            self.main.checked = true;
+                            $(this).attr('class', self.defaultClass + ' ' + checked + ' ' + checkedHover);
+                            self.$icon.html(checkCodepoint);
+                        }
+                    });
+                },
+                check: function () {
+                    this.$group.bizRadio('uncheck');
+                    this.main.checked = true;
+                    this.$label.attr('class', this.defaultClass + ' ' + (this.main.disabled ? checkedDisabled : checked));
+                    this.$icon.html(checkCodepoint);
+                },
+                uncheck: function () {
+                    this.main.checked = false;
+                    this.$label.attr('class', this.defaultClass + ' ' + (this.main.disabled ? uncheckedDisabled : unchecked));
+                    this.$icon.html(uncheckCodepoint);
+                },
+                enable: function () {
+                    this.main.disabled = false;
+                    this.$label.attr('class', this.defaultClass + ' ' + (this.main.checked ? checked : unchecked));
+                },
+                disable: function () {
+                    this.main.disabled = true;
+                    this.$label.attr('class', this.defaultClass + ' ' + (this.main.checked ? checkedDisabled : uncheckedDisabled));
+                },
+                val: function () {
+                    var value = '';
+                    this.$group.each(function (index, element) {
+                        if (element.checked) {
+                            value = $(element).val();
+                            return false;
+                        }
+                    });
+                    return value;
+                },
+                destroy: function () {
+                    this.$main.show();
+                    this.$label.off('mouseover.bizRadio').off('mouseout.bizRadio').off('click.bizRadio').remove();
+                    this.$main.data(dataKey, null);
+                }
+            };
+            function isRadio(elem) {
+                return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && elem.getAttribute('type').toLowerCase() === 'radio';
+            }
+            $.extend($.fn, {
+                bizRadio: function (method) {
+                    var internal_return, args = arguments;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (isRadio(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                                $(this).data(dataKey, new Radio(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = Radio;
         },
         function (module, exports) {
             _require(1);

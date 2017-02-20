@@ -3,10 +3,12 @@
 <div class="example">
 <input type="text" class="date" value="2046-01-01"><span class="icon-date"><i class="biz-icon">&#xe916;</i></span>
 <br><br>
+<!-- range 类型，class 必须含 input-daterange -->
 <div class="input-daterange">
     <input type="text" class="start" value="2016-01-01"><span class="icon-range">to</span><input type="text" class="end" value="2017-12-31">
 </div>
 <br>
+<!-- inline 类型 -->
 <div class="inline-date" data-date="2017-01-01"></div>
 <span class="selected-date" style="padding-left:70px"></span>
 </div>
@@ -45,7 +47,7 @@
             leftArrow: '&lt;i class="biz-icon"&gt;&amp;#xe314;&lt;/i&gt;',
             rightArrow: '&lt;i class="biz-icon"&gt;&amp;#xe315;&lt;/i&gt;'
         },
-        theme: 'orange'
+        theme: 'light-green'
     }).on('changeDate', function(e) {
         $('.selected-date').html(e.format());
     });
