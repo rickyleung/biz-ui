@@ -14,10 +14,8 @@ var Input = Backbone.View.extend({
     },
 
 	initBizUI: function() {
-        $('input').bizInput({
-            onEnter: function(e) {
-                alert(this.$main.val());
-            }
+        $('input').bizInput().on('enter', function(e, value) {
+            alert(value);
         });
         $('.item2').bizInput('disable');
 	},

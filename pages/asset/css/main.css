@@ -20,24 +20,6 @@ code {
 	font-family: Consolas, Monaco, monospace;
 	text-align: left;
 }
-table {
-    border: 0;
-    border-collapse: collapse;
-    table-layout: fixed;
-	margin-left: 40px;
-	margin-bottom: 40px;
-}
-th {
-    padding: 5px 8px;
-    border: 1px #212121 solid;
-	background: #212121;
-	color: #fff
-}
-td {
-	padding: 5px 8px;
-    border: 1px #ccc solid;
-	background: #fff;
-}
 
 /**
  * nav
@@ -358,6 +340,24 @@ body.index {
     float: left;
     margin-right: 20px;
 }
+.components table.options {
+    border: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+	margin-left: 40px;
+	margin-bottom: 40px;
+}
+.components table.options th {
+    padding: 5px 8px;
+    border: 1px #212121 solid;
+	background: #212121;
+	color: #fff
+}
+.components table.options td {
+	padding: 5px 8px;
+    border: 1px #ccc solid;
+	background: #fff;
+}
 .methods {
 	padding-left: 40px;
 	margin-top: 40px;
@@ -373,6 +373,28 @@ ul.issues {
     padding-left: 40px;
     line-height: 30px;
 	list-style: disc inside;
+}
+.date {
+    border-radius: 2px 0 0 2px !important;
+}
+.icon-date, .icon-range {
+    display: inline-block;
+    vertical-align: middle;
+    height: 28px;
+    line-height: 28px;
+    color: #999;
+    background: #f1f1f1;
+    cursor: default;
+}
+.icon-date {
+    padding: 0 3px;
+    border: 1px solid #e2e2e2;
+    border-left: 0;
+}
+.icon-range {
+    padding: 0 8px;
+    border-top: 1px solid #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
 }
 @media screen and (max-width: 1024px) {
     .components {

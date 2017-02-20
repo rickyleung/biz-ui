@@ -10,7 +10,7 @@ var jsdoc = require('gulp-jsdoc3');
 var sequence = require('gulp-sequence');
 
 gulp.task('lint', function() {
-    return gulp.src(['src/*.js', 'src/*/*.js'])
+    return gulp.src(['src/*.js', 'src/ui/*.js'])
       .pipe(jshint())
       .pipe(jshint.reporter('jshint-stylish'))
       .pipe(jshint.reporter('fail'));
@@ -69,6 +69,7 @@ gulp.task('doc', function(cb) {
         'README.md',
         'src/bizui.js',
         'src/ui/Button.js',
+        'src/ui/Calendar.js',
         'src/ui/Input.js',
         'src/ui/Textarea.js',
         'src/ui/Textline.js',

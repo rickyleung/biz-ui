@@ -105,7 +105,6 @@ $.extend($.fn, {
                 if (isButton(this) && (method === undefined || jQuery.isPlainObject(method))) {
                     $(this).data(dataKey, new Button(this, method));
                 }
-
             }
         });
 

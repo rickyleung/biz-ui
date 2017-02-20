@@ -14,17 +14,15 @@
 
 <h4>JavaScript</h4>
 <pre><code class="js">
-    $('input').bizInput({
-        onEnter: function(e) {
-            alert(this.$main.val());
-        }
+    $('input').bizInput().on('enter', function(e, value) {
+        alert(value);
     });
     $('.item2').bizInput('disable');
 
 </code></pre>
 
 <h4>Options</h4>
-<table>
+<table class="options">
     <tr>
         <th>参数名称</th>
         <th>参数类型</th>

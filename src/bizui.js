@@ -1,3 +1,9 @@
+require('./ui/Button');
+require('./ui/Calendar');
+require('./ui/Input');
+require('./ui/Textarea');
+require('./ui/Textline');
+
 /**
  * @namespace
  */
@@ -10,10 +16,6 @@ var bizui = {
      * @property {Object} codepoints - Iconfont codepoints
      */
     codepoints: require('./codepoints.js'),
-    Button: require('./ui/Button'),
-    Input: require('./ui/Input'),
-    Textarea: require('./ui/Textarea'),
-    Textline: require('./ui/Textline'),
     /**
      * Tooltip
      * @function

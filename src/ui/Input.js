@@ -8,7 +8,6 @@ require('jquery-placeholder');
  * @param {String} options.theme - 主题
  * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.disabled - 禁用，默认 false
- * @param {Function} options.onEnter - 按回车回调
  */
 function Input(input, options) {
     this.main = input;
@@ -43,16 +42,6 @@ Input.prototype = {
             this.disable();
         }
 
-        if (typeof options.onEnter === 'function') {
-            var self = this;
-            this.$main.on('keydown.bizInput', function(e) {
-                if (e.keyCode === 13) {
-                    options.onEnter.call(self, e);
-                    return false; // IE10-会自动寻找第一个<button>标签并触发它的click事件
-                }
-            });
-        }
-
         this.$main.on('mouseover.bizInput', function(e) {
             $(this).addClass(hoverClass);
         }).on('mouseout.bizInput', function(e) {
@@ -61,6 +50,17 @@ Input.prototype = {
             $(this).addClass(focusClass + options.theme);
         }).on('blur.bizInput', function(e) {
             $(this).removeClass(focusClass + options.theme);
+        }).on('keydown.bizInput', function(e) {
+            /**
+             * 回车
+             * @event Input#enter
+             * @param {Object} e - 事件对象
+             * @param {String} value - 输入值
+             */
+            if (e.keyCode === 13) {
+                $(this).trigger('enter', $(this).val());
+                return false; // IE10-会自动寻找第一个<button>标签并触发它的click事件
+            }
         });
     },
 
