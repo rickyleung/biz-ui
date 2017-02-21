@@ -3,6 +3,7 @@ require('./ui/Calendar');
 require('./ui/Checkbox');
 require('./ui/Input');
 require('./ui/Radio');
+require('./ui/Tab');
 require('./ui/Textarea');
 require('./ui/Textline');
 

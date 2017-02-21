@@ -184,6 +184,7 @@ Textline.prototype = {
             .off('scroll.bizTextline');
         this.$main.removeClass([defaultClass, this.options.customClass, (prefix + this.options.theme)].join(' '))
             .empty();
+        this.$main.data(dataKey, null);
     },
 
     /**

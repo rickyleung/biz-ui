@@ -415,10 +415,11 @@
             _require(11);
             _require(12);
             _require(13);
+            _require(14);
             var bizui = {
                     theme: 'blue',
                     codepoints: _require(5),
-                    Tooltip: _require(14)
+                    Tooltip: _require(15)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -3517,6 +3518,112 @@
             module.exports = Radio;
         },
         function (module, exports) {
+            function Tab(tab, options) {
+                this.main = tab;
+                this.$main = $(this.main);
+                var defaultOption = {
+                        action: 'click',
+                        selectedIndex: 0,
+                        theme: bizui.theme
+                    };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-tab', prefix = 'biz-tab-', dataKey = 'bizTab';
+            Tab.prototype = {
+                init: function (options) {
+                    this.$main.addClass([
+                        defaultClass,
+                        options.customClass,
+                        prefix + options.theme
+                    ].join(' '));
+                    this.$tabs = this.$main.children('ul').children('li');
+                    this.$contents = this.$main.children('div').children('div').hide();
+                    var self = this;
+                    if (options.action === 'hover') {
+                        options.action = 'mouseover';
+                    }
+                    this.$tabs.on(options.action + '.bizTab', function (e) {
+                        if (!$(this).hasClass('active')) {
+                            var index;
+                            self.$tabs.each(function (i, tab) {
+                                if (tab === e.target) {
+                                    index = i;
+                                    return false;
+                                }
+                            });
+                            self.index(index);
+                        }
+                    });
+                    this.index(options.selectedIndex, false);
+                },
+                index: function (selectedIndex, fire) {
+                    var curTab, curContent;
+                    if (typeof selectedIndex != 'undefined') {
+                        this.$tabs.removeClass('active');
+                        this.$contents.hide();
+                        this.options.selectedIndex = selectedIndex;
+                        curTab = $(this.$tabs[selectedIndex]).addClass('active');
+                        curContent = $(this.$contents[selectedIndex]).show();
+                        if (fire === undefined || !!fire) {
+                            curTab.trigger('changeTab', {
+                                index: selectedIndex,
+                                title: curTab.text(),
+                                content: curContent.html()
+                            });
+                        }
+                    } else {
+                        var curIndex = this.options.selectedIndex;
+                        curTab = $(this.$tabs[curIndex]);
+                        curContent = $(this.$contents[curIndex]);
+                        return {
+                            index: curIndex,
+                            title: curTab.text(),
+                            content: curContent.html()
+                        };
+                    }
+                },
+                destroy: function () {
+                    this.$main.removeClass([
+                        defaultClass,
+                        this.options.customClass,
+                        prefix + this.options.theme
+                    ].join(' '));
+                    this.$tabs.off(this.options.action + '.bizTab');
+                    this.$main.data(dataKey, null);
+                }
+            };
+            function isTab(elem) {
+                return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'div';
+            }
+            $.extend($.fn, {
+                bizTab: function (method) {
+                    var internal_return, args = arguments;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (isTab(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                                $(this).data(dataKey, new Tab(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = Tab;
+        },
+        function (module, exports) {
             _require(1);
             function Textarea(textarea, options) {
                 this.main = textarea;
@@ -3710,6 +3817,7 @@
                         this.options.customClass,
                         prefix + this.options.theme
                     ].join(' ')).empty();
+                    this.$main.data(dataKey, null);
                 },
                 renderLineNumber: function (scrollTop) {
                     var lineCount = this.$textarea.val().split('\n').length, numbers = '1';

@@ -2367,6 +2367,168 @@
   color: #b6b6b6;
 }
 /**
+ * Tab
+ */
+.biz-tab {
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+.biz-tab > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 36px;
+  line-height: 36px;
+}
+.biz-tab > ul > li {
+  float: left;
+  padding: 0 20px;
+  margin-right: 5px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 2px 2px 0 0;
+  color: #ffffff;
+}
+.biz-tab > ul > li:first-child {
+  border-left: 0;
+}
+.biz-tab > ul > li.active {
+  cursor: default;
+  color: #333333;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e2e2;
+  border-bottom: 0;
+  height: 35px;
+  line-height: 36px;
+}
+.biz-tab > div {
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #e2e2e2;
+  margin-top: -1px;
+  border-radius: 0 0 2px 2px;
+}
+/**
+ * tab themes
+ */
+.biz-tab-indigo > ul > li {
+  background-color: #3f51b5;
+}
+.biz-tab-indigo > ul > li:hover {
+  background-color: #606fc7;
+}
+.biz-tab-deep-purple > ul > li {
+  background-color: #673ab7;
+}
+.biz-tab-deep-purple > ul > li:hover {
+  background-color: #8259cb;
+}
+.biz-tab-purple > ul > li {
+  background-color: #9c27b0;
+}
+.biz-tab-purple > ul > li:hover {
+  background-color: #bc37d3;
+}
+.biz-tab-pink > ul > li {
+  background-color: #e91e63;
+}
+.biz-tab-pink > ul > li:hover {
+  background-color: #ee4c83;
+}
+.biz-tab-red > ul > li {
+  background-color: #f44336;
+}
+.biz-tab-red > ul > li:hover {
+  background-color: #f77066;
+}
+.biz-tab-deep-orange > ul > li {
+  background-color: #ff5722;
+}
+.biz-tab-deep-orange > ul > li:hover {
+  background-color: #ff7e55;
+}
+.biz-tab-gray > ul > li {
+  background-color: #9e9e9e;
+}
+.biz-tab-gray > ul > li:hover {
+  background-color: #b8b8b8;
+}
+.biz-tab-blue-gray > ul > li {
+  background-color: #607d8b;
+}
+.biz-tab-blue-gray > ul > li:hover {
+  background-color: #7b96a3;
+}
+.biz-tab-brown > ul > li {
+  background-color: #795548;
+}
+.biz-tab-brown > ul > li:hover {
+  background-color: #996b5b;
+}
+.biz-tab-orange > ul > li {
+  background-color: #ff9800;
+}
+.biz-tab-orange > ul > li:hover {
+  background-color: #ffad33;
+}
+.biz-tab-amber > ul > li {
+  background-color: #ffc107;
+}
+.biz-tab-amber > ul > li:hover {
+  background-color: #ffce3a;
+}
+.biz-tab-yellow > ul > li {
+  background-color: #ffe38e;
+}
+.biz-tab-yellow > ul > li:hover {
+  background-color: #fff0c1;
+}
+.biz-tab-lime > ul > li {
+  background-color: #cddc39;
+}
+.biz-tab-lime > ul > li:hover {
+  background-color: #d8e464;
+}
+.biz-tab-light-green > ul > li {
+  background-color: #8bc34a;
+}
+.biz-tab-light-green > ul > li:hover {
+  background-color: #a4d070;
+}
+.biz-tab-green > ul > li {
+  background-color: #4caf50;
+}
+.biz-tab-green > ul > li:hover {
+  background-color: #6ec071;
+}
+.biz-tab-teal > ul > li {
+  background-color: #009688;
+}
+.biz-tab-teal > ul > li:hover {
+  background-color: #00c9b6;
+}
+.biz-tab-cyan > ul > li {
+  background-color: #00bcd4;
+}
+.biz-tab-cyan > ul > li:hover {
+  background-color: #08e3ff;
+}
+.biz-tab-light-blue > ul > li {
+  background-color: #03a9f4;
+}
+.biz-tab-light-blue > ul > li:hover {
+  background-color: #2ebcfc;
+}
+.biz-tab-blue > ul > li {
+  background-color: #2196f3;
+}
+.biz-tab-blue > ul > li:hover {
+  background-color: #51adf6;
+}
+.biz-tab-yellow > ul > li {
+  color: #d0910b;
+}
+/**
  * textarea
  */
 .biz-textarea {

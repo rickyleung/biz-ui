@@ -399,6 +399,16 @@ ul.issues {
     border-top: 1px solid #e2e2e2;
     border-bottom: 1px solid #e2e2e2;
 }
+.tabs {
+    width: 320px;
+}
+.tabs > div {
+    height: 100px;
+}
+.log {
+    height: 40px;
+    line-height: 40px;
+}
 @media screen and (max-width: 1024px) {
     .components {
         flex-direction: column;

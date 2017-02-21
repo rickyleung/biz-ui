@@ -73,6 +73,7 @@ gulp.task('doc', function(cb) {
         'src/ui/Checkbox.js',
         'src/ui/Input.js',
         'src/ui/Radio.js',
+        'src/ui/Tab.js',
         'src/ui/Textarea.js',
         'src/ui/Textline.js',
         'src/ui/Tooltip.js'
@@ -81,6 +82,9 @@ gulp.task('doc', function(cb) {
         .pipe(jsdoc({
             opts: {
                 destination: 'docs'
+            },
+            templates: {
+                theme: "cerulean"
             }
         }, cb));
 });
