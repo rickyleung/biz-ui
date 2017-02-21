@@ -1,5 +1,6 @@
 require('./ui/Button');
 require('./ui/Calendar');
+require('./ui/Checkbox');
 require('./ui/Input');
 require('./ui/Radio');
 require('./ui/Textarea');

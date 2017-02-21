@@ -1,6 +1,6 @@
 <h3>Radio</h3>
 
-<div class="example button-example">
+<div class="example">
 <input type="radio" name="fruit" value="1" id="apple" title="Apple" checked>
 <input type="radio" name="fruit" value="2" id="banana" title="Banana">
 <input type="radio" name="fruit" value="3" id="cherry" title="Cherry"><br><br>
@@ -31,7 +31,9 @@
 <h4>JavaScript</h4>
 <pre><code class="js">
     var radioGroup = $(':radio');
-    radioGroup.bizRadio();
+    radioGroup.bizRadio({
+        theme: 'pink'
+    });
     $('button').bizButton({
         theme: 'blue-gray'
     });

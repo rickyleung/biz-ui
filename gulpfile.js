@@ -70,6 +70,7 @@ gulp.task('doc', function(cb) {
         'src/bizui.js',
         'src/ui/Button.js',
         'src/ui/Calendar.js',
+        'src/ui/Checkbox.js',
         'src/ui/Input.js',
         'src/ui/Radio.js',
         'src/ui/Textarea.js',

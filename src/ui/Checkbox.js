@@ -1,12 +1,12 @@
 /**
- * Radio
+ * Checkbox
  * @class
- * @param {HTMLElement} radio - 目标元素
+ * @param {HTMLElement} checkbox - 目标元素
  * @param {Object} options - 参数
  * @param {String} options.theme - 主题
  */
-function Radio(radio, options) {
-    this.main = radio;
+function Checkbox(checkbox, options) {
+    this.main = checkbox;
     this.$main = $(this.main);
     // 同组选项
     this.$group = $('input[name="' + this.$main.attr('name') + '"]');
@@ -19,17 +19,17 @@ function Radio(radio, options) {
 }
 
 var defaultClass = 'biz-label',
-    unchecked = 'biz-radio-unchecked',
-    uncheckedHover = 'biz-radio-unchecked-hover',
-    checked = 'biz-radio-checked',
-    checkedHover = 'biz-radio-checked-hover',
-    uncheckedDisabled = 'biz-radio-unchecked-disabled',
-    checkedDisabled = 'biz-radio-checked-disabled',
-    dataKey = 'bizRadio',
-    checkCodepoint = '&#xe837;',
-    uncheckCodepoint = '&#xe836;';
+    unchecked = 'biz-checkbox-unchecked',
+    uncheckedHover = 'biz-checkbox-unchecked-hover',
+    checked = 'biz-checkbox-checked',
+    checkedHover = 'biz-checkbox-checked-hover',
+    uncheckedDisabled = 'biz-checkbox-unchecked-disabled',
+    checkedDisabled = 'biz-checkbox-checked-disabled',
+    dataKey = 'bizCheckbox',
+    checkCodepoint = '&#xe834;',
+    uncheckCodepoint = '&#xe835;';
 
-Radio.prototype = {
+Checkbox.prototype = {
     /**
      * 初始化
      * @param {Object} options - 参数
@@ -55,21 +55,25 @@ Radio.prototype = {
         }
 
         var self = this;
-        this.$label.on('mouseover.bizRadio', function(e) {
+        this.$label.on('mouseover.bizCheckbox', function(e) {
             if (!self.main.disabled) {
                 $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
             }
-        }).on('mouseout.bizRadio', function(e) {
+        }).on('mouseout.bizCheckbox', function(e) {
             if (!self.main.disabled) {
                 $(this).removeClass(self.main.checked ? checkedHover : uncheckedHover);
             }
-        }).on('click.bizRadio', function(e) {
+        }).on('click.bizCheckbox', function(e) {
             if (!self.main.disabled) {
-                self.$group.bizRadio('uncheck');
-                $(this).attr('class', [self.defaultClass, checked, checkedHover].join(' '));
-                self.$icon.html(checkCodepoint);
+                if (self.main.checked) { // label 的点击先于 input 的点击
+                    $(this).attr('class', [self.defaultClass, unchecked, uncheckedHover].join(' '));
+                    self.$icon.html(uncheckCodepoint);
+                } else {
+                    $(this).attr('class', [self.defaultClass, checked, checkedHover].join(' '));
+                    self.$icon.html(checkCodepoint);
+                }
                 if (id === '') {
-                    self.main.checked = true;
+                    self.main.checked = !self.main.checked;
                 }
             }
         });
@@ -79,7 +83,6 @@ Radio.prototype = {
      * 勾选
      */
     check: function() {
-        this.$group.bizRadio('uncheck');
         this.main.checked = true;
         this.$label.attr('class', this.defaultClass + ' ' + (this.main.disabled ? checkedDisabled : checked));
         this.$icon.html(checkCodepoint);
@@ -115,14 +118,13 @@ Radio.prototype = {
      * @return value 值
      */
     val: function() {
-        var value = '';
+        var value = [];
         this.$group.each(function(index, element) {
             if (element.checked) {
-                value = $(element).val();
-                return false;
+                value.push($(element).val());
             }
         });
-        return value;
+        return value.join(',');
     },
 
     /**
@@ -130,20 +132,20 @@ Radio.prototype = {
      */
     destroy: function() {
         this.$main.show();
-        this.$label.off('mouseover.bizRadio')
-            .off('mouseout.bizRadio')
-            .off('click.bizRadio')
+        this.$label.off('mouseover.bizCheckbox')
+            .off('mouseout.bizCheckbox')
+            .off('click.bizCheckbox')
             .remove();
         this.$main.data(dataKey, null);
     }
 };
 
-function isRadio(elem) {
-    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && elem.getAttribute('type').toLowerCase() === 'radio';
+function isCheckbox(elem) {
+    return elem.nodeType === 1 && elem.tagName.toLowerCase() === 'input' && elem.getAttribute('type').toLowerCase() === 'checkbox';
 }
 
 $.extend($.fn, {
-    bizRadio: function(method) {
+    bizCheckbox: function(method) {
         var internal_return, args = arguments;
         this.each(function() {
             var instance = $(this).data(dataKey);
@@ -155,8 +157,8 @@ $.extend($.fn, {
                     }
                 }
             } else {
-                if (isRadio(this) && (method === undefined || jQuery.isPlainObject(method))) {
-                    $(this).data(dataKey, new Radio(this, method));
+                if (isCheckbox(this) && (method === undefined || jQuery.isPlainObject(method))) {
+                    $(this).data(dataKey, new Checkbox(this, method));
                 }
             }
         });
@@ -169,4 +171,4 @@ $.extend($.fn, {
     }
 });
 
-module.exports = Radio;
+module.exports = Checkbox;

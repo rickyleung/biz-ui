@@ -226,13 +226,16 @@ body.index {
 .tutorial {
     margin: 0 auto;
     max-width: 960px;
-    padding: 20px 0;
+    padding-bottom: 60px;
 	background: #fff;
     color: #212121;
 	text-align: center;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.24);
 }
 .tutorial h1 {
 	color: #212121;
+    margin: 0;
+    padding: 40px 0;
 }
 .tutorial h3 {
     font-size: 22px;

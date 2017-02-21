@@ -6,6 +6,8 @@
 * Rewrite CSS by Less.
 * Generate documentations with JSDoc3.
 * Provide 19 themes: blue(default), light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, brown, blue-gray, gray, deep-orange, red, pink, purple, deep-purple, indigo.
+
+#### Components updates
 * bizui
   1. Always exposed to global environment.
   2. New property: `theme`.
@@ -17,6 +19,9 @@
 * Calendar
   1. Many new options and new methods.
   2. Deprecated methods: `enable`, `disable`.
+* Checkbox, Radio
+  1. New option: `theme`.
+  2. Deprecated method: `get`.
 * Input, Textarea
   1. New options: `theme`, `customClass`.
   2. Support the `placeholder` attribute for older IE.

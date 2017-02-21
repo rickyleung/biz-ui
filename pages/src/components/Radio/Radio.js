@@ -15,7 +15,9 @@ var Radio = Backbone.View.extend({
 
 	initBizUI: function() {
         var radioGroup = $(':radio');
-        radioGroup.bizRadio();
+        radioGroup.bizRadio({
+            theme: 'pink'
+        });
         $('button').bizButton({
             theme: 'blue-gray'
         });
@@ -44,7 +46,7 @@ var Radio = Backbone.View.extend({
 
     destroy: function() {
         $('button').bizButton('destroy');
-        $(':radio').bizButton('destroy');
+        $(':radio').bizRadio('destroy');
         this.$el.empty();
     }
 });
