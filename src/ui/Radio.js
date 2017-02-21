@@ -110,7 +110,7 @@ Radio.prototype = {
 
     /**
      * 获取选中的 value 值
-     * @return value值
+     * @return value 值
      */
     val: function() {
         var value = '';

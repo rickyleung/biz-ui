@@ -3,12 +3,12 @@
  * @class
  * @param {HTMLElement} button - 目标元素
  * @param {Object} options - 参数
- * @param {String} options.theme - 主题
  * @param {String} options.customClass - 自定义 CSS class
- * @param {String} options.size - 尺寸（small|large），默认 small
+ * @param {Boolean} options.disabled - 禁用，默认 false
  * @param {String} options.icon - 图标名称
  * @param {String} options.label - 文字
- * @param {Boolean} options.disabled - 禁用，默认 false
+ * @param {String} options.size - 尺寸（small|large），默认 small
+ * @param {String} options.theme - 主题
  */
 function Button(button, options) {
     this.main = button;

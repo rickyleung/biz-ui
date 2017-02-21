@@ -5,9 +5,9 @@ require('jquery-placeholder');
  * @class
  * @param {HTMLElement} textarea - 目标元素
  * @param {Object} options - 参数
- * @param {String} options.theme - 主题
  * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.disabled - 禁用，默认 false
+ * @param {String} options.theme - 主题
  */
 function Textarea(textarea, options) {
     this.main = textarea;

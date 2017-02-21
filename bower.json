@@ -23,8 +23,10 @@
     "jshint-stylish": "^2.2.1"
   },
   "dependencies": {
-    "jquery": "^3.1.1",
-    "jquery-placeholder": "^2.3.1"
+    "bootstrap-datepicker": "^1.6.4",
+    "jquery": "^1.11.0",
+    "jquery-placeholder": "^2.3.1",
+    "tips.js": "^1.2.0"
   },
   "ignore": [
     "**/.*",

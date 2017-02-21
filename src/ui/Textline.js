@@ -3,14 +3,14 @@
  * @class
  * @param {HTMLElement} textline - 目标元素
  * @param {Object} options - 参数
- * @param {String} options.theme - 主题
  * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.disabled - 禁用，默认 false
- * @param {Number} options.width - 宽度，默认取目标对象宽度，最小 200px
  * @param {Number} options.height - 高度，默认取目标对象高度，最小 52px
  * @param {Number} options.maxLine - 最大行数，大于等于 1
+ * @param {String} options.theme - 主题
  * @param {String} options.val - 初始值，字符串形式
  * @param {Array} options.valArray - 初始值，数组形式
+ * @param {Number} options.width - 宽度，默认取目标对象宽度，最小 200px
  */
 function Textline(textline, options) {
     this.main = textline;

@@ -6,7 +6,6 @@ require('../../node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepick
  * @class
  * @param {HTMLElement} calendar - 目标元素
  * @param {Object} options - 参数
- * @param {String} options.theme - 主题
  * @param {Boolean} options.autoclose - 选中日期后关闭日历，默认 true
  * @param {Boolean} options.calendarWeeks - 显示周数，默认 false
  * @param {Boolean} options.clearBtn - 显示清空按钮，默认 false，如果 autoclose 为 true，点击后将关闭日历
@@ -22,6 +21,7 @@ require('../../node_modules/bootstrap-datepicker/dist/locales/bootstrap-datepick
  * @param {String} options.language - 语言（zh-CN|en），默认 'zh-CN'
  * @param {Date|String} options.startDate - 最早开始日期，默认不限制
  * @param {Object} options.templates - 左右箭头模版，默认 {leftArrow: '&laquo;', rightArrow: '&raquo;'}
+ * @param {String} options.theme - 主题
  * @param {String} options.title - 标题，默认 ''
  * @param {Boolean|String} options.todayBtn - 显示切换到今日视图的按钮，默认 false，如为 'linked'，则点击即选中
  * @param {Boolean} options.todayHighlight - 高亮今日，默认 false
