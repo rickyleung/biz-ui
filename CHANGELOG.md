@@ -10,26 +10,40 @@
 #### Components updates
 * bizui
   1. Always exposed to global environment.
-  2. New property: `theme`.
-  3. Deprecated method: `noConflict`.
+  2. New properties: `codepoints`, `theme`.
+  3. Deprecated methods: `noConflict` and component constructors(except Tooltip).
   4. Deprecated property: `version`.
 * Button
-  1. New options: `customClass`, `size`, `icon`.
-  2. Deprecated theme value of option: `dark`.
+  1. New options: `customClass`, `icon`, `size`.
+  2. Deprecated theme value of option: `dark`(use `gray`).
 * Calendar
-  1. Many new options and new methods.
-  2. Deprecated methods: `enable`, `disable`.
+  1. Many new options and new methods, see docs.
+  2. Deprecated methods: `enable`, `disable`
+  3. Decoupling Input components.
 * Checkbox, Radio
   1. New option: `theme`.
-  2. Deprecated method: `get`.
-* Input, Textarea
-  1. New options: `theme`, `customClass`.
+  2. Deprecated method: `get`(use jQuery selector).
+* Input
+  1. New options: `customClass`, `theme`.
+  2. New event: `enter`.
+  3. Support the `placeholder` attribute for older IE.
+  3. Deprecated option: `onEnter`(bind `enter` event).
+* Tab
+  1. New options: `action`, `customClass`, `selectedIndex`, `theme`.
+  2. New method: `index`.
+  3. New event: `changeTab`.
+  3. Deprecated options: `event`(use `action`), `onChange`(bind `changeTab` event), `skin`(use `theme` or `customClass`).
+  4. Deprecated method: `select`(use `index`).
+* Textarea
+  1. New options: `customClass`, `theme`.
   2. Support the `placeholder` attribute for older IE.
 * Textline
-  1. New options: `theme`, `customClass`, `width`, `height`, `maxLine`, `val`, `valArray`.
+  1. New options: `customClass`, `maxLine`, `theme`, `valArray`.
   2. New method: `valArray`.
-  3. Deprecated option: `skin`.
-  4. Deprecated method: `lines`.
-* Tooltips
+  3. Deprecated option: `skin`(use `theme` or `customClass`).
+  4. Deprecated method: `lines`(use `valArray` to get data, use `maxLine` to limit max line number).
+* Tooltip
   1. Use `data-tooltip` attribute to mark target elements instead of `title`.
   2. New options: `action`, `element`, `theme`, `preventDefault`, `removeAll`, `removeSpecific`.
+  4. Deprecated param: `destroy`(use option `removeAll` or `removeSpecific`).
+  3. Deprecated options: `color`, `direction`, `margin`, `el`.
