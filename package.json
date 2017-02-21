@@ -10,7 +10,8 @@
   },
   "scripts": {
     "build": "gulp build",
-    "doc": "gulp doc"
+    "doc": "gulp doc",
+    "start": "gulp build & gulp doc"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
