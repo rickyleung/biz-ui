@@ -72,6 +72,7 @@ gulp.task('doc', function(cb) {
         'src/ui/Calendar.js',
         'src/ui/Checkbox.js',
         'src/ui/Input.js',
+        'src/ui/Page.js',
         'src/ui/Radio.js',
         'src/ui/Tab.js',
         'src/ui/Textarea.js',

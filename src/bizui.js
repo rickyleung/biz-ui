@@ -2,6 +2,7 @@ require('./ui/Button');
 require('./ui/Calendar');
 require('./ui/Checkbox');
 require('./ui/Input');
+require('./ui/Page');
 require('./ui/Radio');
 require('./ui/Tab');
 require('./ui/Textarea');

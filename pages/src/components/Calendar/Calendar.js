@@ -31,7 +31,7 @@ var Calendar = Backbone.View.extend({
             },
             theme: 'light-green'
         }).on('changeDate', function(e) {
-            $('.selected-date').html(e.format());
+            $('.log').html(e.format());
         });
 	},
 

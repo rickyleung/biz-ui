@@ -408,6 +408,8 @@ ul.issues {
 .log {
     height: 40px;
     line-height: 40px;
+    font-family: 'Consolas';
+    color: #666;
 }
 @media screen and (max-width: 1024px) {
     .components {
