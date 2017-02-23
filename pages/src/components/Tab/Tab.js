@@ -32,7 +32,7 @@ var Tab = Backbone.View.extend({
         });
         $('#b4').click(function() {
             var data = tabs.bizTab('index');
-            alert('index: ' + data.index + ', title: ' + data.title + ', content: ' + data.content);
+            bizui.alert('index: ' + data.index + ', title: ' + data.title + ', content: ' + data.content);
         });
 	},
 

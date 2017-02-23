@@ -23,7 +23,7 @@ var bizui = {
     codepoints: require('./codepoints.js'),
     /**
      * 提示对话框
-     * @param {Object} options - 参数
+     * @param {Object|String} options - 参数或提示内容
      * @param {String} options.content - 内容，默认 ''
      * @param {String} options.okText - 确认文字，默认 '确定'
      * @param {String} options.theme - 主题

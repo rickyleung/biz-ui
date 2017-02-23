@@ -40,7 +40,7 @@ var Checkbox = Backbone.View.extend({
             checkboxGroup.bizCheckbox('enable');
         });
         $('#b7').click(function() {
-            alert(checkboxGroup.bizCheckbox('val'));
+            bizui.alert(checkboxGroup.bizCheckbox('val'));
         });
 	},
 

@@ -3754,6 +3754,9 @@
                 }
             };
             var alert = function (options) {
+                if (!jQuery.isPlainObject(options)) {
+                    options = { content: options.toString() };
+                }
                 var defaultOption = {
                         content: '',
                         okText: '\u786E\u5B9A'

@@ -173,6 +173,12 @@ Dialog.prototype = {
 };
 
 var alert = function(options) {
+    if (!jQuery.isPlainObject(options)) {
+        options = {
+            content: options.toString()
+        };
+    }
+
     var defaultOption = {
         content: '',
         okText: '确定'

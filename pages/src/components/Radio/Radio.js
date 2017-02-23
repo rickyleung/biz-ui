@@ -40,7 +40,7 @@ var Radio = Backbone.View.extend({
             radioGroup.bizRadio('enable');
         });
         $('#b7').click(function() {
-            alert(radioGroup.bizRadio('val'));
+            bizui.alert(radioGroup.bizRadio('val'));
         });
 	},
 

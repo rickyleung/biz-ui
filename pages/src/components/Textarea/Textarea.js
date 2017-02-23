@@ -19,7 +19,7 @@ var Textarea = Backbone.View.extend({
         $('button').bizButton({
             theme: 'blue-gray'
         }).click(function() {
-            alert($('.content1').bizTextarea('length'));
+            bizui.alert($('.content1').bizTextarea('length'));
         });
 	},
 
