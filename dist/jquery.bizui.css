@@ -2122,6 +2122,131 @@
   color: #b6b6b6;
 }
 /**
+ * Dialog
+ */
+.biz-dialog {
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 0 8px #888;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background: #ffffff;
+}
+.biz-dialog-title {
+  position: relative;
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  color: #ffffff;
+}
+.biz-dialog-close {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+}
+.biz-dialog-close:hover {
+  -webkit-transform: rotate(90deg);
+}
+.biz-dialog-content {
+  padding: 20px;
+  overflow: auto;
+}
+.biz-dialog-bottom {
+  padding: 20px 0;
+  height: 30px;
+  text-align: center;
+}
+.biz-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.2;
+}
+.biz-alert,
+.biz-confirm {
+  overflow: hidden;
+  color: #333333;
+}
+.biz-alert > i,
+.biz-confirm > i {
+  float: left;
+  font-size: 64px;
+  color: #ccc;
+}
+.biz-alert > div,
+.biz-confirm > div {
+  margin-left: 80px;
+}
+/**
+ * dialog themes
+ */
+.biz-dialog-indigo .biz-dialog-title {
+  background-color: #3f51b5;
+}
+.biz-dialog-deep-purple .biz-dialog-title {
+  background-color: #673ab7;
+}
+.biz-dialog-purple .biz-dialog-title {
+  background-color: #9c27b0;
+}
+.biz-dialog-pink .biz-dialog-title {
+  background-color: #e91e63;
+}
+.biz-dialog-red .biz-dialog-title {
+  background-color: #f44336;
+}
+.biz-dialog-deep-orange .biz-dialog-title {
+  background-color: #ff5722;
+}
+.biz-dialog-gray .biz-dialog-title {
+  background-color: #9e9e9e;
+}
+.biz-dialog-blue-gray .biz-dialog-title {
+  background-color: #607d8b;
+}
+.biz-dialog-brown .biz-dialog-title {
+  background-color: #795548;
+}
+.biz-dialog-orange .biz-dialog-title {
+  background-color: #ff9800;
+}
+.biz-dialog-amber .biz-dialog-title {
+  background-color: #ffc107;
+}
+.biz-dialog-yellow .biz-dialog-title {
+  background-color: #ffe38e;
+}
+.biz-dialog-lime .biz-dialog-title {
+  background-color: #cddc39;
+}
+.biz-dialog-light-green .biz-dialog-title {
+  background-color: #8bc34a;
+}
+.biz-dialog-green .biz-dialog-title {
+  background-color: #4caf50;
+}
+.biz-dialog-teal .biz-dialog-title {
+  background-color: #009688;
+}
+.biz-dialog-cyan .biz-dialog-title {
+  background-color: #00bcd4;
+}
+.biz-dialog-light-blue .biz-dialog-title {
+  background-color: #03a9f4;
+}
+.biz-dialog-blue .biz-dialog-title {
+  background-color: #2196f3;
+}
+.biz-dialog-yellow .biz-dialog-title {
+  color: #d0910b;
+}
+/**
  * input
  */
 .biz-input {

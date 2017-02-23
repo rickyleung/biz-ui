@@ -71,6 +71,7 @@ gulp.task('doc', function(cb) {
         'src/ui/Button.js',
         'src/ui/Calendar.js',
         'src/ui/Checkbox.js',
+        'src/ui/Dialog.js',
         'src/ui/Input.js',
         'src/ui/Page.js',
         'src/ui/Radio.js',

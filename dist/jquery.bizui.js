@@ -411,16 +411,19 @@
             _require(8);
             _require(9);
             _require(10);
-            _require(11);
+            var dialog = _require(11);
             _require(12);
             _require(13);
             _require(14);
             _require(15);
             _require(16);
+            _require(17);
             var bizui = {
                     theme: 'blue',
                     codepoints: _require(5),
-                    Tooltip: _require(17)
+                    alert: dialog.alert,
+                    confirm: dialog.confirm,
+                    Tooltip: _require(18)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -3430,8 +3433,8 @@
                         var iconName = !document.documentMode ? options.icon : bizui.codepoints[options.icon];
                         this.$main.prepend('<i class="biz-icon">' + iconName + '</i> ');
                     }
-                    if (options.label) {
-                        this.$main.html(options.label);
+                    if (options.text) {
+                        this.$main.html(options.text);
                     }
                     if (options.disabled) {
                         this.disable();
@@ -3642,6 +3645,202 @@
                 }
             });
             module.exports = Checkbox;
+        },
+        function (module, exports) {
+            function Dialog(dialog, options) {
+                this.main = dialog;
+                $(this.main).hide();
+                this.$main = $(this.main).clone();
+                var defaultOption = {
+                        customClass: '',
+                        position: 'fixed',
+                        theme: bizui.theme,
+                        title: '',
+                        buttons: [],
+                        destroyOnClose: false
+                    };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-dialog', prefix = 'biz-dialog-', dataKey = 'bizDialog', minWidth = 480, minHeight = 150, currentIndex = 1000;
+            Dialog.prototype = {
+                init: function (options) {
+                    this.$container = $('<div style="display:none;"></div>');
+                    this.$mask = $('<div class="biz-mask" style="display:none;"></div>');
+                    this.$container.appendTo('body').after(this.$mask);
+                    var containerWidth = typeof options.width !== 'undefined' ? Math.max(parseInt(options.width, 10), minWidth) : minWidth, self = this;
+                    this.$container.addClass([
+                        defaultClass,
+                        options.customClass,
+                        prefix + options.theme
+                    ].join(' ')).html([
+                        '<div class="biz-dialog-title">',
+                        '<span>',
+                        this.$main.attr('data-title') || options.title,
+                        '</span>',
+                        '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>',
+                        '<div class="biz-dialog-content"></div>',
+                        '<div class="biz-dialog-bottom"></div>'
+                    ].join('')).css({
+                        position: options.position,
+                        width: containerWidth,
+                        marginLeft: -Math.floor(containerWidth / 2)
+                    }).on('click.bizDialog', '.biz-dialog-close', function () {
+                        self.close();
+                    });
+                    this.updateButtons(options.buttons);
+                    this.$container.find('.biz-dialog-content').append(this.$main.show());
+                    var containerHeight;
+                    if (typeof options.height !== 'undefined') {
+                        containerHeight = Math.max(parseInt(options.height, 10), minHeight);
+                    } else {
+                        this.$container.show();
+                        containerHeight = Math.max(this.$container.height(), minHeight);
+                        this.$container.hide();
+                    }
+                    this.$container.css({
+                        height: containerHeight,
+                        marginTop: -Math.floor(Math.min(containerHeight, $(window).height()) / 2)
+                    });
+                },
+                open: function () {
+                    var index = this.options.zIndex || ++currentIndex;
+                    this.$mask.css({ zIndex: index - 1 }).show();
+                    this.$container.css({ zIndex: index }).show();
+                },
+                close: function () {
+                    var result = true;
+                    if (typeof this.options.onBeforeClose == 'function') {
+                        result = this.options.onBeforeClose();
+                        if (result === false) {
+                            return;
+                        }
+                    }
+                    this.$container.hide();
+                    this.$mask.hide();
+                    if (typeof this.options.zIndex == 'undefined') {
+                        currentIndex--;
+                    }
+                    if (this.options.destroyOnClose) {
+                        this.destroy();
+                    }
+                },
+                updateButtons: function (buttonOption) {
+                    buttonOption = buttonOption || [];
+                    var bottom = this.$container.find('.biz-dialog-bottom'), self = this;
+                    bottom.find('button').bizButton('destroy').off().remove();
+                    $.each(buttonOption, function (index, buttonOption) {
+                        var button = $('<button></button>').appendTo(bottom).bizButton(buttonOption);
+                        if (buttonOption.onClick) {
+                            button.click(function (e) {
+                                buttonOption.onClick.call(self, e);
+                            });
+                        }
+                    });
+                },
+                title: function (title) {
+                    var titleElement = this.$container.find('.biz-dialog-title span');
+                    if (undefined === title) {
+                        return titleElement.html();
+                    }
+                    titleElement.html(title);
+                },
+                destroy: function () {
+                    this.$container.off('click.bizDialog');
+                    this.$container.find('.biz-dialog-bottom button').bizButton('destroy').off();
+                    this.$mask.remove();
+                    this.$container.remove();
+                    this.$main.data(dataKey, null);
+                }
+            };
+            var alert = function (options) {
+                var defaultOption = {
+                        content: '',
+                        okText: '\u786E\u5B9A'
+                    };
+                options = $.extend(defaultOption, options || {});
+                var alert = $('<div style="display:none;" class="biz-alert"><i class="biz-icon">&#xe001;</i><div>' + options.content + '</div></div>');
+                alert.appendTo('body').bizDialog({
+                    destroyOnClose: true,
+                    title: options.title,
+                    theme: options.theme,
+                    buttons: [{
+                            text: options.okText,
+                            theme: options.theme,
+                            onClick: function () {
+                                this.close();
+                            }
+                        }]
+                });
+                alert.bizDialog('open').remove();
+            };
+            var confirm = function (options) {
+                var defaultOption = {
+                        content: '',
+                        okText: '\u786E\u5B9A',
+                        cancelText: '\u53D6\u6D88'
+                    };
+                options = $.extend(defaultOption, options || {});
+                var confirm = $('<div style="display:none;" class="biz-confirm"><i class="biz-icon">&#xe8fd;</i><div>' + options.content + '</div></div>');
+                confirm.appendTo('body').bizDialog({
+                    destroyOnClose: true,
+                    title: options.title,
+                    theme: options.theme,
+                    buttons: [
+                        {
+                            text: options.okText,
+                            theme: options.theme,
+                            onClick: function () {
+                                var result = true;
+                                if (typeof options.onOK == 'function') {
+                                    result = options.onOK();
+                                    if (result === false) {
+                                        return;
+                                    }
+                                }
+                                this.close();
+                            }
+                        },
+                        {
+                            text: options.cancelText,
+                            theme: 'gray',
+                            onClick: function () {
+                                this.close();
+                            }
+                        }
+                    ]
+                });
+                confirm.bizDialog('open').remove();
+            };
+            $.extend($.fn, {
+                bizDialog: function (method) {
+                    var internal_return, args = arguments;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (method === undefined || jQuery.isPlainObject(method)) {
+                                $(this).data(dataKey, new Dialog(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = {
+                alert: alert,
+                confirm: confirm
+            };
         },
         function (module, exports) {
             _require(1);
@@ -3878,6 +4077,7 @@
                 this.$main = $(this.main);
                 var defaultOption = {
                         action: 'click',
+                        customClass: '',
                         selectedIndex: 0,
                         theme: bizui.theme
                     };

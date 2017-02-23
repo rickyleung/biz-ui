@@ -6,7 +6,7 @@
  * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.disabled - 禁用，默认 false
  * @param {String} options.icon - 图标名称
- * @param {String} options.label - 文字
+ * @param {String} options.text - 文字
  * @param {String} options.size - 尺寸（small|large），默认 'small'
  * @param {String} options.theme - 主题
  */
@@ -49,8 +49,8 @@ Button.prototype = {
             this.$main.prepend('<i class="biz-icon">' + iconName + '</i> ');
         }
 
-        if (options.label) {
-            this.$main.html(options.label);
+        if (options.text) {
+            this.$main.html(options.text);
         }
 
         if (options.disabled) {

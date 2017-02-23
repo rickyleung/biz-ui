@@ -1,6 +1,7 @@
 require('./ui/Button');
 require('./ui/Calendar');
 require('./ui/Checkbox');
+var dialog = require('./ui/Dialog');
 require('./ui/Input');
 require('./ui/Page');
 require('./ui/Radio');
@@ -20,6 +21,28 @@ var bizui = {
      * @property {Object} codepoints - Iconfont codepoints
      */
     codepoints: require('./codepoints.js'),
+    /**
+     * 提示对话框
+     * @param {Object} options - 参数
+     * @param {String} options.content - 内容，默认 ''
+     * @param {String} options.okText - 确认文字，默认 '确定'
+     * @param {String} options.theme - 主题
+     * @param {String} options.title - 标题，默认 ''
+     * @function
+     */
+    alert: dialog.alert,
+    /**
+     * 确认对话框
+     * @param {Object} options - 参数
+     * @param {String} options.content - 内容，默认 ''
+     * @param {String} options.cancelText - 取消文字，默认 '取消'
+     * @param {String} options.okText - 确认文字，默认 '确定'
+     * @param {String} options.theme - 主题
+     * @param {String} options.title - 标题，默认 ''
+     * @param {Function} options.onOK - 确认回调，返回 false 则不关闭
+     * @function
+     */
+    confirm: dialog.confirm,
     /**
      * Tooltip
      * @function

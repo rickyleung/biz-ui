@@ -15,7 +15,8 @@
   4. Deprecated property: `version`.
 * Button
   1. New options: `customClass`, `icon`, `size`.
-  2. Deprecated theme value of option: `dark`(use `gray`).
+  2. Deprecated option: `label`(use `text`).
+  3. Deprecated theme value of option: `dark`(use `gray`).
 * Calendar
   1. Many new options and new methods, see docs.
   2. Deprecated methods: `enable`, `disable`.
@@ -23,6 +24,11 @@
 * Checkbox, Radio
   1. New option: `theme`.
   2. Deprecated method: `get`(use jQuery selector).
+* Dialog
+  1. New options: `customClass`, `position`, `theme`.
+  2. New methods: `title`, `updateButtons`.
+  3. Deprecated methods: `bizui.Dialog.alert`(use `bizui.alert`), `bizui.Dialog.confirm`(use `bizui.confirm`).
+  4. Deprecated options: `skin`(use `theme` or `customClass`), `useMousewheel`.
 * Input
   1. New options: `customClass`, `theme`.
   2. New event: `enter`.
@@ -31,8 +37,9 @@
 * Page
   1. New options: `customClass`, `theme`.
   2. New methods: `disable`, `enable`, `getPageSize`, `nextPage`, `prevPage`.
-  3. New event: `changePage`.
-  3. Deprecated option: `onPageClick`(bind `changePage` event).
+  3. Provide second boolean param for `setTotalNumber` to control redrawing.
+  4. New event: `changePage`.
+  5. Deprecated option: `onPageClick`(bind `changePage` event).
 * Tab
   1. New options: `action`, `customClass`, `selectedIndex`, `theme`.
   2. New method: `index`.

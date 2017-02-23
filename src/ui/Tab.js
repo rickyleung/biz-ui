@@ -14,6 +14,7 @@ function Tab(tab, options) {
 
     var defaultOption = {
         action: 'click',
+        customClass: '',
         selectedIndex: 0,
         theme: bizui.theme
     };
