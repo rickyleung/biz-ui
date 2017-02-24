@@ -285,7 +285,7 @@ body.index {
     color: #212121;
 }
 .components aside a.active {
-    color: #00a0e9;
+    font-weight: bold;
 }
 .components aside a span {
     display: inline-block;

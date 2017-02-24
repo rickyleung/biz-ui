@@ -23,6 +23,262 @@
     _require.cache = [];
     _require.modules = [
         function (module, exports) {
+            !function (a, b) {
+                'object' == typeof exports ? module.exports = b() : 'function' == typeof define && define.amd ? define([], b) : a.Draggable = b();
+            }(this, function () {
+                'use strict';
+                function a(a, b) {
+                    var c = this, d = k.bind(c.start, c), e = k.bind(c.drag, c), g = k.bind(c.stop, c);
+                    if (!f(a))
+                        throw new TypeError('Draggable expects argument 0 to be an Element');
+                    b = k.assign({}, i, b), k.assign(c, {
+                        element: a,
+                        handle: b.handle && f(b.handle) ? b.handle : a,
+                        handlers: {
+                            start: {
+                                mousedown: d,
+                                touchstart: d
+                            },
+                            move: {
+                                mousemove: e,
+                                mouseup: g,
+                                touchmove: e,
+                                touchend: g
+                            }
+                        },
+                        options: b
+                    }), c.initialize();
+                }
+                function b(a) {
+                    return parseInt(a, 10);
+                }
+                function c(a) {
+                    return 'currentStyle' in a ? a.currentStyle : getComputedStyle(a);
+                }
+                function d(a) {
+                    return a instanceof Array;
+                }
+                function e(a) {
+                    return void 0 !== a && null !== a;
+                }
+                function f(a) {
+                    return a instanceof Element || 'undefined' != typeof HTMLDocument && a instanceof HTMLDocument;
+                }
+                function g(a) {
+                    return a instanceof Function;
+                }
+                function h() {
+                }
+                var i = {
+                        grid: 0,
+                        filterTarget: null,
+                        limit: {
+                            x: null,
+                            y: null
+                        },
+                        threshold: 0,
+                        setCursor: !1,
+                        setPosition: !0,
+                        smoothDrag: !0,
+                        useGPU: !0,
+                        onDrag: h,
+                        onDragStart: h,
+                        onDragEnd: h
+                    }, j = {
+                        transform: function () {
+                            for (var a = ' -o- -ms- -moz- -webkit-'.split(' '), b = document.body.style, c = a.length; c--;) {
+                                var d = a[c] + 'transform';
+                                if (d in b)
+                                    return d;
+                            }
+                        }()
+                    }, k = {
+                        assign: function () {
+                            for (var a = arguments[0], b = arguments.length, c = 1; b > c; c++) {
+                                var d = arguments[c];
+                                for (var e in d)
+                                    a[e] = d[e];
+                            }
+                            return a;
+                        },
+                        bind: function (a, b) {
+                            return function () {
+                                a.apply(b, arguments);
+                            };
+                        },
+                        on: function (a, b, c) {
+                            if (b && c)
+                                k.addEvent(a, b, c);
+                            else if (b)
+                                for (var d in b)
+                                    k.addEvent(a, d, b[d]);
+                        },
+                        off: function (a, b, c) {
+                            if (b && c)
+                                k.removeEvent(a, b, c);
+                            else if (b)
+                                for (var d in b)
+                                    k.removeEvent(a, d, b[d]);
+                        },
+                        limit: function (a, b) {
+                            return d(b) ? (b = [
+                                +b[0],
+                                +b[1]
+                            ], a < b[0] ? a = b[0] : a > b[1] && (a = b[1])) : a = +b, a;
+                        },
+                        addEvent: 'attachEvent' in Element.prototype ? function (a, b, c) {
+                            a.attachEvent('on' + b, c);
+                        } : function (a, b, c) {
+                            a.addEventListener(b, c, !1);
+                        },
+                        removeEvent: 'attachEvent' in Element.prototype ? function (a, b, c) {
+                            a.detachEvent('on' + b, c);
+                        } : function (a, b, c) {
+                            a.removeEventListener(b, c);
+                        }
+                    };
+                return k.assign(a.prototype, {
+                    setOption: function (a, b) {
+                        var c = this;
+                        return c.options[a] = b, c.initialize(), c;
+                    },
+                    get: function () {
+                        var a = this.dragEvent;
+                        return {
+                            x: a.x,
+                            y: a.y
+                        };
+                    },
+                    set: function (a, b) {
+                        var c = this, d = c.dragEvent;
+                        return d.original = {
+                            x: d.x,
+                            y: d.y
+                        }, c.move(a, b), c;
+                    },
+                    dragEvent: {
+                        started: !1,
+                        x: 0,
+                        y: 0
+                    },
+                    initialize: function () {
+                        var a, b = this, d = b.element, e = (b.handle, d.style), f = c(d), g = b.options, h = j.transform, i = b._dimensions = {
+                                height: d.offsetHeight,
+                                left: d.offsetLeft,
+                                top: d.offsetTop,
+                                width: d.offsetWidth
+                            };
+                        g.useGPU && h && (a = f[h], 'none' === a && (a = ''), e[h] = a + ' translate3d(0,0,0)'), g.setPosition && (e.display = 'block', e.left = i.left + 'px', e.top = i.top + 'px', e.bottom = e.right = 'auto', e.margin = 0, e.position = 'absolute'), g.setCursor && (e.cursor = 'move'), b.setLimit(g.limit), k.assign(b.dragEvent, {
+                            x: i.left,
+                            y: i.top
+                        }), k.on(b.handle, b.handlers.start);
+                    },
+                    start: function (a) {
+                        var b = this, c = b.getCursor(a), d = b.element;
+                        b.useTarget(a.target || a.srcElement) && (a.preventDefault ? a.preventDefault() : a.returnValue = !1, b.dragEvent.oldZindex = d.style.zIndex, d.style.zIndex = 10000, b.setCursor(c), b.setPosition(), b.setZoom(), k.on(document, b.handlers.move));
+                    },
+                    drag: function (a) {
+                        var b = this, c = b.dragEvent, d = b.element, e = b._cursor, f = b._dimensions, g = b.options, h = f.zoom, i = b.getCursor(a), j = g.threshold, k = (i.x - e.x) / h + f.left, l = (i.y - e.y) / h + f.top;
+                        !c.started && j && Math.abs(e.x - i.x) < j && Math.abs(e.y - i.y) < j || (c.original || (c.original = {
+                            x: k,
+                            y: l
+                        }), c.started || (g.onDragStart(d, k, l, a), c.started = !0), b.move(k, l) && g.onDrag(d, c.x, c.y, a));
+                    },
+                    move: function (a, b) {
+                        var c = this, d = c.dragEvent, e = c.options, f = e.grid, g = c.element.style, h = c.limit(a, b, d.original.x, d.original.y);
+                        return !e.smoothDrag && f && (h = c.round(h, f)), h.x !== d.x || h.y !== d.y ? (d.x = h.x, d.y = h.y, g.left = h.x + 'px', g.top = h.y + 'px', !0) : !1;
+                    },
+                    stop: function (a) {
+                        var b, c = this, d = c.dragEvent, e = c.element, f = c.options, g = f.grid;
+                        k.off(document, c.handlers.move), e.style.zIndex = d.oldZindex, f.smoothDrag && g && (b = c.round({
+                            x: d.x,
+                            y: d.y
+                        }, g), c.move(b.x, b.y), k.assign(c.dragEvent, b)), c.dragEvent.started && f.onDragEnd(e, d.x, d.y, a), c.reset();
+                    },
+                    reset: function () {
+                        this.dragEvent.started = !1;
+                    },
+                    round: function (a) {
+                        var b = this.options.grid;
+                        return {
+                            x: b * Math.round(a.x / b),
+                            y: b * Math.round(a.y / b)
+                        };
+                    },
+                    getCursor: function (a) {
+                        return {
+                            x: (a.targetTouches ? a.targetTouches[0] : a).clientX,
+                            y: (a.targetTouches ? a.targetTouches[0] : a).clientY
+                        };
+                    },
+                    setCursor: function (a) {
+                        this._cursor = a;
+                    },
+                    setLimit: function (a) {
+                        var b = this, c = function (a, b) {
+                                return {
+                                    x: a,
+                                    y: b
+                                };
+                            };
+                        if (g(a))
+                            b.limit = a;
+                        else if (f(a)) {
+                            var d = b._dimensions, h = a.scrollHeight - d.height, i = a.scrollWidth - d.width;
+                            b.limit = function (a, b) {
+                                return {
+                                    x: k.limit(a, [
+                                        0,
+                                        i
+                                    ]),
+                                    y: k.limit(b, [
+                                        0,
+                                        h
+                                    ])
+                                };
+                            };
+                        } else if (a) {
+                            var j = {
+                                    x: e(a.x),
+                                    y: e(a.y)
+                                };
+                            b.limit = j.x || j.y ? function (b, c) {
+                                return {
+                                    x: j.x ? k.limit(b, a.x) : b,
+                                    y: j.y ? k.limit(c, a.y) : c
+                                };
+                            } : c;
+                        } else
+                            b.limit = c;
+                    },
+                    setPosition: function () {
+                        var a = this, c = a.element, d = c.style;
+                        k.assign(a._dimensions, {
+                            left: b(d.left) || c.offsetLeft,
+                            top: b(d.top) || c.offsetTop
+                        });
+                    },
+                    setZoom: function () {
+                        for (var a = this, b = a.element, d = 1; b = b.offsetParent;) {
+                            var e = c(b).zoom;
+                            if (e && 'normal' !== e) {
+                                d = e;
+                                break;
+                            }
+                        }
+                        a._dimensions.zoom = d;
+                    },
+                    useTarget: function (a) {
+                        var b = this.options.filterTarget;
+                        return b instanceof Function ? b(a) : !0;
+                    },
+                    destroy: function () {
+                        k.off(this.handle, this.handlers.start), k.off(document, this.handlers.move);
+                    }
+                }), a;
+            });
+        },
+        function (module, exports) {
             !function (a) {
                 a.fn.datepicker.dates['zh-CN'] = {
                     days: [
@@ -93,7 +349,7 @@
                 if (typeof define === 'function' && define.amd) {
                     define(['jquery'], factory);
                 } else if (typeof module === 'object' && module.exports) {
-                    factory(_require(2));
+                    factory(_require(3));
                 } else {
                     factory(jQuery);
                 }
@@ -287,7 +543,7 @@
                 };
             };
             !function (t) {
-                return 'object' == typeof module && module.exports ? module.exports = t(_require(2)) : 'function' == typeof define && define.amd ? define(['jquery'], t) : t(jQuery);
+                return 'object' == typeof module && module.exports ? module.exports = t(_require(3)) : 'function' == typeof define && define.amd ? define(['jquery'], t) : t(jQuery);
             }(function (t) {
                 var e;
                 return e = function () {
@@ -408,22 +664,22 @@
             });
         },
         function (module, exports) {
-            _require(8);
             _require(9);
             _require(10);
-            var dialog = _require(11);
-            _require(12);
+            _require(11);
+            var dialog = _require(12);
             _require(13);
             _require(14);
             _require(15);
             _require(16);
             _require(17);
+            _require(18);
             var bizui = {
                     theme: 'blue',
-                    codepoints: _require(5),
+                    codepoints: _require(6),
                     alert: dialog.alert,
                     confirm: dialog.confirm,
-                    Tooltip: _require(18)
+                    Tooltip: _require(19)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -1369,7 +1625,7 @@
                 if (typeof define === 'function' && define.amd) {
                     define(['jquery'], factory);
                 } else if (typeof exports === 'object') {
-                    factory(_require(2));
+                    factory(_require(3));
                 } else {
                     factory(jQuery);
                 }
@@ -3087,7 +3343,7 @@
                 if (typeof define === 'function' && define.amd) {
                     define(['jquery'], factory);
                 } else if (typeof exports === 'object') {
-                    factory(_require(2));
+                    factory(_require(3));
                 } else {
                     factory(jQuery);
                 }
@@ -3429,12 +3685,12 @@
                     if (options.size === 'large') {
                         this.$main.addClass(largeClass);
                     }
+                    if (options.text) {
+                        this.$main.html(options.text);
+                    }
                     if (options.icon) {
                         var iconName = !document.documentMode ? options.icon : bizui.codepoints[options.icon];
                         this.$main.prepend('<i class="biz-icon">' + iconName + '</i> ');
-                    }
-                    if (options.text) {
-                        this.$main.html(options.text);
                     }
                     if (options.disabled) {
                         this.disable();
@@ -3492,8 +3748,8 @@
             module.exports = Button;
         },
         function (module, exports) {
-            _require(6);
-            _require(0);
+            _require(7);
+            _require(1);
             function Calendar(calendar, options) {
             }
             Calendar.prototype = {
@@ -3647,6 +3903,7 @@
             module.exports = Checkbox;
         },
         function (module, exports) {
+            var Draggable = _require(0);
             function Dialog(dialog, options) {
                 this.main = dialog;
                 $(this.main).hide();
@@ -3654,6 +3911,7 @@
                 var defaultOption = {
                         customClass: '',
                         position: 'fixed',
+                        draggable: false,
                         theme: bizui.theme,
                         title: '',
                         buttons: [],
@@ -3668,7 +3926,7 @@
                     this.$container = $('<div style="display:none;"></div>');
                     this.$mask = $('<div class="biz-mask" style="display:none;"></div>');
                     this.$container.appendTo('body').after(this.$mask);
-                    var containerWidth = typeof options.width !== 'undefined' ? Math.max(parseInt(options.width, 10), minWidth) : minWidth, self = this;
+                    var self = this;
                     this.$container.addClass([
                         defaultClass,
                         options.customClass,
@@ -3681,16 +3939,12 @@
                         '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>',
                         '<div class="biz-dialog-content"></div>',
                         '<div class="biz-dialog-bottom"></div>'
-                    ].join('')).css({
-                        position: options.position,
-                        width: containerWidth,
-                        marginLeft: -Math.floor(containerWidth / 2)
-                    }).on('click.bizDialog', '.biz-dialog-close', function () {
+                    ].join('')).on('click.bizDialog', '.biz-dialog-close', function () {
                         self.close();
                     });
-                    this.updateButtons(options.buttons);
                     this.$container.find('.biz-dialog-content').append(this.$main.show());
-                    var containerHeight;
+                    this.updateButtons(options.buttons);
+                    var containerWidth = typeof options.width !== 'undefined' ? Math.max(parseInt(options.width, 10), minWidth) : minWidth, containerHeight;
                     if (typeof options.height !== 'undefined') {
                         containerHeight = Math.max(parseInt(options.height, 10), minHeight);
                     } else {
@@ -3699,9 +3953,34 @@
                         this.$container.hide();
                     }
                     this.$container.css({
+                        width: containerWidth,
                         height: containerHeight,
+                        position: options.position,
+                        marginLeft: -Math.floor(containerWidth / 2),
                         marginTop: -Math.floor(Math.min(containerHeight, $(window).height()) / 2)
                     });
+                    if (options.draggable) {
+                        this.draggable = new Draggable(this.$container[0], {
+                            handle: this.$container.find('.biz-dialog-title').addClass('biz-draggble')[0],
+                            setPosition: options.position === 'absolute',
+                            limit: {
+                                x: [
+                                    0,
+                                    $('body').width() - containerWidth
+                                ],
+                                y: [
+                                    0,
+                                    $('body').height() - containerHeight
+                                ]
+                            }
+                        });
+                        this.$container.css({
+                            margin: 0,
+                            display: 'none',
+                            left: Math.floor(($(window).width() - containerWidth) / 2),
+                            top: containerHeight < $(window).height() ? Math.floor(($(window).height() - containerHeight) / 2) : 0
+                        });
+                    }
                 },
                 open: function () {
                     var index = this.options.zIndex || ++currentIndex;
@@ -3746,6 +4025,9 @@
                     titleElement.html(title);
                 },
                 destroy: function () {
+                    if (this.options.draggable) {
+                        this.draggable.destroy();
+                    }
                     this.$container.off('click.bizDialog');
                     this.$container.find('.biz-dialog-bottom button').bizButton('destroy').off();
                     this.$mask.remove();
@@ -3846,7 +4128,7 @@
             };
         },
         function (module, exports) {
-            _require(1);
+            _require(2);
             function Input(input, options) {
                 this.main = input;
                 this.$main = $(this.main);
@@ -3930,7 +4212,7 @@
             module.exports = Input;
         },
         function (module, exports) {
-            _require(7);
+            _require(8);
             function Page(options) {
             }
             Page.prototype = {
@@ -4182,7 +4464,7 @@
             module.exports = Tab;
         },
         function (module, exports) {
-            _require(1);
+            _require(2);
             function Textarea(textarea, options) {
                 this.main = textarea;
                 this.$main = $(this.main);
@@ -4420,7 +4702,7 @@
             module.exports = Textline;
         },
         function (module, exports) {
-            _require(3);
+            _require(4);
             function Tooltip(options) {
                 if (options.theme) {
                     options.tooltipClass = 'biz-tooltip-' + options.theme;
@@ -4433,5 +4715,5 @@
             module.exports = Tooltip;
         }
     ];
-    return _require(4);
+    return _require(5);
 }));

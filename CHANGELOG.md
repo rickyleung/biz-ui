@@ -25,7 +25,7 @@
   1. New option: `theme`.
   2. Deprecated method: `get`(use jQuery selector).
 * Dialog
-  1. New options: `customClass`, `position`, `theme`.
+  1. New options: `customClass`, `draggable`, `position`, `theme`.
   2. New methods: `title`, `updateButtons`.
   3. Deprecated methods: `bizui.Dialog.alert`(use `bizui.alert`), `bizui.Dialog.confirm`(use `bizui.confirm`).
   4. Deprecated options: `skin`(use `theme` or `customClass`), `useMousewheel`.

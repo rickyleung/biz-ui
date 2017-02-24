@@ -25,6 +25,7 @@
         buttons: [
             {
                 text: 'OK',
+                icon: 'done',
                 onClick: function() {
                     this.close();
                 }
@@ -32,11 +33,13 @@
             {
                 text: 'Cancel',
                 theme: 'gray',
+                icon: 'close',
                 onClick: function() {
                     this.close();
                 }
             }
-        ]
+        ],
+        draggable: true
     });
     $('.b1').click(function() {
         $('.d1').bizDialog('open');
@@ -79,6 +82,11 @@
         <td>destroyOnClose</td>
         <td>Boolean</td>
         <td>关闭时销毁对话框，默认 false</td>
+    </tr>
+    <tr>
+        <td>draggable		</td>
+        <td>Boolean</td>
+        <td>可拖拽，默认 false</td>
     </tr>
     <tr>
         <td>height</td>

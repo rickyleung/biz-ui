@@ -21,6 +21,7 @@ var Dialog = Backbone.View.extend({
             buttons: [
                 {
                     text: 'OK',
+                    icon: 'done',
                     onClick: function() {
                         this.close();
                     }
@@ -28,11 +29,13 @@ var Dialog = Backbone.View.extend({
                 {
                     text: 'Cancel',
                     theme: 'gray',
+                    icon: 'close',
                     onClick: function() {
                         this.close();
                     }
                 }
-            ]
+            ],
+            draggable: true
         });
         $('.b1').click(function() {
             $('.d1').bizDialog('open');

@@ -1,3 +1,5 @@
+var Draggable = require('Draggable');
+
 /**
  * Dialog
  * @class
@@ -6,6 +8,7 @@
  * @param {Array} options.buttons - 底部按钮的 option 数组（多一个 onClick 属性），默认 []
  * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.destroyOnClose - 关闭时销毁对话框，默认 false
+ * @param {Boolean} options.draggable - 可拖拽，默认 false
  * @param {Number} options.height - 对话框高度，默认取填充内容后的高度，最小 240px
  * @param {String} options.position - 定位方式（fixed|absolute），默认 'fixed'
  * @param {String} options.theme - 主题
@@ -22,6 +25,7 @@ function Dialog(dialog, options) {
     var defaultOption = {
         customClass: '',
         position: 'fixed',
+        draggable: false,
         theme: bizui.theme,
         title: '',
         buttons: [],
@@ -50,9 +54,8 @@ Dialog.prototype = {
         this.$mask = $('<div class="biz-mask" style="display:none;"></div>');
         this.$container.appendTo('body').after(this.$mask);
 
-        // 设置 $container
-        var containerWidth = typeof options.width !== 'undefined' ? Math.max(parseInt(options.width, 10), minWidth) : minWidth,
-            self = this;
+        // 填充 $container
+        var self = this;
         this.$container.addClass([defaultClass, options.customClass, prefix + options.theme].join(' '))
             .html([
                 '<div class="biz-dialog-title">',
@@ -61,22 +64,15 @@ Dialog.prototype = {
                 '<div class="biz-dialog-content"></div>',
                 '<div class="biz-dialog-bottom"></div>'
             ].join(''))
-            .css({
-                position: options.position,
-                width: containerWidth,
-                marginLeft: -Math.floor(containerWidth / 2)
-            })
             .on('click.bizDialog', '.biz-dialog-close', function() {
                 self.close();
             });
-
+        this.$container.find('.biz-dialog-content').append(this.$main.show()); // 把目标元素副本移至 $container 中
         this.updateButtons(options.buttons);
 
-        // 把目标元素移至 $container 中
-        this.$container.find('.biz-dialog-content').append(this.$main.show());
-
-        // 设置 $container 高度
-        var containerHeight;
+        // 设置 $container 尺寸和位置
+        var containerWidth = typeof options.width !== 'undefined' ? Math.max(parseInt(options.width, 10), minWidth) : minWidth,
+            containerHeight;
         if (typeof options.height !== 'undefined') {
             containerHeight = Math.max(parseInt(options.height, 10), minHeight);
         } else {
@@ -85,9 +81,30 @@ Dialog.prototype = {
             this.$container.hide();
         }
         this.$container.css({
+            width: containerWidth,
             height: containerHeight,
+            position: options.position,
+            marginLeft: -Math.floor(containerWidth / 2),
             marginTop: -Math.floor(Math.min(containerHeight, $(window).height()) / 2)
         });
+
+        // 拖拽
+        if (options.draggable) {
+            this.draggable = new Draggable(this.$container[0], {
+                handle: this.$container.find('.biz-dialog-title').addClass('biz-draggble')[0],
+                setPosition: options.position === 'absolute',
+                limit: {
+                    x: [0, $('body').width() - containerWidth],
+                    y: [0, $('body').height() - containerHeight]
+                }
+            });
+            this.$container.css({
+                margin: 0,
+                display: 'none',
+                left: Math.floor(($(window).width() - containerWidth) / 2),
+                top: containerHeight < $(window).height() ? Math.floor(($(window).height() - containerHeight) / 2) : 0
+            });
+        }
     },
 
     /**
@@ -164,6 +181,9 @@ Dialog.prototype = {
      * 销毁
      */
     destroy: function() {
+        if (this.options.draggable) {
+            this.draggable.destroy();
+        }
         this.$container.off('click.bizDialog');
         this.$container.find('.biz-dialog-bottom button').bizButton('destroy').off();
         this.$mask.remove();

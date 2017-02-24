@@ -44,13 +44,13 @@ Button.prototype = {
             this.$main.addClass(largeClass);
         }
 
+        if (options.text) {
+            this.$main.html(options.text);
+        }
+
         if (options.icon) {
             var iconName = !document.documentMode ? options.icon : bizui.codepoints[options.icon];
             this.$main.prepend('<i class="biz-icon">' + iconName + '</i> ');
-        }
-
-        if (options.text) {
-            this.$main.html(options.text);
         }
 
         if (options.disabled) {

@@ -2140,6 +2140,9 @@
   font-size: 20px;
   color: #ffffff;
 }
+.biz-draggble {
+  cursor: move;
+}
 .biz-dialog-close {
   position: absolute;
   top: 8px;
