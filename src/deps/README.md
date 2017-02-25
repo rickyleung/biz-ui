@@ -4,6 +4,7 @@
 * Line 111: Add theme class.
 
 ### jquery.simplePagination.js (1.6)
+* UMD
 * Line 23: Set default options.
 * Line 65: Modify default class name.
 * Line 73: Rename method - setPageNumber.
@@ -14,3 +15,9 @@
 * Line 173: Rename method - getPageSize.
 * Line 333: Modify href.
 * Line 358: Trigger changePage event.
+
+### jquery.treetable.js (3.2.0)
+* UMD
+* Line 436: Set default options.
+* Line 466: customClass.
+* Line 478: destroy.

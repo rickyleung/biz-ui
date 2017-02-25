@@ -37,6 +37,7 @@ var Tab = Backbone.View.extend({
 	},
 
     destroy: function() {
+        $('button').bizButton('destroy').off();
 		$('.tab').bizTab('destroy');
         this.$el.empty();
     }

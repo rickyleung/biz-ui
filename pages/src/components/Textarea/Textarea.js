@@ -25,7 +25,7 @@ var Textarea = Backbone.View.extend({
 
     destroy: function() {
 		$('textarea').bizTextarea('destroy');
-		$('button').bizButton('destroy');
+		$('button').bizButton('destroy').off();
         this.$el.empty();
     }
 });

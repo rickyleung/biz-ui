@@ -25,11 +25,32 @@ var Dialog = Backbone.View.extend({
                     onClick: function() {
                         this.close();
                     }
-                },
+                }
+            ]
+        });
+        $('#b1').click(function() {
+            $('.d1').bizDialog('open');
+        });
+        $('.d2').bizDialog({
+            buttons: [
                 {
-                    text: 'Cancel',
-                    theme: 'gray',
-                    icon: 'close',
+                    text: 'OK',
+                    icon: 'done',
+                    onClick: function() {
+                        this.close();
+                    }
+                }
+            ],
+            position: 'absolute'
+        });
+        $('#b2').click(function() {
+            $('.d2').bizDialog('open');
+        });
+        $('.d3').bizDialog({
+            buttons: [
+                {
+                    text: 'OK',
+                    icon: 'done',
                     onClick: function() {
                         this.close();
                     }
@@ -37,17 +58,17 @@ var Dialog = Backbone.View.extend({
             ],
             draggable: true
         });
-        $('.b1').click(function() {
-            $('.d1').bizDialog('open');
+        $('#b3').click(function() {
+            $('.d3').bizDialog('open');
         });
-        $('.b2').click(function() {
+        $('#b4').click(function() {
             bizui.alert({
                 title: 'Alert',
                 content: 'Content',
                 theme: 'red'
             });
         });
-        $('.b3').click(function() {
+        $('#b5').click(function() {
             bizui.confirm({
                 title: 'Confirm',
                 content: 'Content',
@@ -57,8 +78,8 @@ var Dialog = Backbone.View.extend({
 	},
 
     destroy: function() {
-        $('button').bizButton('destroy');
-        $('.d1').bizDialog('destroy');
+        $('button').bizButton('destroy').off();
+        $('.dialog-content').bizDialog('destroy');
         this.$el.empty();
     }
 });

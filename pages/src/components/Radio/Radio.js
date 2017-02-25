@@ -45,7 +45,7 @@ var Radio = Backbone.View.extend({
 	},
 
     destroy: function() {
-        $('button').bizButton('destroy');
+        $('button').bizButton('destroy').off();
         $(':radio').bizRadio('destroy');
         this.$el.empty();
     }

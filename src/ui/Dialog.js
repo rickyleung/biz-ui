@@ -19,8 +19,7 @@ var Draggable = require('Draggable');
  */
 function Dialog(dialog, options) {
     this.main = dialog;
-    $(this.main).hide();
-    this.$main = $(this.main).clone();
+    this.$main = $(this.main);
 
     var defaultOption = {
         customClass: '',
@@ -67,7 +66,7 @@ Dialog.prototype = {
             .on('click.bizDialog', '.biz-dialog-close', function() {
                 self.close();
             });
-        this.$container.find('.biz-dialog-content').append(this.$main.show()); // 把目标元素副本移至 $container 中
+        this.$container.find('.biz-dialog-content').append(this.$main.show()); // 把目标元素移至 $container 中
         this.updateButtons(options.buttons);
 
         // 设置 $container 尺寸和位置
@@ -167,7 +166,7 @@ Dialog.prototype = {
     /**
      * 获取/设置标题
      * @param {String} title - 标题
-     * @return - 标题
+     * @return 标题
      */
     title: function(title) {
         var titleElement = this.$container.find('.biz-dialog-title span');
@@ -218,7 +217,7 @@ var alert = function(options) {
             }
         }]
     });
-    alert.bizDialog('open').remove();
+    alert.bizDialog('open');
 };
 
 var confirm = function(options) {
@@ -255,7 +254,7 @@ var confirm = function(options) {
             }
         }]
     });
-    confirm.bizDialog('open').remove();
+    confirm.bizDialog('open');
 };
 
 $.extend($.fn, {

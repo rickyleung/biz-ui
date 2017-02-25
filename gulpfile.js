@@ -78,7 +78,8 @@ gulp.task('doc', function(cb) {
         'src/ui/Tab.js',
         'src/ui/Textarea.js',
         'src/ui/Textline.js',
-        'src/ui/Tooltip.js'
+        'src/ui/Tooltip.js',
+        'src/ui/TreeTable.js'
     ];
     gulp.src(files, {read: false})
         .pipe(jsdoc({

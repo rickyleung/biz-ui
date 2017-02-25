@@ -122,7 +122,7 @@ Textline.prototype = {
 
     /**
      * 获取文本长度（不计回车）
-     * @return - 文本长度
+     * @return 文本长度
      */
     length: function() {
         return this.$textarea.val().replace(/\r?\n/g, '').length;
@@ -131,7 +131,7 @@ Textline.prototype = {
     /**
      * 以字符串形式获取/设置内容，超过 maxLine 会被截断
      * @param {String} value - 内容
-     * @return - 内容
+     * @return 内容
      */
     val: function(value) {
         if (undefined === value) {
@@ -154,7 +154,7 @@ Textline.prototype = {
     /**
      * 以数组形式获取/设置内容，超过 maxLine 会被截断
      * @param {Array} value - 内容
-     * @return - 内容
+     * @return 内容
      */
     valArray: function(value) {
         if (undefined === value) {

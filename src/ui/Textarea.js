@@ -71,7 +71,7 @@ Textarea.prototype = {
 
     /**
      * 获取文本长度（不计回车）
-     * @return - 文本长度
+     * @return 文本长度
      */
     length: function() {
         return this.$main.val().replace(/\r?\n/g, '').length;

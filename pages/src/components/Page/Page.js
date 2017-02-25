@@ -49,7 +49,7 @@ var Page = Backbone.View.extend({
 	},
 
     destroy: function() {
-        $('button').bizButton('destroy');
+        $('button').bizButton('destroy').off();
         $('input:text').bizInput('destroy');
         $('input:checkbox').bizCheckbox('destroy');
         $('.page-nav').bizPage('destroy');

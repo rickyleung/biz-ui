@@ -64,7 +64,7 @@ Tab.prototype = {
      * @param {Number} selectedIndex - 序号
      * @param {Boolean} fire - 触发 changeTab 事件，默认 true
      * @fires Tab#changeTab
-     * @return - tab 数据
+     * @return tab 数据
      */
     index: function(selectedIndex, fire) {
         var curTab, curContent;

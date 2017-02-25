@@ -58,7 +58,7 @@ Calendar.prototype = {
     },
     /**
      * 获取日期，目标元素需为 input 或 inline 型
-     * @return - Date对象
+     * @return Date对象
      */
     getDate: function() {},
     /**

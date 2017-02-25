@@ -4,7 +4,7 @@ require('../deps/jquery.simplePagination');
  * Page
  * @class
  * @param {Object} options - 参数
- * @param {Number} options.customClass - 自定义 CSS class
+ * @param {String} options.customClass - 自定义 CSS class
  * @param {String} options.nextText - 后一页标识，默认 biz-icon: chevron_right
  * @param {Number} options.pageNumber - 当前页码，默认1
  * @param {Number} options.pageSize - 每页条数，默认1
@@ -34,12 +34,12 @@ Page.prototype = {
     getPageCount: function() {},
     /**
      * 获取当前页码
-     * @return - 当前页码
+     * @return 当前页码
      */
     getPageNumber: function() {},
     /**
      * 获取每页条数
-     * @return - 每页条数
+     * @return 每页条数
      */
     getPageSize: function() {},
     /**

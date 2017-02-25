@@ -1,18 +1,26 @@
 <h3>Dialog</h3>
 
 <div class="example">
-<div class="d1" data-title="Title">Content</div>
-<button class="b1">normal dialog</button>
-<button class="b2">alert dialog</button>
-<button class="b3">confirm dialog</button>
+<div class="dialog-content d1" data-title="Fixed">I'm fixed.</div>
+<div class="dialog-content d2" data-title="Absolute">I'm absolute.</div>
+<div class="dialog-content d3" data-title="Draggable">I'm draggable.</div>
+<button id="b1">Fixed dialog</button>
+<button id="b2">Absolute dialog</button>
+<button id="b3">Draggable dialog</button>
+<button id="b4">Alert dialog</button>
+<button id="b5">Confirm dialog</button>
 </div>
 
 <h4>HTML</h4>
 <pre><code class="xml">
-    &lt;div class="d1" data-title="Title"&gt;Content&lt;/div&gt;
-    &lt;button class="b1"&gt;normal dialog&lt;/button&gt;
-    &lt;button class="b2"&gt;alert dialog&lt;/button&gt;
-    &lt;button class="b3"&gt;confirm dialog&lt;/button&gt;
+    &lt;div class="dialog-content d1" data-title="Fixed"&gt;I'm fixed.&lt;/div&gt;
+    &lt;div class="dialog-content d2" data-title="Absolute"&gt;I'm absolute.&lt;/div&gt;
+    &lt;div class="dialog-content d3" data-title="Draggable"&gt;I'm draggable.&lt;/div&gt;
+    &lt;button id="b1"&gt;Fixed dialog&lt;/button&gt;
+    &lt;button id="b2"&gt;Absolute dialog&lt;/button&gt;
+    &lt;button id="b3"&gt;Draggable dialog&lt;/button&gt;
+    &lt;button id="b4"&gt;Alert dialog&lt;/button&gt;
+    &lt;button id="b5"&gt;Confirm dialog&lt;/button&gt;
 
 </code></pre>
 
@@ -29,11 +37,32 @@
                 onClick: function() {
                     this.close();
                 }
-            },
+            }
+        ]
+    });
+    $('.b1').click(function() {
+        $('.d1').bizDialog('open');
+    });
+    $('.d2').bizDialog({
+        buttons: [
             {
-                text: 'Cancel',
-                theme: 'gray',
-                icon: 'close',
+                text: 'OK',
+                icon: 'done',
+                onClick: function() {
+                    this.close();
+                }
+            }
+        ],
+        position: 'absolute'
+    });
+    $('.b2').click(function() {
+        $('.d2').bizDialog('open');
+    });
+    $('.d3').bizDialog({
+        buttons: [
+            {
+                text: 'OK',
+                icon: 'done',
                 onClick: function() {
                     this.close();
                 }
@@ -41,17 +70,17 @@
         ],
         draggable: true
     });
-    $('.b1').click(function() {
-        $('.d1').bizDialog('open');
+    $('.b3').click(function() {
+        $('.d3').bizDialog('open');
     });
-    $('.b2').click(function() {
+    $('.b4').click(function() {
         bizui.alert({
             title: 'Alert',
             content: 'Content',
             theme: 'red'
         });
     });
-    $('.b3').click(function() {
+    $('.b5').click(function() {
         bizui.confirm({
             title: 'Confirm',
             content: 'Content',

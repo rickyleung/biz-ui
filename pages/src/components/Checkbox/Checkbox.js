@@ -45,7 +45,7 @@ var Checkbox = Backbone.View.extend({
 	},
 
     destroy: function() {
-        $('button').bizButton('destroy');
+        $('button').bizButton('destroy').off();
         $(':checkbox').bizCheckbox('destroy');
         this.$el.empty();
     }
