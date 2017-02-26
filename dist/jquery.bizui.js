@@ -4457,6 +4457,9 @@
                     var index = this.options.zIndex || ++currentIndex;
                     this.$mask.css({ zIndex: index - 1 }).show();
                     this.$container.css({ zIndex: index }).show();
+                    if (this.options.position === 'absolute') {
+                        this.$container.css({ top: this.$container.position().top + document.body.scrollTop });
+                    }
                 },
                 close: function () {
                     var result = true;

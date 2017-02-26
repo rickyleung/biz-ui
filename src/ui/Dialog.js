@@ -119,6 +119,12 @@ Dialog.prototype = {
         this.$container.css({
             zIndex: index
         }).show();
+
+        if (this.options.position === 'absolute') {
+            this.$container.css({
+                top: this.$container.position().top + document.body.scrollTop
+            });
+        }
     },
 
     /**
