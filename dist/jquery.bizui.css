@@ -2471,6 +2471,119 @@
   color: #d0910b;
 }
 /**
+ * Panel
+ */
+.biz-panel {
+  position: fixed;
+  top: 0;
+  left: 100%;
+  width: 100%;
+  height: 100%;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+}
+.biz-panel-margin {
+  float: left;
+  height: 100%;
+}
+.biz-panel-body {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: -3px 0 8px #aaa;
+  background-color: #ffffff;
+}
+.biz-panel-title {
+  position: fixed;
+  width: 100%;
+  padding: 20px 0 20px 60px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  color: #ffffff;
+}
+.biz-panel-close {
+  position: absolute;
+  top: 25px;
+  font-size: 30px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+}
+.biz-panel-close:hover {
+  -webkit-transform: rotate(90deg);
+}
+.biz-panel-content {
+  padding: 25px 60px;
+  margin-top: 80px;
+}
+.biz-panel-bottom {
+  padding: 0 0 60px 60px;
+  height: 30px;
+  line-height: 30px;
+}
+/**
+ * panel themes
+ */
+.biz-panel-indigo .biz-panel-title {
+  background-color: #3f51b5;
+}
+.biz-panel-deep-purple .biz-panel-title {
+  background-color: #673ab7;
+}
+.biz-panel-purple .biz-panel-title {
+  background-color: #9c27b0;
+}
+.biz-panel-pink .biz-panel-title {
+  background-color: #e91e63;
+}
+.biz-panel-red .biz-panel-title {
+  background-color: #f44336;
+}
+.biz-panel-deep-orange .biz-panel-title {
+  background-color: #ff5722;
+}
+.biz-panel-gray .biz-panel-title {
+  background-color: #9e9e9e;
+}
+.biz-panel-blue-gray .biz-panel-title {
+  background-color: #607d8b;
+}
+.biz-panel-brown .biz-panel-title {
+  background-color: #795548;
+}
+.biz-panel-orange .biz-panel-title {
+  background-color: #ff9800;
+}
+.biz-panel-amber .biz-panel-title {
+  background-color: #ffc107;
+}
+.biz-panel-yellow .biz-panel-title {
+  background-color: #ffe38e;
+}
+.biz-panel-lime .biz-panel-title {
+  background-color: #cddc39;
+}
+.biz-panel-light-green .biz-panel-title {
+  background-color: #8bc34a;
+}
+.biz-panel-green .biz-panel-title {
+  background-color: #4caf50;
+}
+.biz-panel-teal .biz-panel-title {
+  background-color: #009688;
+}
+.biz-panel-cyan .biz-panel-title {
+  background-color: #00bcd4;
+}
+.biz-panel-light-blue .biz-panel-title {
+  background-color: #03a9f4;
+}
+.biz-panel-blue .biz-panel-title {
+  background-color: #2196f3;
+}
+.biz-panel-yellow .biz-panel-title {
+  color: #d0910b;
+}
+/**
  * radio themes
  */
 .biz-label-indigo.biz-radio-checked .biz-icon,

@@ -29,6 +29,7 @@
   2. New methods: `title`, `updateButtons`.
   3. Deprecated methods: `bizui.Dialog.alert`(use `bizui.alert`), `bizui.Dialog.confirm`(use `bizui.confirm`).
   4. Deprecated options: `skin`(use `theme` or `customClass`), `useMousewheel`.
+  5. Use `data-title` attribute to get title instead of `title`.
 * Input
   1. New options: `customClass`, `theme`.
   2. New event: `enter`.
@@ -40,6 +41,10 @@
   3. Provide second boolean param for `setTotalNumber` to control redrawing.
   4. New event: `changePage`.
   5. Deprecated option: `onPageClick`(bind `changePage` event).
+* Panel
+  1. New options: `customClass`, `destroyOnClose`, `speed`, `theme`, `title`, `onBeforeClose`, `zIndex`.
+  2. New methods: `title`, `updateButtons`.
+  3. Use `data-title` attribute to get title instead of `title`.
 * Tab
   1. New options: `action`, `customClass`, `selectedIndex`, `theme`.
   2. New method: `index`.

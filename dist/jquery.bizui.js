@@ -674,13 +674,14 @@
             _require(17);
             _require(18);
             _require(19);
-            _require(21);
+            _require(20);
+            _require(22);
             var bizui = {
                     theme: 'blue',
                     codepoints: _require(6),
                     alert: dialog.alert,
                     confirm: dialog.confirm,
-                    Tooltip: _require(20)
+                    Tooltip: _require(21)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -4404,7 +4405,7 @@
                         prefix + options.theme
                     ].join(' ')).html([
                         '<div class="biz-dialog-title">',
-                        '<span>',
+                        '<span class="biz-dialog-title-text">',
                         this.$main.attr('data-title') || options.title,
                         '</span>',
                         '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>',
@@ -4492,7 +4493,7 @@
                     });
                 },
                 title: function (title) {
-                    var titleElement = this.$container.find('.biz-dialog-title span');
+                    var titleElement = this.$container.find('.biz-panel-title-text');
                     if (undefined === title) {
                         return titleElement.html();
                     }
@@ -4715,6 +4716,136 @@
             };
             $.extend($.fn, { bizPage: $.fn.pagination });
             module.exports = Page;
+        },
+        function (module, exports) {
+            function Panel(panel, options) {
+                this.main = panel;
+                this.$main = $(this.main);
+                var defaultOption = {
+                        customClass: '',
+                        marginLeft: 200,
+                        speed: 300,
+                        theme: bizui.theme,
+                        title: '',
+                        buttons: [],
+                        destroyOnClose: false
+                    };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-panel', prefix = 'biz-panel-', dataKey = 'bizPanel', currentIndex = 1000;
+            Panel.prototype = {
+                init: function (options) {
+                    this.$container = $('<div style="display:none;"></div>');
+                    this.$mask = $('<div class="biz-mask" style="display:none;"></div>');
+                    this.$container.appendTo('body').after(this.$mask);
+                    var self = this;
+                    this.$container.addClass([
+                        defaultClass,
+                        options.customClass,
+                        prefix + options.theme
+                    ].join(' ')).html([
+                        '<div class="biz-panel-margin"></div>',
+                        '<div class="biz-panel-body">',
+                        '<div class="biz-panel-title">',
+                        '<span class="biz-panel-title-text">',
+                        this.$main.attr('data-title') || options.title,
+                        '</span>',
+                        '<i class="biz-panel-close biz-icon">&#xe5cd;</i></div>',
+                        '<div class="biz-panel-content"></div>',
+                        '<div class="biz-panel-bottom"></div></div>'
+                    ].join('')).on('click.bizPanel', '.biz-panel-close', function () {
+                        self.close();
+                    });
+                    this.$container.find('.biz-panel-content').append(this.$main.show());
+                    this.updateButtons(options.buttons);
+                    this.$container.find('.biz-panel-margin').css({ width: options.marginLeft });
+                    this.$container.find('.biz-panel-close').css({ right: options.marginLeft + 85 });
+                },
+                open: function () {
+                    $('body').css({ overflow: 'hidden' });
+                    var index = this.options.zIndex || ++currentIndex;
+                    this.$mask.css({ zIndex: index - 1 }).show();
+                    var self = this;
+                    this.$container.css({ zIndex: index }).show().animate({ left: 0 }, this.options.speed, function () {
+                        self.$container.find('.biz-panel-body')[0].scrollTop = 0;
+                    });
+                },
+                close: function () {
+                    var result = true;
+                    if (typeof this.options.onBeforeClose == 'function') {
+                        result = this.options.onBeforeClose();
+                        if (result === false) {
+                            return;
+                        }
+                    }
+                    var self = this;
+                    this.$container.animate({ left: '100%' }, this.options.speed, function () {
+                        self.$container.hide();
+                        self.$mask.hide();
+                        $('body').css({ overflow: 'visible' });
+                    });
+                    if (typeof this.options.zIndex == 'undefined') {
+                        currentIndex--;
+                    }
+                    if (this.options.destroyOnClose) {
+                        this.destroy();
+                    }
+                },
+                updateButtons: function (buttonOption) {
+                    buttonOption = buttonOption || [];
+                    var bottom = this.$container.find('.biz-panel-bottom'), self = this;
+                    bottom.find('button').bizButton('destroy').off().remove();
+                    $.each(buttonOption, function (index, buttonOption) {
+                        var button = $('<button></button>').appendTo(bottom).bizButton(buttonOption);
+                        if (buttonOption.onClick) {
+                            button.click(function (e) {
+                                buttonOption.onClick.call(self, e);
+                            });
+                        }
+                    });
+                },
+                title: function (title) {
+                    var titleElement = this.$container.find('.biz-panel-title-text');
+                    if (undefined === title) {
+                        return titleElement.html();
+                    }
+                    titleElement.html(title);
+                },
+                destroy: function () {
+                    this.$container.off('click.bizPanel');
+                    this.$container.find('.biz-panel-bottom button').bizButton('destroy').off();
+                    this.$mask.remove();
+                    this.$container.remove();
+                    this.$main.data(dataKey, null);
+                }
+            };
+            $.extend($.fn, {
+                bizPanel: function (method) {
+                    var internal_return, args = arguments;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (method === undefined || jQuery.isPlainObject(method)) {
+                                $(this).data(dataKey, new Panel(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = Panel;
         },
         function (module, exports) {
             function Radio(radio, options) {

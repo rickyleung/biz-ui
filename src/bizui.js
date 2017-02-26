@@ -4,6 +4,7 @@ require('./ui/Checkbox');
 var dialog = require('./ui/Dialog');
 require('./ui/Input');
 require('./ui/Page');
+require('./ui/Panel');
 require('./ui/Radio');
 require('./ui/Tab');
 require('./ui/Textarea');

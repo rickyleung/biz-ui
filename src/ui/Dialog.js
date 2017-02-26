@@ -9,7 +9,7 @@ var Draggable = require('Draggable');
  * @param {String} options.customClass - 自定义 CSS class
  * @param {Boolean} options.destroyOnClose - 关闭时销毁对话框，默认 false
  * @param {Boolean} options.draggable - 可拖拽，默认 false
- * @param {Number} options.height - 对话框高度，默认取填充内容后的高度，最小 240px
+ * @param {Number} options.height - 对话框高度，默认取填充内容后的高度，最小 150px
  * @param {String} options.position - 定位方式（fixed|absolute），默认 'fixed'
  * @param {String} options.theme - 主题
  * @param {String} options.title - 对话框标题，默认取目标元素的 data-title 属性
@@ -58,7 +58,7 @@ Dialog.prototype = {
         this.$container.addClass([defaultClass, options.customClass, prefix + options.theme].join(' '))
             .html([
                 '<div class="biz-dialog-title">',
-                '<span>', this.$main.attr('data-title') || options.title, '</span>',
+                '<span class="biz-dialog-title-text">', this.$main.attr('data-title') || options.title, '</span>',
                 '<i class="biz-dialog-close biz-icon">&#xe5cd;</i></div>',
                 '<div class="biz-dialog-content"></div>',
                 '<div class="biz-dialog-bottom"></div>'
@@ -175,7 +175,7 @@ Dialog.prototype = {
      * @return 标题
      */
     title: function(title) {
-        var titleElement = this.$container.find('.biz-dialog-title span');
+        var titleElement = this.$container.find('.biz-panel-title-text');
         if (undefined === title) {
             return titleElement.html();
         }
