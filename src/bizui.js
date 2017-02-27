@@ -9,6 +9,7 @@ require('./ui/Radio');
 require('./ui/Tab');
 require('./ui/Textarea');
 require('./ui/Textline');
+require('./ui/Tree');
 require('./ui/TreeTable');
 
 /**

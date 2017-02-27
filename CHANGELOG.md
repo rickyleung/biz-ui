@@ -64,6 +64,9 @@
   2. New options: `action`, `element`, `theme`, `preventDefault`, `removeAll`, `removeSpecific`.
   4. Deprecated param: `destroy`(use option `{removeAll: true}`).
   3. Deprecated options: `color`(use `theme`), `direction`(use `data-tooltip-direction` attribute), `margin`, `el`(use `element`).
+* Tree
+  1. Many new options and new methods, see docs.
+  2. Deprecated methods: `ins`.
 * TreeTable
   1. New options: `column`, `customClass`, `initialState`, `clickableNodeNames`.
   2. New methods: `loadBranch`, `move`, `node`, `removeNode`, `sortBranch`, `unloadBranch`.
