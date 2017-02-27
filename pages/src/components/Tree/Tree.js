@@ -43,13 +43,13 @@ var Tree = Backbone.View.extend({
                 ]
             }
         ];
-        $('.tree-container').bizTree({
+        $('.tree-container').on("loaded.jstree", function(e, data) {
+            data.instance.open_all();
+        }).bizTree({
             core: {
                 data: treeData
             },
             plugins : ['checkbox']
-        }).on("loaded.jstree", function(e, data) {
-            data.instance.open_all();
         });
 	},
 
