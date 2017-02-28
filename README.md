@@ -1,13 +1,19 @@
 BizUI - A jQuery plugin for business UI components
 ===============
 
-[![Build Status][travis-image]][travis-url]
 [![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+
+[![NPM Stat][npm-stat-image]][npm-stat-url]
+
+[npm-image]: http://img.shields.io/npm/v/biz-ui.svg
+[npm-url]: https://npmjs.org/package/biz-ui
 
 [travis-image]: https://travis-ci.org/bizdevfe/biz-ui.svg
 [travis-url]: https://travis-ci.org/bizdevfe/biz-ui
-[npm-image]: http://img.shields.io/npm/v/biz-ui.svg
-[npm-url]: https://npmjs.org/package/biz-ui
+
+[npm-stat-image]: https://nodei.co/npm/biz-ui.png?downloads=true
+[npm-stat-url]: https://nodei.co/npm/biz-ui
 
 Browser support
 --------
@@ -63,8 +69,8 @@ Supported iconfonts via [Google Material Design Icons](https://material.io/icons
 Build
 --------
     $ npm install
-    $ npm run build
+    $ gulp build
 
 Get documentations
 --------
-    $ npm run doc
+    $ gulp doc

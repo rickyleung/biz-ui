@@ -9,8 +9,6 @@
     "url": "https://github.com/bizdevfe/biz-ui.git"
   },
   "scripts": {
-    "build": "gulp build",
-    "doc": "gulp doc",
     "start": "gulp build & gulp doc"
   },
   "devDependencies": {
