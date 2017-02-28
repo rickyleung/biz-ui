@@ -3,7 +3,7 @@ require('jstree');
 /**
  * Tree
  * @class
- * @description 完全调用 jstree，选项、方法、事件请参见：https://www.jstree.com/api/
+ * @description 内部调用 jsTree，初始化选项、方法、事件及插件的使用请参见：https://www.jstree.com/api/ 和 https://www.jstree.com/plugins/
  */
 function Tree() {}
 
