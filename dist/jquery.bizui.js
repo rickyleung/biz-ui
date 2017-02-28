@@ -7291,14 +7291,15 @@
             _require(19);
             _require(20);
             _require(21);
-            _require(23);
+            _require(22);
             _require(24);
+            _require(25);
             var bizui = {
                     theme: 'blue',
                     codepoints: _require(7),
                     alert: dialog.alert,
                     confirm: dialog.confirm,
-                    Tooltip: _require(22)
+                    Tooltip: _require(23)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -10898,15 +10899,15 @@
                         this.$icon.html(uncheckCodepoint);
                     }
                     var self = this;
-                    this.$label.on('mouseover.bizCheckbox', function (e) {
+                    this.$label.on('mouseover.bizCheckbox', function () {
                         if (!self.main.disabled) {
                             $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
                         }
-                    }).on('mouseout.bizCheckbox', function (e) {
+                    }).on('mouseout.bizCheckbox', function () {
                         if (!self.main.disabled) {
                             $(this).removeClass(self.main.checked ? checkedHover : uncheckedHover);
                         }
-                    }).on('click.bizCheckbox', function (e) {
+                    }).on('click.bizCheckbox', function () {
                         if (!self.main.disabled) {
                             if (self.main.checked) {
                                 $(this).attr('class', [
@@ -11220,6 +11221,110 @@
             };
         },
         function (module, exports) {
+            function DropDown(dropdown, options) {
+                this.main = dropdown;
+                this.$main = $(this.main);
+                var defaultOption = {
+                        alignX: 'left',
+                        alignY: 'bottom',
+                        customClass: '',
+                        offsetX: 0,
+                        offsetY: 0
+                    };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-dropdown', dataKey = 'bizDialog';
+            DropDown.prototype = {
+                init: function (options) {
+                    if (typeof options.trigger === 'undefined') {
+                        return;
+                    }
+                    this.$container = $('<div style="display:none;"></div>');
+                    this.$container.addClass(defaultClass + ' ' + options.customClass).appendTo('body').append(this.$main.show());
+                    this.$trigger = $(options.trigger);
+                    var self = this;
+                    this.$trigger.on('click.bizDropDown', function () {
+                        self.toggle();
+                    });
+                },
+                toggle: function () {
+                    if (this.$container.css('display') === 'none') {
+                        this.open();
+                    } else {
+                        this.close();
+                    }
+                },
+                open: function () {
+                    var result = true;
+                    if (typeof this.options.onBeforeOpen == 'function') {
+                        result = this.options.onBeforeOpen();
+                        if (result === false) {
+                            return;
+                        }
+                    }
+                    this.$container.show();
+                    var triggerPosition = this.$trigger.position(), containerLeft, containerTop;
+                    if (this.options.alignX === 'left') {
+                        containerLeft = triggerPosition.left + this.options.offsetX;
+                    } else if (this.options.alignX === 'right') {
+                        containerLeft = triggerPosition.left + this.$trigger.outerWidth() - this.$container.outerWidth() + this.options.offsetX;
+                    }
+                    if (this.options.alignY == 'bottom') {
+                        containerTop = triggerPosition.top + this.$trigger.outerHeight() + this.options.offsetY;
+                    } else if (this.options.alignY == 'top') {
+                        containerTop = triggerPosition.top - this.$container.outerHeight() + this.options.offsetY;
+                    }
+                    this.$container.css({
+                        left: containerLeft,
+                        top: containerTop,
+                        zIndex: this.options.zIndex || this.$trigger.css('zIndex')
+                    });
+                },
+                close: function () {
+                    var result = true;
+                    if (typeof this.options.onBeforeClose == 'function') {
+                        result = this.options.onBeforeClose();
+                        if (result === false) {
+                            return;
+                        }
+                    }
+                    this.$container.hide();
+                },
+                destroy: function () {
+                    this.$trigger.off('click.bizDropDown');
+                    this.$container.remove();
+                    this.$main.data(dataKey, null);
+                }
+            };
+            $.extend($.fn, {
+                bizDropDown: function (method) {
+                    var internal_return, args = arguments;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (method === undefined || jQuery.isPlainObject(method)) {
+                                $(this).data(dataKey, new DropDown(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = DropDown;
+        },
+        function (module, exports) {
             _require(2);
             function Input(input, options) {
                 this.main = input;
@@ -11239,13 +11344,13 @@
                     if (options.disabled) {
                         this.disable();
                     }
-                    this.$main.on('mouseover.bizInput', function (e) {
+                    this.$main.on('mouseover.bizInput', function () {
                         $(this).addClass(hoverClass);
-                    }).on('mouseout.bizInput', function (e) {
+                    }).on('mouseout.bizInput', function () {
                         $(this).removeClass(hoverClass);
-                    }).on('focus.bizInput', function (e) {
+                    }).on('focus.bizInput', function () {
                         $(this).addClass(focusClass + options.theme);
-                    }).on('blur.bizInput', function (e) {
+                    }).on('blur.bizInput', function () {
                         $(this).removeClass(focusClass + options.theme);
                     }).on('keydown.bizInput', function (e) {
                         if (e.keyCode === 13) {
@@ -11490,15 +11595,15 @@
                         this.$icon.html(uncheckCodepoint);
                     }
                     var self = this;
-                    this.$label.on('mouseover.bizRadio', function (e) {
+                    this.$label.on('mouseover.bizRadio', function () {
                         if (!self.main.disabled) {
                             $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
                         }
-                    }).on('mouseout.bizRadio', function (e) {
+                    }).on('mouseout.bizRadio', function () {
                         if (!self.main.disabled) {
                             $(this).removeClass(self.main.checked ? checkedHover : uncheckedHover);
                         }
-                    }).on('click.bizRadio', function (e) {
+                    }).on('click.bizRadio', function () {
                         if (!self.main.disabled) {
                             self.$group.bizRadio('uncheck');
                             $(this).attr('class', [
@@ -11705,13 +11810,13 @@
                     if (options.disabled) {
                         this.disable();
                     }
-                    this.$main.on('mouseover.bizTextarea', function (e) {
+                    this.$main.on('mouseover.bizTextarea', function () {
                         $(this).addClass(hoverClass);
-                    }).on('mouseout.bizTextarea', function (e) {
+                    }).on('mouseout.bizTextarea', function () {
                         $(this).removeClass(hoverClass);
-                    }).on('focus.bizTextarea', function (e) {
+                    }).on('focus.bizTextarea', function () {
                         $(this).addClass(focusClass + options.theme);
-                    }).on('blur.bizTextarea', function (e) {
+                    }).on('blur.bizTextarea', function () {
                         $(this).removeClass(focusClass + options.theme);
                     });
                 },
@@ -11802,17 +11907,17 @@
                         this.disable();
                     }
                     var self = this;
-                    this.$textarea.on('mouseover.bizTextline', function (e) {
+                    this.$textarea.on('mouseover.bizTextline', function () {
                         $(this).addClass(hoverClass);
-                    }).on('mouseout.bizTextline', function (e) {
+                    }).on('mouseout.bizTextline', function () {
                         $(this).removeClass(hoverClass);
-                    }).on('focus.bizTextline', function (e) {
+                    }).on('focus.bizTextline', function () {
                         $(this).addClass(focusClass + options.theme);
-                    }).on('blur.bizTextline', function (e) {
+                    }).on('blur.bizTextline', function () {
                         $(this).removeClass(focusClass + options.theme);
-                    }).on('keyup.bizTextline.render', function (e) {
+                    }).on('keyup.bizTextline.render', function () {
                         self.renderLineNumber(e.target.scrollTop);
-                    }).on('scroll.bizTextline', function (e) {
+                    }).on('scroll.bizTextline', function () {
                         self.scrollLineNumber(e.target.scrollTop);
                     });
                     if (parseInt(options.maxLine, 10) >= 1) {

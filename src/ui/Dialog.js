@@ -3,7 +3,7 @@ var Draggable = require('Draggable');
 /**
  * Dialog
  * @class
- * @param {HTMLElement} dialog - 目标元素，创建对话框时，目标元素将被隐藏并复制到对话框中
+ * @param {HTMLElement} dialog - 目标元素，创建对话框时，目标元素将移动到对话框容器中
  * @param {Object} options - 参数
  * @param {Array} options.buttons - 底部按钮的 option 数组（多一个 onClick 属性），默认 []
  * @param {String} options.customClass - 自定义 CSS class

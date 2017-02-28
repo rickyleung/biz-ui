@@ -2250,6 +2250,17 @@
   color: #d0910b;
 }
 /**
+ * dropdown
+ */
+.biz-dropdown {
+  position: absolute;
+  box-shadow: 0 0 8px #888;
+  background-color: #ffffff;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #333333;
+}
+/**
  * input
  */
 .biz-input {

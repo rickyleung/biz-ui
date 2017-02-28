@@ -2,6 +2,7 @@ require('./ui/Button');
 require('./ui/Calendar');
 require('./ui/Checkbox');
 var dialog = require('./ui/Dialog');
+require('./ui/DropDown');
 require('./ui/Input');
 require('./ui/Page');
 require('./ui/Panel');

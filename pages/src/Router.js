@@ -5,6 +5,7 @@ var Router = Backbone.Router.extend({
         'calendar': 'calendar',
         'checkbox': 'checkbox',
         'dialog': 'dialog',
+        'dropdown': 'dropdown',
         'input': 'input',
         'page': 'page',
         'panel': 'panel',
@@ -45,6 +46,10 @@ var Router = Backbone.Router.extend({
 
     dialog: function() {
         this.startRout(new Dialog());
+    },
+
+    dropdown: function() {
+        this.startRout(new DropDown());
     },
 
     input: function() {
