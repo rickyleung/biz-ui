@@ -77,10 +77,13 @@ gulp.task('doc', function(cb) {
         'src/ui/Page.js',
         'src/ui/Panel.js',
         'src/ui/Radio.js',
+        'src/ui/Select.js',
         'src/ui/Tab.js',
+        'src/ui/Table.js',
         'src/ui/Textarea.js',
         'src/ui/Textline.js',
         'src/ui/Tooltip.js',
+        'src/ui/Transfer.js',
         'src/ui/Tree.js',
         'src/ui/TreeTable.js'
     ];

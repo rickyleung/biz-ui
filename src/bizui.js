@@ -7,9 +7,12 @@ require('./ui/Input');
 require('./ui/Page');
 require('./ui/Panel');
 require('./ui/Radio');
+require('./ui/Select');
 require('./ui/Tab');
+require('./ui/Table');
 require('./ui/Textarea');
 require('./ui/Textline');
+require('./ui/Transfer');
 require('./ui/Tree');
 require('./ui/TreeTable');
 

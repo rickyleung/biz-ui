@@ -7292,14 +7292,17 @@
             _require(20);
             _require(21);
             _require(22);
+            _require(23);
             _require(24);
-            _require(25);
+            _require(26);
+            _require(27);
+            _require(28);
             var bizui = {
                     theme: 'blue',
                     codepoints: _require(7),
                     alert: dialog.alert,
                     confirm: dialog.confirm,
-                    Tooltip: _require(23)
+                    Tooltip: _require(25)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -11684,6 +11687,8 @@
             module.exports = Radio;
         },
         function (module, exports) {
+        },
+        function (module, exports) {
             function Tab(tab, options) {
                 this.main = tab;
                 this.$main = $(this.main);
@@ -11789,6 +11794,8 @@
                 }
             });
             module.exports = Tab;
+        },
+        function (module, exports) {
         },
         function (module, exports) {
             _require(2);
@@ -12040,6 +12047,8 @@
                 $.tips(options);
             }
             module.exports = Tooltip;
+        },
+        function (module, exports) {
         },
         function (module, exports) {
             _require(4);
