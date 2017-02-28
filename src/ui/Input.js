@@ -42,13 +42,13 @@ Input.prototype = {
             this.disable();
         }
 
-        this.$main.on('mouseover.bizInput', function(e) {
+        this.$main.on('mouseover.bizInput', function() {
             $(this).addClass(hoverClass);
-        }).on('mouseout.bizInput', function(e) {
+        }).on('mouseout.bizInput', function() {
             $(this).removeClass(hoverClass);
-        }).on('focus.bizInput', function(e) {
+        }).on('focus.bizInput', function() {
             $(this).addClass(focusClass + options.theme);
-        }).on('blur.bizInput', function(e) {
+        }).on('blur.bizInput', function() {
             $(this).removeClass(focusClass + options.theme);
         }).on('keydown.bizInput', function(e) {
             /**

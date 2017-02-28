@@ -55,15 +55,15 @@ Radio.prototype = {
         }
 
         var self = this;
-        this.$label.on('mouseover.bizRadio', function(e) {
+        this.$label.on('mouseover.bizRadio', function() {
             if (!self.main.disabled) {
                 $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
             }
-        }).on('mouseout.bizRadio', function(e) {
+        }).on('mouseout.bizRadio', function() {
             if (!self.main.disabled) {
                 $(this).removeClass(self.main.checked ? checkedHover : uncheckedHover);
             }
-        }).on('click.bizRadio', function(e) {
+        }).on('click.bizRadio', function() {
             if (!self.main.disabled) {
                 self.$group.bizRadio('uncheck');
                 $(this).attr('class', [self.defaultClass, checked, checkedHover].join(' '));

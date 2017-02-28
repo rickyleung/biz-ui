@@ -66,17 +66,17 @@ Textline.prototype = {
         }
 
         var self = this;
-        this.$textarea.on('mouseover.bizTextline', function(e) {
+        this.$textarea.on('mouseover.bizTextline', function() {
             $(this).addClass(hoverClass);
-        }).on('mouseout.bizTextline', function(e) {
+        }).on('mouseout.bizTextline', function() {
             $(this).removeClass(hoverClass);
-        }).on('focus.bizTextline', function(e) {
+        }).on('focus.bizTextline', function() {
             $(this).addClass(focusClass + options.theme);
-        }).on('blur.bizTextline', function(e) {
+        }).on('blur.bizTextline', function() {
             $(this).removeClass(focusClass + options.theme);
-        }).on('keyup.bizTextline.render', function(e) {
+        }).on('keyup.bizTextline.render', function() {
             self.renderLineNumber(e.target.scrollTop);
-        }).on('scroll.bizTextline', function(e) {
+        }).on('scroll.bizTextline', function() {
             self.scrollLineNumber(e.target.scrollTop);
         });
 

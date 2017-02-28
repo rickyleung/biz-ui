@@ -55,15 +55,15 @@ Checkbox.prototype = {
         }
 
         var self = this;
-        this.$label.on('mouseover.bizCheckbox', function(e) {
+        this.$label.on('mouseover.bizCheckbox', function() {
             if (!self.main.disabled) {
                 $(this).addClass(self.main.checked ? checkedHover : uncheckedHover);
             }
-        }).on('mouseout.bizCheckbox', function(e) {
+        }).on('mouseout.bizCheckbox', function() {
             if (!self.main.disabled) {
                 $(this).removeClass(self.main.checked ? checkedHover : uncheckedHover);
             }
-        }).on('click.bizCheckbox', function(e) {
+        }).on('click.bizCheckbox', function() {
             if (!self.main.disabled) {
                 if (self.main.checked) { // label 的点击先于 input 的点击
                     $(this).attr('class', [self.defaultClass, unchecked, uncheckedHover].join(' '));

@@ -42,13 +42,13 @@ Textarea.prototype = {
             this.disable();
         }
 
-        this.$main.on('mouseover.bizTextarea', function(e) {
+        this.$main.on('mouseover.bizTextarea', function() {
             $(this).addClass(hoverClass);
-        }).on('mouseout.bizTextarea', function(e) {
+        }).on('mouseout.bizTextarea', function() {
             $(this).removeClass(hoverClass);
-        }).on('focus.bizTextarea', function(e) {
+        }).on('focus.bizTextarea', function() {
             $(this).addClass(focusClass + options.theme);
-        }).on('blur.bizTextarea', function(e) {
+        }).on('blur.bizTextarea', function() {
             $(this).removeClass(focusClass + options.theme);
         });
     },
