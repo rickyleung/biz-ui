@@ -44,17 +44,22 @@
   1. New options: `customClass`, `theme`.
   2. New methods: `disable`, `enable`, `getPageSize`, `nextPage`, `prevPage`.
   3. Provide second boolean param for `setTotalNumber` to control redrawing.
-  4. New event: `changePage`.
-  5. Deprecated option: `onPageClick`(bind `changePage` event).
+  4. New event: `change`.
+  5. Deprecated option: `onPageClick`(bind `change` event).
 * Panel
   1. New options: `customClass`, `destroyOnClose`, `speed`, `theme`, `title`, `onBeforeClose`, `zIndex`.
   2. New methods: `title`, `updateButtons`.
   3. Use `data-title` attribute to get title instead of `title`.
+* Select
+  1. New options: `theme`, `inheritOriginalWidth`.
+  2. New methods: `open`, `close`.
+  2. Deprecated option: `loop`.
+  3. Deprecated methods: `enable`, `disable`, `val`(use jQuery val() to get or set, call refresh() after setting).
 * Tab
   1. New options: `action`, `customClass`, `selectedIndex`, `theme`.
   2. New method: `index`.
-  3. New event: `changeTab`.
-  3. Deprecated options: `event`(use `action`), `onChange`(bind `changeTab` event), `skin`(use `theme` or `customClass`).
+  3. New event: `change`.
+  3. Deprecated options: `event`(use `action`), `onChange`(bind `change` event), `skin`(use `theme` or `customClass`).
   4. Deprecated method: `select`(use `index`).
 * Textarea
   1. New options: `customClass`, `theme`.
