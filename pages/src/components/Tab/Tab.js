@@ -15,7 +15,7 @@ var Tab = Backbone.View.extend({
 
 	initBizUI: function() {
         var tabs = $('.tabs');
-        tabs.bizTab().on('changeTab', function(e, data) {
+        tabs.bizTab().on('change', function(e, data) {
             $('.log').html('index: ' + data.index + ', title: ' + data.title + ', content: ' + data.content);
         });
         $('button').bizButton({

@@ -44,23 +44,23 @@ Page.prototype = {
     getPageSize: function() {},
     /**
      * 向前翻一页
-     * @fires Page#changePage
+     * @fires Page#change
      */
     prevPage: function() {},
     /**
      * 向后翻一页
-     * @fires Page#changePage
+     * @fires Page#change
      */
     nextPage: function() {},
     /**
      * 设置当前页码
      * @param {Number} pageNumber - 当前页码
-     * @fires Page#changePage
+     * @fires Page#change
      */
     setPageNumber: function(pageNumber) {
         /**
          * 页码变更
-         * @event Page#changePage
+         * @event Page#change
          * @param {Object} e - 事件对象
          * @param {Number} pageNumber - 当前页码
          */
@@ -68,7 +68,7 @@ Page.prototype = {
     /**
      * 设置每页条数，设置后会定位至第一页
      * @param {Number} pageSize - 每页条数
-     * @fires Page#changePage
+     * @fires Page#change
      */
     setPageSize: function(pageSize) {},
     /**

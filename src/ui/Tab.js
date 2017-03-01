@@ -62,8 +62,8 @@ Tab.prototype = {
     /**
      * 获取/设置当前被选中的 tab
      * @param {Number} selectedIndex - 序号
-     * @param {Boolean} fire - 触发 changeTab 事件，默认 true
-     * @fires Tab#changeTab
+     * @param {Boolean} fire - 触发 change 事件，默认 true
+     * @fires Tab#change
      * @return tab 数据
      */
     index: function(selectedIndex, fire) {
@@ -79,14 +79,14 @@ Tab.prototype = {
             if (fire === undefined || !!fire) {
                 /**
                  * 切换 tab
-                 * @event Tab#changeTab
+                 * @event Tab#change
                  * @param {Object} e - 事件对象
                  * @param {Object} data - 数据
                  * @param {Number} data.index - 序号
                  * @param {String} data.title - tab 标题
                  * @param {String} data.content - tab 内容
                  */
-                curTab.trigger('changeTab', {
+                curTab.trigger('change', {
                     index: selectedIndex,
                     title: curTab.text(),
                     content: curContent.html()

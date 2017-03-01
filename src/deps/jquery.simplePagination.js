@@ -355,7 +355,7 @@
             if (o.selectOnClick) {
                 methods._draw.call(this);
             }
-            return $(this).trigger('changePage', pageIndex + 1);
+            return $(this).trigger('change', pageIndex + 1);
         },
 
 

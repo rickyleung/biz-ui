@@ -45,7 +45,7 @@
 <h4>JavaScript</h4>
 <pre><code class="js">
     var tabs = $('.tabs');
-    tabs.bizTab().on('changeTab', function(e, data) {
+    tabs.bizTab().on('change', function(e, data) {
         $('.log').html('index: ' + data.index + ', title: ' + data.title + ', content: ' + data.content);
     });
     $('button').bizButton({
@@ -110,6 +110,6 @@
 <br>
 <h4>Events</h4>
 <div class="methods">
-<h4>changeTab(e, data)</h4>
+<h4>change(e, data)</h4>
 <p class="des">切换 tab</p>
 </div>
