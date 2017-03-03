@@ -70,7 +70,7 @@
 .biz-button-disable,
 .biz-button-disable:hover {
   background-color: #dedede !important;
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 /**
  * large button
@@ -2119,7 +2119,7 @@
 .biz-checkbox-checked-disabled,
 .biz-checkbox-unchecked-disabled {
   cursor: default;
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 /**
  * dialog
@@ -2277,13 +2277,14 @@
   color: #333333;
   border-color: #e2e2e2;
   background-color: #ffffff;
+  -webkit-appearance: none;
 }
 .biz-input-hover {
   border-color: #cccccc;
 }
 .biz-input-disable {
   background-color: #f1f1f1;
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 /**
  * input themes
@@ -2397,7 +2398,7 @@
 .biz-page li.disabled span {
   border: 1px solid #e2e2e2;
   background: #f1f1f1;
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 /**
 * page themes
@@ -2752,7 +2753,7 @@
 .biz-radio-checked-disabled,
 .biz-radio-unchecked-disabled {
   cursor: default;
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 /*======================================
   Selectric v1.11.1
@@ -3007,7 +3008,7 @@
   color: #ffffff;
 }
 .selectric-items .disabled {
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 /**
  * select themes
@@ -3617,6 +3618,80 @@
   color: #d0910b;
 }
 /**
+ * table
+ */
+.biz-table {
+  width: 100%;
+  border: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  background: #ffffff;
+}
+.biz-table th {
+  padding: 5px 8px;
+  border: 1px solid #555;
+  background: #707070;
+  white-space: nowrap;
+  font-weight: normal;
+  color: #ffffff;
+}
+.biz-table td {
+  padding: 5px 8px;
+  border: 1px solid #e2e2e2;
+  white-space: normal;
+  overflow: hidden;
+  word-break: break-all;
+  word-wrap: break-word;
+  outline: none;
+  color: #333333;
+}
+.biz-table tr:hover {
+  background: #fafafa;
+}
+.biz-table.biz-rowspan tr:hover {
+  background: #fff;
+}
+/**
+ * table - sum
+ */
+.biz-table tr.sum {
+  font-weight: bold;
+  background: #fffbe5 !important;
+}
+.biz-table tr.sum td {
+  border-left-color: #fffbe5;
+  border-right-color: #fffbe5;
+}
+.biz-table tr.sum td:first-child {
+  border-left-color: #e2e2e2;
+}
+.biz-table tr.sum td:last-child {
+  border-right-color: #e2e2e2;
+}
+/**
+ * table - no-data
+ */
+.biz-table tr.no-data {
+  background: #fff !important;
+}
+.biz-table tr.no-data td {
+  text-align: center;
+}
+/**
+ * table - select
+ */
+.biz-table tr.selected {
+  background: #fafafa !important;
+}
+.biz-table.biz-rowspan tr.selected {
+  background: #fff !important;
+}
+/**
+  * table - edit
+  */
+/**
  * textarea
  */
 .biz-textarea {
@@ -3633,13 +3708,14 @@
   color: #333333;
   border-color: #e2e2e2;
   background-color: #ffffff;
+  -webkit-appearance: none;
 }
 .biz-textarea-hover {
   border-color: #cccccc;
 }
 .biz-textarea-disable {
   background-color: #f1f1f1;
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 /**
  * textarea themes
@@ -3725,13 +3801,14 @@
   border-left: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  -webkit-appearance: none;
 }
 .biz-textline textarea.biz-textline-hover {
   border-color: #cccccc;
 }
 .biz-textline textarea.biz-textline-disable {
   background-color: #f1f1f1;
-  color: #b6b6b6;
+  color: #c0c0c0;
 }
 .biz-textline div {
   float: left;
@@ -5757,15 +5834,15 @@ table.treetable {
   width: 100%;
   margin: 5px 0;
   border-collapse: collapse;
-  border: 1px solid #9e9e9e;
+  border: 1px solid #707070;
   font-size: 14px;
   color: #333333;
 }
 table.treetable thead {
-  background: #9e9e9e;
+  background: #707070;
 }
 table.treetable thead tr th {
-  border: 1px solid #9e9e9e;
+  border: 1px solid #707070;
   color: #ffffff;
   font-weight: normal;
   padding: 8px;

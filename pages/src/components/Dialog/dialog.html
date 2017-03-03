@@ -98,57 +98,57 @@
         <th>描述</th>
     </tr>
     <tr>
-        <td>buttons</td>
+        <td>[buttons]</td>
         <td>Array</td>
         <td>底部按钮的 option 数组（多一个 onClick 属性），默认 [ ]</td>
     </tr>
     <tr>
-        <td>customClass</td>
+        <td>[customClass]</td>
         <td>String</td>
-        <td>自定义 CSS class</td>
+        <td>自定义 class</td>
     </tr>
     <tr>
-        <td>destroyOnClose</td>
+        <td>[destroyOnClose]</td>
         <td>Boolean</td>
         <td>关闭时销毁对话框，默认 false</td>
     </tr>
     <tr>
-        <td>draggable</td>
+        <td>[draggable]</td>
         <td>Boolean</td>
         <td>可拖拽，默认 false</td>
     </tr>
     <tr>
-        <td>height</td>
+        <td>[height]</td>
         <td>Number</td>
-        <td>对话框高度，默认取填充内容后的高度，最小 240px</td>
+        <td>对话框高度，默认取填充内容后的高度，最小 150px</td>
     </tr>
     <tr>
-        <td>position</td>
+        <td>[position]</td>
         <td>String</td>
-        <td>定位方式（fixed|absolute），默认 'fixed'</td>
+        <td>定位方式（fixed | absolute），默认 'fixed'</td>
     </tr>
     <tr>
-        <td>theme</td>
+        <td>[theme]</td>
         <td>String</td>
         <td>主题</td>
     </tr>
     <tr>
-        <td>title</td>
+        <td>[title]</td>
         <td>String</td>
         <td>对话框标题，默认取目标元素的 data-title 属性</td>
     </tr>
     <tr>
-        <td>width</td>
+        <td>[width]</td>
         <td>Number</td>
-        <td>对话框宽度，最小 480px</td>
+        <td>对话框宽度，最小 320px</td>
     </tr>
     <tr>
-        <td>onBeforeClose</td>
+        <td>[onBeforeClose]</td>
         <td>Function</td>
         <td>关闭前回调，返回 false 则不关闭</td>
     </tr>
     <tr>
-        <td>zIndex</td>
+        <td>[zIndex]</td>
         <td>Number</td>
         <td>对话框 z-index</td>
     </tr>
@@ -181,7 +181,7 @@
 </div>
 
 <div class="methods">
-<h4>bizui.alert(Object|String options)</h4>
+<h4>bizui.alert([Object|String options])</h4>
 <p class="des">提示对话框</p>
 </div>
 <table class="options">
@@ -191,29 +191,29 @@
         <th>描述</th>
     </tr>
     <tr>
-        <td>content</td>
+        <td>[content]</td>
         <td>String</td>
         <td>内容，默认 ''</td>
     </tr>
     <tr>
-        <td>okText</td>
+        <td>[okText]</td>
         <td>String</td>
         <td>确认文字，默认 '确定'</td>
     </tr>
     <tr>
-        <td>theme</td>
+        <td>[theme]</td>
         <td>String</td>
         <td>主题</td>
     </tr>
     <tr>
-        <td>title</td>
+        <td>[title]</td>
         <td>String</td>
-        <td>标题，默认 ''</td>
+        <td>标题</td>
     </tr>
 </table>
 
 <div class="methods">
-<h4>bizui.confirm(Object options)</h4>
+<h4>bizui.confirm([Object options])</h4>
 <p class="des">确认对话框</p>
 </div>
 <table class="options">
@@ -223,32 +223,32 @@
         <th>描述</th>
     </tr>
     <tr>
-        <td>content</td>
+        <td>[content]</td>
         <td>String</td>
         <td>内容，默认 ''</td>
     </tr>
     <tr>
-        <td>cancelText</td>
+        <td>[cancelText]</td>
         <td>String</td>
         <td>取消文字，默认 '取消'</td>
     </tr>
     <tr>
-        <td>okText</td>
+        <td>[okText]</td>
         <td>String</td>
         <td>确认文字，默认 '确定'</td>
     </tr>
     <tr>
-        <td>theme</td>
+        <td>[theme]</td>
         <td>String</td>
         <td>主题</td>
     </tr>
     <tr>
-        <td>title</td>
+        <td>[title]</td>
         <td>String</td>
-        <td>标题，默认 ''</td>
+        <td>标题</td>
     </tr>
     <tr>
-        <td>onOK</td>
+        <td>[onOK]</td>
         <td>Function</td>
         <td>确认回调，返回 false 则不关闭</td>
     </tr>

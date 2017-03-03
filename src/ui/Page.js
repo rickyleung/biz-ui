@@ -3,16 +3,17 @@ require('../deps/jquery.simplePagination');
 /**
  * Page
  * @class
- * @param {Object} options - 参数
- * @param {String} options.customClass - 自定义 CSS class
- * @param {String} options.nextText - 后一页标识，默认 biz-icon: chevron_right
- * @param {Number} options.pageNumber - 当前页码，默认1
- * @param {Number} options.pageSize - 每页条数，默认1
- * @param {String} options.prevText - 前一页标识，默认 biz-icon: chevron_left
- * @param {String} options.theme - 主题
- * @param {Number} options.totalNumber - 总条数，默认1
+ * @param {HTMLElement} page                  目标元素
+ * @param {Object}      [options]             参数
+ * @param {String}      [options.customClass] 自定义 CSS class
+ * @param {String}      [options.nextText]    后一页标识
+ * @param {Number}      [options.pageNumber]  前页码，默认1
+ * @param {Number}      [options.pageSize]    每页条数，默认1
+ * @param {String}      [options.prevText]    前一页标识
+ * @param {String}      [options.theme]       主题
+ * @param {Number}      [options.totalNumber] 总条数，默认1
  */
-function Page(options) {}
+function Page(page, options) {}
 
 Page.prototype = {
     /**
@@ -29,17 +30,17 @@ Page.prototype = {
     enable: function() {},
     /**
      * 获取页数
-     * @return 页数
+     * @return {Number}
      */
     getPageCount: function() {},
     /**
      * 获取当前页码
-     * @return 当前页码
+     * @return {Number}
      */
     getPageNumber: function() {},
     /**
      * 获取每页条数
-     * @return 每页条数
+     * @return {Number}
      */
     getPageSize: function() {},
     /**
@@ -54,7 +55,7 @@ Page.prototype = {
     nextPage: function() {},
     /**
      * 设置当前页码
-     * @param {Number} pageNumber - 当前页码
+     * @param {Number} pageNumber 当前页码
      * @fires Page#change
      */
     setPageNumber: function(pageNumber) {
@@ -67,14 +68,14 @@ Page.prototype = {
     },
     /**
      * 设置每页条数，设置后会定位至第一页
-     * @param {Number} pageSize - 每页条数
+     * @param {Number} pageSize 每页条数
      * @fires Page#change
      */
     setPageSize: function(pageSize) {},
     /**
      * 设置总条数
-     * @param {Number} totalNumber - 总条数
-     * @param {Boolean} redraw - 重绘（定位至第一页），默认 false
+     * @param {Number}  totalNumber 总条数
+     * @param {Boolean} [redraw]    重绘（定位至第一页），默认 false
      */
     setTotalNumber: function(totalNumber, redraw) {}
 };

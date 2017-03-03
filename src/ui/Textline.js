@@ -1,16 +1,16 @@
 /**
  * Textline
  * @class
- * @param {HTMLElement} textline - 目标元素
- * @param {Object} options - 参数
- * @param {String} options.customClass - 自定义 CSS class
- * @param {Boolean} options.disabled - 禁用，默认 false
- * @param {Number} options.height - 高度，默认取目标对象高度，最小 52px
- * @param {Number} options.maxLine - 最大行数，大于等于 1
- * @param {String} options.theme - 主题
- * @param {String} options.val - 初始值，字符串形式
- * @param {Array} options.valArray - 初始值，数组形式
- * @param {Number} options.width - 宽度，默认取目标对象宽度，最小 200px
+ * @param {HTMLElement} textline              目标元素
+ * @param {Object}      [options]             参数
+ * @param {String}      [options.customClass] 自定义 class
+ * @param {Boolean}     [options.disabled]    禁用，默认 false
+ * @param {Number}      [options.height]      高度，默认取目标对象高度，最小 52px
+ * @param {Number}      [options.maxLine]     最大行数，大于等于 1
+ * @param {String}      [options.theme]       主题
+ * @param {String}      [options.val]         初始值，字符串形式
+ * @param {Array}       [options.valArray]    初始值，数组形式
+ * @param {Number}      [options.width]       宽度，默认取目标对象宽度，最小 200px
  */
 function Textline(textline, options) {
     this.main = textline;
@@ -34,7 +34,7 @@ var defaultClass = 'biz-textline',
 Textline.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {
@@ -74,9 +74,9 @@ Textline.prototype = {
             $(this).addClass(focusClass + options.theme);
         }).on('blur.bizTextline', function() {
             $(this).removeClass(focusClass + options.theme);
-        }).on('keyup.bizTextline.render', function() {
+        }).on('keyup.bizTextline.render', function(e) {
             self.renderLineNumber(e.target.scrollTop);
-        }).on('scroll.bizTextline', function() {
+        }).on('scroll.bizTextline', function(e) {
             self.scrollLineNumber(e.target.scrollTop);
         });
 
@@ -122,7 +122,7 @@ Textline.prototype = {
 
     /**
      * 获取文本长度（不计回车）
-     * @return 文本长度
+     * @return {Number}
      */
     length: function() {
         return this.$textarea.val().replace(/\r?\n/g, '').length;
@@ -130,8 +130,8 @@ Textline.prototype = {
 
     /**
      * 以字符串形式获取/设置内容，超过 maxLine 会被截断
-     * @param {String} value - 内容
-     * @return 内容
+     * @param {String} [value] 内容
+     * @return {String}
      */
     val: function(value) {
         if (undefined === value) {
@@ -153,8 +153,8 @@ Textline.prototype = {
 
     /**
      * 以数组形式获取/设置内容，超过 maxLine 会被截断
-     * @param {Array} value - 内容
-     * @return 内容
+     * @param {Array} [value] 内容
+     * @return {Array}
      */
     valArray: function(value) {
         if (undefined === value) {
@@ -189,7 +189,7 @@ Textline.prototype = {
 
     /**
      * 绘制行号
-     * @param {Number} scrollTop - 滚动高度
+     * @param {Number} scrollTop 滚动高度
      * @private
      */
     renderLineNumber: function(scrollTop) {
@@ -204,7 +204,7 @@ Textline.prototype = {
 
     /**
      * 滚动行号
-     * @param {Number} scrollTop - 滚动高度
+     * @param {Number} scrollTop 滚动高度
      * @private
      */
     scrollLineNumber: function(scrollTop) {

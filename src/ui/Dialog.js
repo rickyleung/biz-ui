@@ -3,19 +3,19 @@ var Draggable = require('Draggable');
 /**
  * Dialog
  * @class
- * @param {HTMLElement} dialog - 目标元素，创建对话框时，目标元素将移动到对话框容器中
- * @param {Object} options - 参数
- * @param {Array} options.buttons - 底部按钮的 option 数组（多一个 onClick 属性），默认 []
- * @param {String} options.customClass - 自定义 CSS class
- * @param {Boolean} options.destroyOnClose - 关闭时销毁对话框，默认 false
- * @param {Boolean} options.draggable - 可拖拽，默认 false
- * @param {Number} options.height - 对话框高度，默认取填充内容后的高度，最小 150px
- * @param {String} options.position - 定位方式（fixed|absolute），默认 'fixed'
- * @param {String} options.theme - 主题
- * @param {String} options.title - 对话框标题，默认取目标元素的 data-title 属性
- * @param {Number} options.width - 对话框宽度，最小 480px
- * @param {Function} options.onBeforeClose - 关闭前回调，返回 false 则不关闭
- * @param {Number} options.zIndex - 对话框 z-index
+ * @param {HTMLElement} dialog                   目标元素（创建对话框时，目标元素将移动到 body 下的对话框容器中）
+ * @param {Object}      [options]                参数
+ * @param {Array}       [options.buttons]        底部按钮的 option 数组（多一个 onClick 属性），默认 []
+ * @param {String}      [options.customClass]    自定义 class
+ * @param {Boolean}     [options.destroyOnClose] 关闭时销毁对话框，默认 false
+ * @param {Boolean}     [options.draggable]      可拖拽，默认 false
+ * @param {Number}      [options.height]         对话框高度，默认取填充内容后的高度，最小 150px
+ * @param {String}      [options.position]       定位方式（fixed | absolute），默认 'fixed'
+ * @param {String}      [options.theme]          主题
+ * @param {String}      [options.title]          对话框标题，默认取目标元素的 data-title 属性
+ * @param {Number}      [options.width]          对话框宽度，最小 320px
+ * @param {Function}    [options.onBeforeClose]  关闭前回调，返回 false 则不关闭
+ * @param {Number}      [options.zIndex]         对话框 z-index
  */
 function Dialog(dialog, options) {
     this.main = dialog;
@@ -37,14 +37,14 @@ function Dialog(dialog, options) {
 var defaultClass = 'biz-dialog',
     prefix = 'biz-dialog-',
     dataKey = 'bizDialog',
-    minWidth = 480,
+    minWidth = 320,
     minHeight = 150,
     currentIndex = 1000;
 
 Dialog.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {
@@ -152,7 +152,7 @@ Dialog.prototype = {
 
     /**
      * 更新按钮
-     * @param {Array} buttonOption - 底部按钮的 option 数组
+     * @param {Array} buttonOption 底部按钮的 option 数组
      */
     updateButtons: function(buttonOption) {
         buttonOption = buttonOption || [];
@@ -171,8 +171,8 @@ Dialog.prototype = {
 
     /**
      * 获取/设置标题
-     * @param {String} title - 标题
-     * @return 标题
+     * @param {String} [title] 标题
+     * @return {String}
      */
     title: function(title) {
         var titleElement = this.$container.find('.biz-panel-title-text');
@@ -200,7 +200,7 @@ Dialog.prototype = {
 var alert = function(options) {
     if (!jQuery.isPlainObject(options)) {
         options = {
-            content: options.toString()
+            content: options
         };
     }
 

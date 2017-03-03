@@ -1,17 +1,17 @@
 /**
  * Panel
  * @class
- * @param {HTMLElement} panel - 目标元素
- * @param {Object} options - 参数
- * @param {Array} options.buttons - 底部按钮的 option 数组（多一个 onClick 属性），默认 []
- * @param {String} options.customClass - 自定义 CSS class
- * @param {Boolean} options.destroyOnClose - 关闭时销毁抽屉浮层，默认 false
- * @param {Number} options.marginLeft - 左边距
- * @param {Number} options.speed - 动画速度，默认 300（ms）
- * @param {String} options.theme - 主题
- * @param {String} options.title - 抽屉浮层标题，默认取目标元素的 data-title 属性
- * @param {Function} options.onBeforeClose - 关闭前回调，返回 false 则不关闭
- * @param {Number} options.zIndex - 抽屉浮层标 z-index
+ * @param {HTMLElement} panel                    目标元素
+ * @param {Object}      [options]                参数
+ * @param {Array}       [options.buttons]        底部按钮的 option 数组（多一个 onClick 属性），默认 []
+ * @param {String}      [options.customClass]    自定义 class
+ * @param {Boolean}     [options.destroyOnClose] 关闭时销毁抽屉浮层，默认 false
+ * @param {Number}      [options.marginLeft]     左边距（px），默认 200
+ * @param {Number}      [options.speed]          动画速度（ms），默认 300
+ * @param {String}      [options.theme]          主题
+ * @param {String}      [options.title]          屉浮层标题，默认取目标元素的 data-title 属性
+ * @param {Function}    [options.onBeforeClose]  关闭前回调，返回 false 则不关闭
+ * @param {Number}      [options.zIndex]         抽屉浮层标 z-index
  */
 function Panel(panel, options) {
     this.main = panel;
@@ -38,7 +38,7 @@ var defaultClass = 'biz-panel',
 Panel.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {
@@ -133,7 +133,7 @@ Panel.prototype = {
 
     /**
      * 更新按钮
-     * @param {Array} buttonOption - 底部按钮的 option 数组
+     * @param {Array} buttonOption 底部按钮的 option 数组
      */
     updateButtons: function(buttonOption) {
         buttonOption = buttonOption || [];
@@ -152,8 +152,8 @@ Panel.prototype = {
 
     /**
      * 获取/设置标题
-     * @param {String} title - 标题
-     * @return 标题
+     * @param {String} [title] 标题
+     * @return {String}
      */
     title: function(title) {
         var titleElement = this.$container.find('.biz-panel-title-text');

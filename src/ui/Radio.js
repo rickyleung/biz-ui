@@ -1,9 +1,9 @@
 /**
  * Radio
  * @class
- * @param {HTMLElement} radio - 目标元素
- * @param {Object} options - 参数
- * @param {String} options.theme - 主题
+ * @param {HTMLElement} radio           目标元素
+ * @param {Object}      [options]       参数
+ * @param {String}      [options.theme] 主题
  */
 function Radio(radio, options) {
     this.main = radio;
@@ -32,7 +32,7 @@ var defaultClass = 'biz-label',
 Radio.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {
@@ -112,7 +112,7 @@ Radio.prototype = {
 
     /**
      * 获取选中的 value 值
-     * @return value 值
+     * @return {String}
      */
     val: function() {
         var value = '';

@@ -1,12 +1,12 @@
 /**
  * Tab
  * @class
- * @param {HTMLElement} tab - 目标元素
- * @param {Object} options - 参数
- * @param {String} options.action - 切换方式（click|hover），默认 'click'
- * @param {String} options.customClass - 自定义 CSS class
- * @param {Number} options.selectedIndex - 选中 tab 序号，默认 0
- * @param {String} options.theme - 主题
+ * @param {HTMLElement} tab                     目标元素
+ * @param {Object}      [options]               参数
+ * @param {String}      [options.action]        切换方式（click | hover），默认 'click'
+ * @param {String}      [options.customClass]   自定义 class
+ * @param {Number}      [options.selectedIndex] 选中 tab 序号，默认 0
+ * @param {String}      [options.theme]         主题
  */
 function Tab(tab, options) {
     this.main = tab;
@@ -29,7 +29,7 @@ var defaultClass = 'biz-tab',
 Tab.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {
@@ -61,10 +61,10 @@ Tab.prototype = {
 
     /**
      * 获取/设置当前被选中的 tab
-     * @param {Number} selectedIndex - 序号
-     * @param {Boolean} fire - 触发 change 事件，默认 true
+     * @param {Number}  [selectedIndex] 序号
+     * @param {Boolean} [fire]          触发 change 事件，默认 true
      * @fires Tab#change
-     * @return tab 数据
+     * @return {Object}
      */
     index: function(selectedIndex, fire) {
         var curTab, curContent;
@@ -80,11 +80,11 @@ Tab.prototype = {
                 /**
                  * 切换 tab
                  * @event Tab#change
-                 * @param {Object} e - 事件对象
-                 * @param {Object} data - 数据
-                 * @param {Number} data.index - 序号
-                 * @param {String} data.title - tab 标题
-                 * @param {String} data.content - tab 内容
+                 * @param {Object} e            事件对象
+                 * @param {Object} data         数据
+                 * @param {Number} data.index   序号
+                 * @param {String} data.title   tab 标题
+                 * @param {String} data.content tab 内容
                  */
                 curTab.trigger('change', {
                     index: selectedIndex,

@@ -3,11 +3,11 @@ require('jquery-placeholder');
 /**
  * Textarea
  * @class
- * @param {HTMLElement} textarea - 目标元素
- * @param {Object} options - 参数
- * @param {String} options.customClass - 自定义 CSS class
- * @param {Boolean} options.disabled - 禁用，默认 false
- * @param {String} options.theme - 主题
+ * @param {HTMLElement} textarea              目标元素
+ * @param {Object}      [options]             参数
+ * @param {String}      [options.customClass] 自定义 class
+ * @param {Boolean}     [options.disabled]    禁用，默认 false
+ * @param {String}      [options.theme]       主题
  */
 function Textarea(textarea, options) {
     this.main = textarea;
@@ -30,7 +30,7 @@ var defaultClass = 'biz-textarea',
 Textarea.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {
@@ -71,7 +71,7 @@ Textarea.prototype = {
 
     /**
      * 获取文本长度（不计回车）
-     * @return 文本长度
+     * @return {Number}
      */
     length: function() {
         return this.$main.val().replace(/\r?\n/g, '').length;

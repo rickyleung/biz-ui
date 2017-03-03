@@ -3,11 +3,11 @@ require('jquery-placeholder');
 /**
  * Input
  * @class
- * @param {HTMLElement} input - 目标元素
- * @param {Object} options - 参数
- * @param {String} options.customClass - 自定义 CSS class
- * @param {Boolean} options.disabled - 禁用，默认 false
- * @param {String} options.theme - 主题
+ * @param {HTMLElement} input                 目标元素
+ * @param {Object}      [options]             参数
+ * @param {String}      [options.customClass] 自定义 class
+ * @param {Boolean}     [options.disabled]    禁用，默认 false
+ * @param {String}      [options.theme]       主题
  */
 function Input(input, options) {
     this.main = input;
@@ -30,7 +30,7 @@ var defaultClass = 'biz-input',
 Input.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {
@@ -54,8 +54,8 @@ Input.prototype = {
             /**
              * 回车
              * @event Input#enter
-             * @param {Object} e - 事件对象
-             * @param {String} value - 输入值
+             * @param {Object} e     事件对象
+             * @param {String} value 输入值
              */
             if (e.keyCode === 13) {
                 $(this).trigger('enter', $(this).val());

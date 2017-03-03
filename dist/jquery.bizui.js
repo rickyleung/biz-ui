@@ -11693,7 +11693,7 @@
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
             }
-            var defaultClass = 'biz-dialog', prefix = 'biz-dialog-', dataKey = 'bizDialog', minWidth = 480, minHeight = 150, currentIndex = 1000;
+            var defaultClass = 'biz-dialog', prefix = 'biz-dialog-', dataKey = 'bizDialog', minWidth = 320, minHeight = 150, currentIndex = 1000;
             Dialog.prototype = {
                 init: function (options) {
                     this.$container = $('<div style="display:none;"></div>');
@@ -11813,7 +11813,7 @@
             };
             var alert = function (options) {
                 if (!jQuery.isPlainObject(options)) {
-                    options = { content: options.toString() };
+                    options = { content: options };
                 }
                 var defaultOption = {
                         content: '',
@@ -12093,7 +12093,7 @@
         },
         function (module, exports) {
             _require(10);
-            function Page(options) {
+            function Page(page, options) {
             }
             Page.prototype = {
                 destroy: function () {
@@ -12368,7 +12368,7 @@
         },
         function (module, exports) {
             _require(9);
-            function Select() {
+            function Select(select, options) {
             }
             Select.prototype = {
                 destroy: function () {
@@ -12492,6 +12492,507 @@
             module.exports = Tab;
         },
         function (module, exports) {
+            function Table(table, options) {
+                this.main = table;
+                this.$main = $(this.main);
+                var defaultOption = {
+                        customClass: '',
+                        data: [],
+                        noDataContent: '<p><i class="biz-icon">&#xe001;</i> \u6CA1\u6709\u6570\u636E</p>',
+                        selectable: false,
+                        resizable: false,
+                        topOffset: 0,
+                        lockHead: false
+                    };
+                this.options = $.extend(defaultOption, options || {});
+                this.init(this.options);
+            }
+            var defaultClass = 'biz-table', dataKey = 'bizTable';
+            function escapeHTML(str) {
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            }
+            Table.prototype = {
+                init: function (options) {
+                    this.$main.html([
+                        '<div class="biz-table-head-wrap"><table class="biz-table-head"></table></div>',
+                        '<div class="biz-table-placeholder"></div>',
+                        '<div class="biz-table-body-wrap"><table class="biz-table-body"></table></div>'
+                    ].join(''));
+                    this.$headWrap = this.$main.find('.biz-table-head-wrap');
+                    this.$bodyWrap = this.$main.find('.biz-table-body-wrap');
+                    this.$placeholder = this.$main.find('.biz-table-placeholder');
+                    this.$tableHead = this.$main.find('.biz-table-head');
+                    this.$tableBody = this.$main.find('.biz-table-body');
+                    this.$tableHead.html(this.createTableHead(options)).addClass([
+                        defaultClass,
+                        options.customClass
+                    ].join(' '));
+                    this.$tableBody.html(this.createTableBody(options)).addClass([
+                        defaultClass,
+                        options.customClass,
+                        this.rowSpan > 1 && options.data.length > 0 ? 'biz-rowspan' : ''
+                    ].join(' '));
+                    if (options.foot && options.data.length > 0) {
+                        var tbody = this.$tableBody.find('tbody'), foot = this.createFoot(options);
+                        if (options.foot === 'top') {
+                            tbody.prepend(foot);
+                        }
+                        if (options.foot === 'bottom') {
+                            tbody.append(foot);
+                        }
+                    }
+                    if (options.data.length === 0) {
+                        this.createNoDataContent();
+                    }
+                    if (options.selectable && options.data.length > 0) {
+                        this.createSelect(options.data);
+                        this.bindSelect();
+                    }
+                },
+                createTableHead: function (options) {
+                    var thead = $('<thead><tr></tr></thead><tbody></tbody>'), column = options.column, columnCount = column.length;
+                    this.rowSpan = 1;
+                    for (var i = 0; i < columnCount; i++) {
+                        var col = column[i];
+                        if (typeof col.visible !== 'undefined' && !col.visible) {
+                            continue;
+                        }
+                        if (!$.isArray(col.content)) {
+                            col.content = [col.content];
+                        }
+                        if (col.content.length > this.rowSpan) {
+                            this.rowSpan = col.content.length;
+                        }
+                        var th = $('<th nowrap></th>').attr({
+                                'data-width': col.width,
+                                width: col.width,
+                                field: col.field
+                            });
+                        var title = col.escapeTitle === false ? col.title : escapeHTML(col.title);
+                        if (col.sortable) {
+                            var wrap = $('<div class="sortable"></div>').html(title);
+                            if (col.currentSort) {
+                                wrap.attr(col.currentSort, '');
+                            }
+                            title = wrap.prop('outerHTML');
+                        }
+                        thead.find('tr').append(th.html(title).prop('outerHTML'));
+                    }
+                    return thead.prop('outerHTML');
+                },
+                createTableBody: function (options) {
+                    var tbody = $('<tbody></tbody>'), column = options.column, columnCount = column.length, data = options.data, rowCount = data.length;
+                    for (var i = 0; i < rowCount; i++) {
+                        var tr = $('<tr></tr>'), item = data[i], index = i + 1;
+                        for (var j = 0; j < columnCount; j++) {
+                            var col = column[j];
+                            if (typeof col.visible !== 'undefined' && !col.visible) {
+                                continue;
+                            }
+                            if (!$.isArray(col.content)) {
+                                col.content = [col.content];
+                            }
+                            var td = $('<td></td>').attr({
+                                    align: col.align,
+                                    width: col.width
+                                });
+                            if (col.editable && col.content.length === 1) {
+                                td.attr('editable', '');
+                            }
+                            if (this.rowSpan > 1 && col.content.length === 1) {
+                                td.attr('rowspan', this.rowSpan);
+                            }
+                            var content = col.content[0].apply(this, [
+                                    item,
+                                    index,
+                                    col.field
+                                ]).toString();
+                            td.html(col.escapeContent === false ? content : escapeHTML(content)).appendTo(tr);
+                        }
+                        tbody.append(tr);
+                        if (this.rowSpan > 1) {
+                            for (var m = 1; m < this.rowSpan; m++) {
+                                var _tr = $('<tr></tr>');
+                                for (var n = 0; n < columnCount; n++) {
+                                    var _col = column[n];
+                                    if (!$.isArray(_col.content)) {
+                                        _col.content = [_col.content];
+                                    }
+                                    if (typeof _col.visible !== 'undefined' && !_col.visible || _col.content.length === 1) {
+                                        continue;
+                                    }
+                                    var _td = $('<td></td>').attr('align', _col.align), _content = _col.content[m].apply(this, [
+                                            item,
+                                            index,
+                                            _col.field
+                                        ]).toString();
+                                    _td.html(_col.escapeContent === false ? _content : escapeHTML(_content)).appendTo(_tr);
+                                }
+                                tbody.append(_tr);
+                            }
+                        }
+                    }
+                    return tbody.prop('outerHTML');
+                },
+                createFoot: function (options) {
+                    var sum = $('<tr class="sum"></tr>'), column = options.column, columnCount = column.length;
+                    if (options.selectable) {
+                        sum.append('<td width="24"></td>');
+                    }
+                    for (var i = 0; i < columnCount; i++) {
+                        var col = column[i];
+                        if (typeof col.visible !== 'undefined' && !col.visible) {
+                            continue;
+                        }
+                        var td = $('<td></td>').attr({
+                                align: col.align,
+                                width: col.width
+                            });
+                        var content = col.footContent ? col.footContent.call(this, col.field).toString() : '';
+                        td.html(col.escapeContent === false ? content : escapeHTML(content)).appendTo(sum);
+                    }
+                    return sum.prop('outerHTML');
+                },
+                createNoDataContent: function () {
+                    var colspan = this.options.column.length;
+                    $.each(this.options.column, function (index, col) {
+                        if (col.visible) {
+                            colspan--;
+                        }
+                    });
+                    if (this.options.selectable) {
+                        colspan = colspan + 1;
+                    }
+                    this.$tableBody.find('tbody').append('<tr class="no-data"><td colspan="' + colspan + '">' + this.options.noDataContent + '</td></tr>');
+                },
+                createSelect: function (data) {
+                    var headEnabled = false;
+                    if (this.rowSpan === 1) {
+                        this.$tableBody.find('tr[class!="sum"]').each(function (index, tr) {
+                            var td = $('<td width="24" align="center" class="select-col"><input type="checkbox" title=" "></td>');
+                            $(this).prepend(td);
+                            if (data[index].disabledSelect) {
+                                $(this).addClass('select-disabled');
+                                td.find(':checkbox').prop('disabled', true);
+                            } else {
+                                headEnabled = true;
+                            }
+                        });
+                    } else {
+                        var self = this, dataIndex = 0;
+                        this.$tableBody.find('tr[class!="sum"]').each(function (index, tr) {
+                            if ((index + self.rowSpan) % self.rowSpan === 0) {
+                                var td = $('<td width="24" align="center" class="select-col" rowspan="' + self.rowSpan + '"><input type="checkbox" title=" "></td>');
+                                $(this).prepend(td);
+                                if (data[dataIndex].disabledSelect) {
+                                    $(this).addClass('select-disabled');
+                                    td.find(':checkbox').prop('disabled', true);
+                                } else {
+                                    headEnabled = true;
+                                }
+                                dataIndex++;
+                            }
+                        });
+                    }
+                    var th = $('<th nowrap data-width="24" width="24" class="select-col"><input type="checkbox" title=" "></th>');
+                    this.$tableHead.find('tr').prepend(th);
+                    if (!headEnabled) {
+                        th.find(':checkbox').prop('disabled', true);
+                    }
+                    this.$main.find(':checkbox').bizCheckbox({ theme: 'gray' });
+                },
+                bindSelect: function () {
+                    var self = this;
+                    this.$main.on('click.bizTableSelectAll', '.biz-table-head .select-col .biz-label', function (e) {
+                        if ($(this).hasClass('biz-checkbox-unchecked-disabled')) {
+                            return;
+                        }
+                        var selected = $(this).hasClass('biz-checkbox-checked'), checkbox = self.$tableBody.find('.select-col :checkbox').filter(':not(:disabled)'), tr = self.$tableBody.find('tr[class!="sum"]').filter('[class!="select-disabled"]');
+                        if (selected) {
+                            checkbox.bizCheckbox('check');
+                            tr.addClass('selected');
+                        } else {
+                            checkbox.bizCheckbox('uncheck');
+                            tr.removeClass('selected');
+                        }
+                        if (self.options.onSelect) {
+                            self.options.onSelect.call(self, self.getSelected(), e);
+                        }
+                    }).on('click.bizTableSelectOne', '.biz-table-body .select-col .biz-label', function (e) {
+                        if ($(this).hasClass('biz-checkbox-unchecked-disabled')) {
+                            return;
+                        }
+                        var selected = $(this).hasClass('biz-checkbox-checked'), tr = $(this).parent().parent();
+                        if (selected) {
+                            tr.addClass('selected');
+                        } else {
+                            tr.removeClass('selected');
+                        }
+                        var selectedCount = self.$tableBody.find('.select-col .biz-checkbox-checked').length, checkboxCount = self.$tableBody.find('.select-col :checkbox').filter(':not(:disabled)').length, selectAll = self.$tableHead.find('.select-col :checkbox');
+                        if (selectedCount === checkboxCount) {
+                            selectAll.bizCheckbox('check');
+                        } else {
+                            selectAll.bizCheckbox('uncheck');
+                        }
+                        if (self.options.onSelect) {
+                            self.options.onSelect.call(self, self.getSelected(), e);
+                        }
+                    });
+                },
+                getSelectedIndex: function () {
+                    var self = this, result = [];
+                    this.$tableBody.find('tr[class!="sum"]').each(function (index, tr) {
+                        if ($(tr).hasClass('selected')) {
+                            result.push(self.rowSpan > 1 ? index / self.rowSpan : index);
+                        }
+                    });
+                    return result;
+                },
+                getData: function () {
+                    return this.options.data;
+                },
+                getSelected: function () {
+                    var self = this;
+                    return $.map(this.getSelectedIndex(), function (index) {
+                        return self.options.data[index];
+                    });
+                },
+                setSelected: function (rowIndex, selected, fire) {
+                    var self = this;
+                    if (rowIndex === 0) {
+                        rowIndex = $.map(this.options.data, function (val, index) {
+                            return index + 1;
+                        });
+                    }
+                    if (!$.isArray(rowIndex)) {
+                        rowIndex = [rowIndex];
+                    }
+                    $.each(rowIndex, function (index, val) {
+                        var tr = self.$tableBody.find('tbody tr:nth-child(' + (self.rowSpan > 1 ? val * self.rowSpan : val) + ')').filter('[class!="sum"]').filter('[class!="select-disabled"]'), checkbox = tr.find('.select-col :checkbox');
+                        if (selected) {
+                            checkbox.bizCheckbox('check');
+                            tr.addClass('selected');
+                        } else {
+                            checkbox.bizCheckbox('uncheck');
+                            tr.removeClass('selected');
+                        }
+                    });
+                    var selectedCount = self.$tableBody.find('.select-col .biz-checkbox-checked').length, checkboxCount = self.$tableBody.find('.select-col :checkbox').filter(':not(:disabled)').length, selectAll = self.$tableHead.find('.select-col :checkbox');
+                    if (selectedCount === checkboxCount) {
+                        selectAll.bizCheckbox('check');
+                    } else {
+                        selectAll.bizCheckbox('uncheck');
+                    }
+                    if (fire && this.options.onSelect) {
+                        this.options.onSelect.call(this, this.getSelected());
+                    }
+                },
+                syncWidth: function () {
+                    this.$headWrap.css({ width: this.$main.width() });
+                    this.$tableHead.css({ width: this.$tableBody.width() });
+                },
+                setMinWidth: function () {
+                    var width = $.map(this.options.column, function (col, index) {
+                            if (typeof col.visible !== 'undefined' && !col.visible) {
+                                return 0;
+                            }
+                            return col.width + 17;
+                        });
+                    var minWidth = this.options.selectable ? 37 : 0;
+                    $.each(width, function (index, val) {
+                        minWidth = minWidth + val;
+                    });
+                    this.$tableHead.css('min-width', minWidth);
+                    this.$tableBody.css('min-width', minWidth);
+                    this.syncWidth();
+                },
+                bindSort: function () {
+                    var self = this;
+                    this.$main.on('click.bizTableSort', '.biz-table-head div.sortable', function (e) {
+                        var head = $(e.currentTarget), field = head.parent().attr('field');
+                        if (head.attr('des') !== undefined) {
+                            head.removeAttr('des').attr('asc', '');
+                        } else if (head.attr('asc') !== undefined) {
+                            head.removeAttr('asc').attr('des', '');
+                        } else {
+                            head.parents().filter('tr:first').find('div.sortable').removeAttr('des').removeAttr('asc');
+                            head.attr('des', '');
+                        }
+                        $.each(self.options.column, function (index, val) {
+                            if (val.field === field) {
+                                val.currentSort = head.attr('des') !== undefined ? 'des' : 'asc';
+                            } else if (val.currentSort) {
+                                delete val.currentSort;
+                            }
+                        });
+                        self.options.onSort.call(self, {
+                            field: head.parent().attr('field'),
+                            des: head.attr('des') !== undefined,
+                            asc: head.attr('asc') !== undefined
+                        }, e);
+                    });
+                },
+                resetSort: function () {
+                    var i, col;
+                    if (this.defaultSort.length) {
+                        for (i = 0; i < this.options.column.length; i++) {
+                            col = this.options.column[i];
+                            delete col.currentSort;
+                            for (var j = 0; j < this.defaultSort.length; j++) {
+                                if (col.field == this.defaultSort[j].field) {
+                                    col.currentSort = this.defaultSort[j].currentSort;
+                                }
+                            }
+                        }
+                    } else {
+                        for (i = 0; i < this.options.column.length; i++) {
+                            col = this.options.column[i];
+                            if (col.currentSort) {
+                                delete col.currentSort;
+                            }
+                        }
+                    }
+                },
+                bindValidate: function () {
+                    var self = this;
+                    this.$main.find('td[editable]').on('validate', function (e, newValue) {
+                        var columIndex = $(this).parent().find('td').index($(this));
+                        if (self.options.selectable) {
+                            columIndex = columIndex - 1;
+                        }
+                        return self.options.onValidate.call(self, {
+                            newValue: newValue,
+                            field: self.options.column[columIndex].field
+                        }, e);
+                    });
+                },
+                bindEdit: function () {
+                    var self = this;
+                    this.$main.find('td[editable]').on('change', function (e, newValue) {
+                        var rowIndex = parseInt($(this).parent().attr('id').replace(self.rowIdPrefix, ''), 10), columIndex = $(this).parent().find('td').index($(this));
+                        if (self.options.selectable) {
+                            columIndex = columIndex - 1;
+                        }
+                        var field = self.options.column[columIndex].field;
+                        self.options.data[rowIndex - 1][field] = newValue;
+                        self.options.onEdit.call(self, {
+                            newValue: newValue,
+                            item: self.options.data[rowIndex - 1],
+                            index: rowIndex,
+                            field: field
+                        }, e);
+                    });
+                },
+                updateData: function (data) {
+                    this.options.data = $.map(data || [], function (val, index) {
+                        return val;
+                    });
+                    this.refresh();
+                },
+                updateRow: function (rowIndex, data) {
+                    this.options.data[rowIndex - 1] = $.extend(true, {}, data);
+                    this.refresh();
+                },
+                updateCell: function (rowIndex, field, data) {
+                    this.options.data[rowIndex - 1][field] = data;
+                    this.refresh();
+                },
+                showColumn: function (field) {
+                    this.setColumnVisible(field, true);
+                },
+                hideColumn: function (field) {
+                    this.setColumnVisible(field, false);
+                },
+                setColumnVisible: function (field, visible) {
+                    if (!$.isArray(field)) {
+                        field = [field];
+                    }
+                    var self = this;
+                    $.each(field, function (i, f) {
+                        $.each(self.options.column, function (j, col) {
+                            if (col.field === f) {
+                                col.visible = visible;
+                            }
+                        });
+                    });
+                    this.refresh();
+                },
+                refresh: function () {
+                    this.$main.find(':checkbox').bizCheckbox('destroy');
+                    this.$tableBody.find('td[editable]').off();
+                    this.$tableHead.html(this.createTableHead(this.options));
+                    this.$tableBody.html(this.createTableBody(this.options));
+                    if (this.options.selectable) {
+                        this.createSelect(this.options.data);
+                    }
+                    if (this.options.data.length) {
+                        if (this.options.foot === 'top') {
+                            this.$tableBody.find('tbody').prepend(this.createFoot(this.options));
+                        }
+                        if (this.options.foot === 'bottom') {
+                            this.$tableBody.find('tbody').append(this.createFoot(this.options));
+                        }
+                    } else if (this.options.noDataContent) {
+                        this.createNoDataContent();
+                    }
+                    this.syncWidth();
+                    this.$headWrap[0].scrollLeft = this.$bodyWrap[0].scrollLeft = 0;
+                    if (this.options.resizable) {
+                        this.setMinWidth();
+                        this.$tableHead.resizableColumns('destroy').resizableColumns({
+                            start: function () {
+                                $('.biz-table-editor').blur();
+                            }
+                        });
+                    }
+                    this.$tableBody.find('td').prop('tabindex', 1);
+                    if (this.options.onEdit) {
+                        this.bindEdit();
+                    }
+                    if (this.options.onValidate) {
+                        this.bindValidate();
+                    }
+                },
+                destroy: function () {
+                    this.$main.find(':checkbox').bizCheckbox('destroy');
+                    this.$tableBody.find('td[editable]').off();
+                    $('.biz-table-editor').off().remove();
+                    this.$main.off('click.bizTableSelectAll').off('click.bizTableSelectOne').off('click.bizTableSort');
+                    if (this.options.resizable) {
+                        this.$tableHead.resizableColumns('destroy');
+                    }
+                    $(window).off('scroll.bizTable');
+                    this.$headWrap.off();
+                    this.$bodyWrap.off();
+                    this.$main.empty();
+                }
+            };
+            $.extend($.fn, {
+                bizTable: function (method) {
+                    var internal_return, args = arguments;
+                    this.each(function () {
+                        var instance = $(this).data(dataKey);
+                        if (instance) {
+                            if (typeof method === 'string' && typeof instance[method] === 'function') {
+                                internal_return = instance[method].apply(instance, Array.prototype.slice.call(args, 1));
+                                if (internal_return !== undefined) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            if (method === undefined || jQuery.isPlainObject(method)) {
+                                $(this).data(dataKey, new Table(this, method));
+                            }
+                        }
+                    });
+                    if (internal_return !== undefined) {
+                        return internal_return;
+                    } else {
+                        return this;
+                    }
+                }
+            });
+            module.exports = Table;
         },
         function (module, exports) {
             _require(2);
@@ -12618,9 +13119,9 @@
                         $(this).addClass(focusClass + options.theme);
                     }).on('blur.bizTextline', function () {
                         $(this).removeClass(focusClass + options.theme);
-                    }).on('keyup.bizTextline.render', function () {
+                    }).on('keyup.bizTextline.render', function (e) {
                         self.renderLineNumber(e.target.scrollTop);
-                    }).on('scroll.bizTextline', function () {
+                    }).on('scroll.bizTextline', function (e) {
                         self.scrollLineNumber(e.target.scrollTop);
                     });
                     if (parseInt(options.maxLine, 10) >= 1) {
@@ -12748,7 +13249,7 @@
         },
         function (module, exports) {
             _require(4);
-            function Tree() {
+            function Tree(tree, options) {
             }
             $.extend($.jstree.defaults.core, { strings: { 'Loading ...': '\u52A0\u8F7D\u4E2D ...' } });
             $.extend($.fn, { bizTree: $.fn.jstree });
@@ -12756,7 +13257,7 @@
         },
         function (module, exports) {
             _require(11);
-            function TreeTable(options) {
+            function TreeTable(treetable, options) {
             }
             TreeTable.prototype = {
                 destroy: function () {

@@ -21,7 +21,7 @@ var Page = Backbone.View.extend({
         $('input:text').bizInput();
         $('input:checkbox').bizCheckbox();
         page.bizPage({
-            pageSize: 20,
+            pageSize: 50,
             pageNumber: 1,
             totalNumber: 300
         });

@@ -1,17 +1,17 @@
 /**
  * DropDown
  * @class
- * @param {HTMLElement} dropdown - 下拉浮层容器，创建时将被移动到 body 下
- * @param {Object} options - 参数
- * @param {String} options.alignX - 水平方对齐方式（left|right），默认 "left"
- * @param {String} options.alignY - 垂直方对齐方式（top|bottom），默认 "bottom"
- * @param {String} options.customClass - 自定义 CSS class
- * @param {Function} options.onBeforeOpen - 打开时的回调，返回 false 则不执行打开
- * @param {Function} options.onBeforeClose - 关闭时的回调，返回 false 则不执行关闭
- * @param {Number} options.offsetX - 水平偏移，默认 0
- * @param {Number} options.offsetY - 垂直偏移，默认 0
- * @param {String} options.trigger - 触发下拉浮层的元素选择器
- * @param {Number} options.zIndex - 下拉浮层 z-index，默认使用 trigger 的 z-index
+ * @param {HTMLElement} dropdown                下拉浮层容器（创建时将被移动到 body 下）
+ * @param {Object}      options                 参数
+ * @param {String}      [options.alignX]        水平方对齐方式（left|right），默认 "left"
+ * @param {String}      [options.alignY]        垂直方对齐方式（top|bottom），默认 "bottom"
+ * @param {String}      [options.customClass]   自定义 class
+ * @param {Function}    [options.onBeforeOpen]  打开时的回调，返回 false 则不执行打开
+ * @param {Function}    [options.onBeforeClose] 关闭时的回调，返回 false 则不执行关闭
+ * @param {Number}      [options.offsetX]       水平偏移，默认 0
+ * @param {Number}      [options.offsetY]       垂直偏移，默认 0
+ * @param {String}      options.trigger         触发下拉浮层的元素选择器
+ * @param {Number}      [options.zIndex]        下拉浮层 z-index，默认使用 trigger 的 z-index
  */
 function DropDown(dropdown, options) {
     this.main = dropdown;
@@ -34,7 +34,7 @@ var defaultClass = 'biz-dropdown',
 DropDown.prototype = {
     /**
      * 初始化
-     * @param {Object} options - 参数
+     * @param {Object} options 参数
      * @private
      */
     init: function(options) {

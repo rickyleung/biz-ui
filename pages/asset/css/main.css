@@ -154,7 +154,7 @@ body.index {
 .features {
     margin: 0 auto;
     max-width: 960px;
-    padding: 40px 0;
+    padding: 40px 0 0 0;
     display: flex;
     flex-wrap: wrap;
     color: #212121;
@@ -339,9 +339,15 @@ body.index {
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
 }
+.components .example button {
+    margin-bottom: 10px;
+}
+.components .example input {
+    width: 120px;
+}
 .components .example .textline {
     float: left;
-    margin-right: 20px;
+    margin: 0 20px 10px 0;
 }
 .components table.options {
     border: 0;
@@ -463,4 +469,12 @@ ul.issues {
     .components aside .tree {background-position: 0 -322px;}
     .components aside .treetable {background-position: 0 -345px;}
     .components aside .dropdown {background-position: 0 -368px;}
+    .components table.options {
+        margin-left: 0;
+        width: 100%;
+    }
+    .components table.options td {
+        word-break: break-all;
+        word-wrap: break-word;
+    }
 }
