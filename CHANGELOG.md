@@ -1,12 +1,12 @@
-## 1.4.0 (March 1, 2017)
+## 1.4.0 (March 8, 2017)
 
 * Redesign homepage.
+* Rewrite CSS using Less.
+* Rewrap modules with CommonJS specification.
 * Build with Gulp.
-* Follow the CommonJS module specification.
-* Rewrite CSS by Less.
-* Remove image dependencies.
+* Remove image dependencies by iconfont or base64.
 * JSDoc3 style documentations.
-* Provide 19 themes: blue(default), light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, brown, blue-gray, gray, deep-orange, red, pink, purple, deep-purple, indigo.
+* 19 new themes: blue(default), light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, brown, blue-gray, gray, deep-orange, red, pink, purple, deep-purple, indigo.
 
 #### Components updates
 * bizui (namespace)
@@ -19,7 +19,7 @@
   2. Deprecated option: `label`(use `text`).
   3. Deprecated theme value of option: `dark`(use `gray`).
 * Calendar
-  1. Many new options and new methods, see docs.
+  1. Lots of new options and methods.
   2. Deprecated methods: `enable`, `disable`.
   3. Decoupling Input components, initialize and style them by yourself.
 * Checkbox, Radio
@@ -30,7 +30,7 @@
   2. New methods: `title`, `updateButtons`.
   3. Deprecated methods: `bizui.Dialog.alert`(use `bizui.alert`), `bizui.Dialog.confirm`(use `bizui.confirm`).
   4. Deprecated options: `skin`(use `theme` or `customClass`), `useMousewheel`.
-  5. Use `data-title` attribute to get title instead of `title`.
+  5. Use `data-title` attribute to retrieve title instead of `title`.
 * DropDown
   1. New option: `customClass`.
   2. Deprecated options: `skin`(use `customClass`), `delay`, `event`.
@@ -49,7 +49,7 @@
 * Panel
   1. New options: `customClass`, `destroyOnClose`, `speed`, `theme`, `title`, `onBeforeClose`, `zIndex`.
   2. New methods: `title`, `updateButtons`.
-  3. Use `data-title` attribute to get title instead of `title`.
+  3. Use `data-title` attribute to retrieve title instead of `title`.
 * Select
   1. New options: `theme`, `inheritOriginalWidth`.
   2. New methods: `open`, `close`.
@@ -64,7 +64,7 @@
 * Table
   1. New options: `customClass`, `defaultSort`, `onFailEdit`.
   2. Provide third boolean param for `setSelected` to tigger onSelect.
-  3. Deprecated option: `skin`(use `customClass`), `resizable`(low usage ratio).
+  3. Deprecated option: `skin`(use `customClass`), `resizable`(huge code and low usage ratio).
 * Textarea
   1. New options: `customClass`, `theme`.
   2. Support the `placeholder` attribute for older IE.
@@ -79,10 +79,12 @@
   4. Deprecated param: `destroy`(use option `{removeAll: true}`).
   3. Deprecated options: `color`(use `theme`), `direction`(use `data-tooltip-direction` attribute), `margin`, `el`(use `element`).
 * Tree
-  1. Many new options and new methods, see docs.
+  1. Lots of new options and methods.
   2. Deprecated methods: `ins`.
 * TreeTable
   1. New options: `column`, `customClass`, `initialState`, `clickableNodeNames`.
   2. New methods: `loadBranch`, `move`, `node`, `removeNode`, `sortBranch`, `unloadBranch`.
   3. Deprecated options: `expanded`(use `initialState`), `resizable`, `onLoad`, `onSelect`, `onCancelSelect`.
   4. Deprecated method: `selectNode`.
+
+For more detailed APIs, run `gulp doc` and see `docs/`.
