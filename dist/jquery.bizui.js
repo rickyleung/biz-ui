@@ -7280,11 +7280,10 @@
             });
         },
         function (module, exports) {
-            _require(12);
             _require(13);
             _require(14);
-            var dialog = _require(15);
-            _require(16);
+            _require(15);
+            var dialog = _require(16);
             _require(17);
             _require(18);
             _require(19);
@@ -7294,15 +7293,16 @@
             _require(23);
             _require(24);
             _require(25);
-            _require(27);
+            _require(26);
             _require(28);
             _require(29);
+            _require(30);
             var bizui = {
                     theme: 'blue',
                     codepoints: _require(7),
                     alert: dialog.alert,
                     confirm: dialog.confirm,
-                    Tooltip: _require(26)
+                    Tooltip: _require(27)
                 };
             window.bizui = bizui;
             module.exports = bizui;
@@ -9971,6 +9971,120 @@
                     factory(jQuery);
                 }
             }(function ($, undefined) {
+                $.fn.editableTableWidget = function (options) {
+                    'use strict';
+                    return $(this).each(function () {
+                        var buildDefaultOptions = function () {
+                                var opts = $.extend({}, $.fn.editableTableWidget.defaultOptions);
+                                opts.editor = opts.editor.clone();
+                                return opts;
+                            }, activeOptions = $.extend(buildDefaultOptions(), options), ARROW_LEFT = 37, ARROW_UP = 38, ARROW_RIGHT = 39, ARROW_DOWN = 40, ENTER = 13, ESC = 27, TAB = 9, element = $(this), editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()), active, showEditor = function (select) {
+                                active = element.find('td:focus');
+                                if (active.length) {
+                                    editor.val(active.text()).removeClass('error').show().offset(active.offset()).css(active.css(activeOptions.cloneProperties)).width(active.width()).height(active.height()).focus();
+                                    if (select) {
+                                        editor.select();
+                                    }
+                                }
+                            }, setActiveText = function (trigger) {
+                                var text = $.trim(editor.val()), evt = $.Event('change'), originalContent;
+                                if (!active || active.text() === text) {
+                                    return true;
+                                }
+                                if (editor.hasClass('error')) {
+                                    if (trigger) {
+                                        active.trigger('fail', text);
+                                    }
+                                    return true;
+                                }
+                                originalContent = active.html();
+                                active.text(text).trigger(evt, text);
+                                if (evt.result === false) {
+                                    active.html(originalContent);
+                                }
+                            }, movement = function (element, keycode) {
+                                if (keycode === ARROW_RIGHT) {
+                                    return element.next('td');
+                                } else if (keycode === ARROW_LEFT) {
+                                    return element.prev('td');
+                                } else if (keycode === ARROW_UP) {
+                                    return element.parent().prev().children().eq(element.index());
+                                } else if (keycode === ARROW_DOWN) {
+                                    return element.parent().next().children().eq(element.index());
+                                }
+                                return [];
+                            };
+                        editor.blur(function () {
+                            setActiveText(true);
+                            editor.hide();
+                        }).keydown(function (e) {
+                            if (e.which === ENTER) {
+                                setActiveText();
+                                editor.hide();
+                                active.focus();
+                                e.preventDefault();
+                                e.stopPropagation();
+                            } else if (e.which === ESC) {
+                                editor.val(active.text());
+                                e.preventDefault();
+                                e.stopPropagation();
+                                editor.hide();
+                                active.focus();
+                            } else if (e.which === TAB) {
+                                active.focus();
+                            } else if (this.selectionEnd - this.selectionStart === this.value.length) {
+                                var possibleMove = movement(active, e.which);
+                                if (possibleMove.length > 0) {
+                                    possibleMove.focus();
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                }
+                            }
+                        }).on('input paste', function () {
+                            var evt = $.Event('validate');
+                            active.trigger(evt, $.trim(editor.val()));
+                            if (evt.result === false) {
+                                editor.addClass('error');
+                            } else {
+                                editor.removeClass('error');
+                            }
+                        });
+                        element.on('click.bizTableEdit', 'td[editable]', showEditor);
+                        element.find('td').prop('tabindex', 1);
+                        $(window).on('resize.bizTableEdit', function () {
+                            if (editor.is(':visible')) {
+                                editor.offset(active.offset()).width(active.width()).height(active.height());
+                            }
+                        });
+                    });
+                };
+                $.fn.editableTableWidget.defaultOptions = {
+                    cloneProperties: [
+                        'padding',
+                        'padding-top',
+                        'padding-bottom',
+                        'padding-left',
+                        'padding-right',
+                        'text-align',
+                        'font',
+                        'font-size',
+                        'font-family',
+                        'font-weight'
+                    ],
+                    editor: $('<input class="biz-table-editor">')
+                };
+            }));
+        },
+        function (module, exports) {
+            (function (factory) {
+                if (typeof define === 'function' && define.amd) {
+                    define(['jquery'], factory);
+                } else if (typeof exports === 'object') {
+                    factory(_require(3));
+                } else {
+                    factory(jQuery);
+                }
+            }(function ($, undefined) {
                 'use strict';
                 var $doc = $(document);
                 var $win = $(window);
@@ -12092,7 +12206,7 @@
             module.exports = Input;
         },
         function (module, exports) {
-            _require(10);
+            _require(11);
             function Page(page, options) {
             }
             Page.prototype = {
@@ -12367,7 +12481,7 @@
             module.exports = Radio;
         },
         function (module, exports) {
-            _require(9);
+            _require(10);
             function Select(select, options) {
             }
             Select.prototype = {
@@ -12492,6 +12606,7 @@
             module.exports = Tab;
         },
         function (module, exports) {
+            _require(9);
             function Table(table, options) {
                 this.main = table;
                 this.$main = $(this.main);
@@ -12500,9 +12615,9 @@
                         data: [],
                         noDataContent: '<p><i class="biz-icon">&#xe001;</i> \u6CA1\u6709\u6570\u636E</p>',
                         selectable: false,
-                        resizable: false,
-                        topOffset: 0,
-                        lockHead: false
+                        defaultSort: 'des',
+                        lockHead: false,
+                        topOffset: 0
                     };
                 this.options = $.extend(defaultOption, options || {});
                 this.init(this.options);
@@ -12547,6 +12662,57 @@
                     if (options.selectable && options.data.length > 0) {
                         this.createSelect(options.data);
                         this.bindSelect();
+                    }
+                    if (options.onSort) {
+                        this.bindSort();
+                    }
+                    var self = this;
+                    this.$headWrap.on('scroll', function () {
+                        self.$bodyWrap[0].scrollLeft = this.scrollLeft;
+                    });
+                    this.$bodyWrap.on('scroll', function () {
+                        self.$headWrap[0].scrollLeft = this.scrollLeft;
+                    });
+                    this.syncWidth();
+                    $(window).on('resize.bizTable', function () {
+                        self.syncWidth();
+                    });
+                    if (options.lockHead) {
+                        var headHeight = this.$headWrap.height();
+                        $(window).on('scroll.bizTable', function () {
+                            var currentOffsetTop = self.$main.offset().top - options.topOffset;
+                            if ($(window).scrollTop() > currentOffsetTop) {
+                                if (!self.hasLocked) {
+                                    self.$headWrap.css({
+                                        position: 'fixed',
+                                        top: self.options.topOffset,
+                                        width: self.$main.width()
+                                    });
+                                    self.$placeholder.css({ height: headHeight });
+                                    self.hasLocked = true;
+                                }
+                            } else {
+                                if (self.hasLocked) {
+                                    self.$headWrap.css({
+                                        position: 'static',
+                                        top: 'auto',
+                                        width: 'auto'
+                                    });
+                                    self.$placeholder.css({ height: 0 });
+                                    self.hasLocked = false;
+                                }
+                            }
+                        });
+                    }
+                    this.$tableBody.editableTableWidget();
+                    if (options.onValidate) {
+                        this.bindValidate();
+                    }
+                    if (options.onEdit) {
+                        this.bindEdit();
+                    }
+                    if (options.onFailEdit) {
+                        this.bindFailEdit();
                     }
                 },
                 createTableHead: function (options) {
@@ -12748,9 +12914,6 @@
                     });
                     return result;
                 },
-                getData: function () {
-                    return this.options.data;
-                },
                 getSelected: function () {
                     var self = this;
                     return $.map(this.getSelectedIndex(), function (index) {
@@ -12787,101 +12950,59 @@
                         this.options.onSelect.call(this, this.getSelected());
                     }
                 },
-                syncWidth: function () {
-                    this.$headWrap.css({ width: this.$main.width() });
-                    this.$tableHead.css({ width: this.$tableBody.width() });
+                getData: function () {
+                    return this.options.data;
                 },
-                setMinWidth: function () {
-                    var width = $.map(this.options.column, function (col, index) {
-                            if (typeof col.visible !== 'undefined' && !col.visible) {
-                                return 0;
-                            }
-                            return col.width + 17;
-                        });
-                    var minWidth = this.options.selectable ? 37 : 0;
-                    $.each(width, function (index, val) {
-                        minWidth = minWidth + val;
-                    });
-                    this.$tableHead.css('min-width', minWidth);
-                    this.$tableBody.css('min-width', minWidth);
-                    this.syncWidth();
+                getColumn: function () {
+                    return this.options.column;
+                },
+                removeSort: function () {
+                    this.$tableHead.find('.sortable').removeAttr('des').removeAttr('asc');
                 },
                 bindSort: function () {
                     var self = this;
-                    this.$main.on('click.bizTableSort', '.biz-table-head div.sortable', function (e) {
-                        var head = $(e.currentTarget), field = head.parent().attr('field');
+                    this.$main.on('click.bizTableSort', '.biz-table-head .sortable', function (e) {
+                        var head = $(this), field = head.parent().attr('field');
                         if (head.attr('des') !== undefined) {
-                            head.removeAttr('des').attr('asc', '');
+                            self.removeSort();
+                            head.attr('asc', '');
                         } else if (head.attr('asc') !== undefined) {
-                            head.removeAttr('asc').attr('des', '');
-                        } else {
-                            head.parents().filter('tr:first').find('div.sortable').removeAttr('des').removeAttr('asc');
+                            self.removeSort();
                             head.attr('des', '');
+                        } else {
+                            self.removeSort();
+                            head.attr(self.options.defaultSort === 'des' ? 'des' : 'asc', '');
                         }
-                        $.each(self.options.column, function (index, val) {
-                            if (val.field === field) {
-                                val.currentSort = head.attr('des') !== undefined ? 'des' : 'asc';
-                            } else if (val.currentSort) {
-                                delete val.currentSort;
-                            }
-                        });
                         self.options.onSort.call(self, {
-                            field: head.parent().attr('field'),
+                            field: field,
                             des: head.attr('des') !== undefined,
                             asc: head.attr('asc') !== undefined
                         }, e);
                     });
                 },
-                resetSort: function () {
-                    var i, col;
-                    if (this.defaultSort.length) {
-                        for (i = 0; i < this.options.column.length; i++) {
-                            col = this.options.column[i];
-                            delete col.currentSort;
-                            for (var j = 0; j < this.defaultSort.length; j++) {
-                                if (col.field == this.defaultSort[j].field) {
-                                    col.currentSort = this.defaultSort[j].currentSort;
-                                }
-                            }
-                        }
-                    } else {
-                        for (i = 0; i < this.options.column.length; i++) {
-                            col = this.options.column[i];
-                            if (col.currentSort) {
-                                delete col.currentSort;
-                            }
-                        }
+                syncWidth: function () {
+                    this.$headWrap.css({ width: this.$main.width() });
+                    this.$tableHead.css({ width: this.$tableBody.width() });
+                },
+                showColumn: function (field) {
+                    this.setColumnVisible(field, true);
+                },
+                hideColumn: function (field) {
+                    this.setColumnVisible(field, false);
+                },
+                setColumnVisible: function (fields, visible) {
+                    if (!$.isArray(fields)) {
+                        fields = [fields];
                     }
-                },
-                bindValidate: function () {
                     var self = this;
-                    this.$main.find('td[editable]').on('validate', function (e, newValue) {
-                        var columIndex = $(this).parent().find('td').index($(this));
-                        if (self.options.selectable) {
-                            columIndex = columIndex - 1;
-                        }
-                        return self.options.onValidate.call(self, {
-                            newValue: newValue,
-                            field: self.options.column[columIndex].field
-                        }, e);
+                    $.each(fields, function (index, field) {
+                        $.each(self.options.column, function (i, col) {
+                            if (col.field === field) {
+                                col.visible = visible;
+                            }
+                        });
                     });
-                },
-                bindEdit: function () {
-                    var self = this;
-                    this.$main.find('td[editable]').on('change', function (e, newValue) {
-                        var rowIndex = parseInt($(this).parent().attr('id').replace(self.rowIdPrefix, ''), 10), columIndex = $(this).parent().find('td').index($(this));
-                        if (self.options.selectable) {
-                            columIndex = columIndex - 1;
-                        }
-                        var field = self.options.column[columIndex].field;
-                        self.options.data[rowIndex - 1][field] = newValue;
-                        self.options.onEdit.call(self, {
-                            newValue: newValue,
-                            item: self.options.data[rowIndex - 1],
-                            index: rowIndex,
-                            field: field
-                        }, e);
-                    });
+                    this.refresh();
                 },
                 updateData: function (data) {
                     this.options.data = $.map(data || [], function (val, index) {
@@ -12897,74 +13018,85 @@
                     this.options.data[rowIndex - 1][field] = data;
                     this.refresh();
                 },
-                showColumn: function (field) {
-                    this.setColumnVisible(field, true);
-                },
-                hideColumn: function (field) {
-                    this.setColumnVisible(field, false);
-                },
-                setColumnVisible: function (field, visible) {
-                    if (!$.isArray(field)) {
-                        field = [field];
-                    }
+                bindValidate: function () {
                     var self = this;
-                    $.each(field, function (i, f) {
-                        $.each(self.options.column, function (j, col) {
-                            if (col.field === f) {
-                                col.visible = visible;
-                            }
-                        });
+                    this.$main.on('validate', 'td[editable]', function (e, newValue) {
+                        var columIndex = $(this).parent().find('td').index($(this));
+                        if (self.options.selectable) {
+                            columIndex = columIndex - 1;
+                        }
+                        return self.options.onValidate.call(self, {
+                            newValue: newValue,
+                            field: self.options.column[columIndex].field
+                        }, e);
                     });
-                    this.refresh();
+                },
+                bindEdit: function () {
+                    var self = this;
+                    this.$main.on('change', 'td[editable]', function (e, newValue) {
+                        var row = $(this).parent(), columIndex = row.find('td').index($(this)), rowIndex = row.parent().find('tr[class!="sum"]').index(row) / self.rowSpan;
+                        if (self.options.selectable) {
+                            columIndex = columIndex - 1;
+                        }
+                        var field = self.options.column[columIndex].field;
+                        self.options.data[rowIndex][field] = newValue;
+                        return self.options.onEdit.call(self, {
+                            newValue: newValue,
+                            field: field,
+                            item: self.options.data[rowIndex],
+                            index: rowIndex
+                        }, e);
+                    });
+                },
+                bindFailEdit: function () {
+                    var self = this;
+                    this.$main.on('fail', 'td[editable]', function (e, newValue) {
+                        var row = $(this).parent(), columIndex = row.find('td').index($(this)), rowIndex = row.parent().find('tr[class!="sum"]').index(row) / self.rowSpan;
+                        if (self.options.selectable) {
+                            columIndex = columIndex - 1;
+                        }
+                        var field = self.options.column[columIndex].field;
+                        return self.options.onFailEdit.call(self, {
+                            newValue: newValue,
+                            field: field,
+                            item: self.options.data[rowIndex],
+                            index: rowIndex
+                        }, e);
+                    });
                 },
                 refresh: function () {
-                    this.$main.find(':checkbox').bizCheckbox('destroy');
-                    this.$tableBody.find('td[editable]').off();
-                    this.$tableHead.html(this.createTableHead(this.options));
-                    this.$tableBody.html(this.createTableBody(this.options));
-                    if (this.options.selectable) {
-                        this.createSelect(this.options.data);
+                    var options = this.options;
+                    this.$main.find('.select-col :checkbox').bizCheckbox('destroy');
+                    this.$tableHead.html(this.createTableHead(options));
+                    this.$tableBody.html(this.createTableBody(options));
+                    if (options.foot && options.data.length > 0) {
+                        var tbody = this.$tableBody.find('tbody'), foot = this.createFoot(options);
+                        if (options.foot === 'top') {
+                            tbody.prepend(foot);
+                        }
+                        if (options.foot === 'bottom') {
+                            tbody.append(foot);
+                        }
                     }
-                    if (this.options.data.length) {
-                        if (this.options.foot === 'top') {
-                            this.$tableBody.find('tbody').prepend(this.createFoot(this.options));
-                        }
-                        if (this.options.foot === 'bottom') {
-                            this.$tableBody.find('tbody').append(this.createFoot(this.options));
-                        }
-                    } else if (this.options.noDataContent) {
+                    if (options.data.length === 0) {
                         this.createNoDataContent();
                     }
-                    this.syncWidth();
+                    if (options.selectable && options.data.length > 0) {
+                        this.createSelect(options.data);
+                    }
                     this.$headWrap[0].scrollLeft = this.$bodyWrap[0].scrollLeft = 0;
-                    if (this.options.resizable) {
-                        this.setMinWidth();
-                        this.$tableHead.resizableColumns('destroy').resizableColumns({
-                            start: function () {
-                                $('.biz-table-editor').blur();
-                            }
-                        });
-                    }
+                    this.syncWidth();
                     this.$tableBody.find('td').prop('tabindex', 1);
-                    if (this.options.onEdit) {
-                        this.bindEdit();
-                    }
-                    if (this.options.onValidate) {
-                        this.bindValidate();
-                    }
                 },
                 destroy: function () {
-                    this.$main.find(':checkbox').bizCheckbox('destroy');
-                    this.$tableBody.find('td[editable]').off();
-                    $('.biz-table-editor').off().remove();
-                    this.$main.off('click.bizTableSelectAll').off('click.bizTableSelectOne').off('click.bizTableSort');
-                    if (this.options.resizable) {
-                        this.$tableHead.resizableColumns('destroy');
-                    }
-                    $(window).off('scroll.bizTable');
+                    this.$main.find('.select-col :checkbox').bizCheckbox('destroy');
+                    this.$main.off('click.bizTableSelectAll').off('click.bizTableSelectOne').off('click.bizTableSort').off('click.bizTableEdit').off('validate').off('change').off('fail');
                     this.$headWrap.off();
                     this.$bodyWrap.off();
+                    $(window).off('scroll.bizTable').off('resize.bizTable').off('resize.bizTableEdit');
+                    $('.biz-table-editor').off().remove();
                     this.$main.empty();
+                    this.$main.data(dataKey, null);
                 }
             };
             $.extend($.fn, {
@@ -13256,7 +13388,7 @@
             module.exports = Tree;
         },
         function (module, exports) {
-            _require(11);
+            _require(12);
             function TreeTable(treetable, options) {
             }
             TreeTable.prototype = {

@@ -61,6 +61,10 @@
   3. New event: `change`.
   3. Deprecated options: `event`(use `action`), `onChange`(bind `change` event), `skin`(use `theme` or `customClass`).
   4. Deprecated method: `select`(use `index`).
+* Table
+  1. New options: `customClass`, `defaultSort`, `onFailEdit`.
+  2. Provide third boolean param for `setSelected` to tigger onSelect.
+  3. Deprecated option: `skin`(use `customClass`), `resizable`(low usage ratio).
 * Textarea
   1. New options: `customClass`, `theme`.
   2. Support the `placeholder` attribute for older IE.
