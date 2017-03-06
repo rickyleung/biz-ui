@@ -62,6 +62,10 @@ Use iconfonts just like [Google Material Design Icons](https://material.io/icons
 
     <i class="biz-icon">3d_rotation</i>
 
+Demos
+--------
+[http://bizdevfe.github.io/biz-ui/](http://bizdevfe.github.io/biz-ui/pages/components.html)
+
 Browser support
 --------
 IE9+, Firefox, Chrome and Safari.
