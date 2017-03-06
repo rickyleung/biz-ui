@@ -20,8 +20,6 @@
 <div class="container">
 	<div class="tutorial">
         <h1>快速起步</h1>
-    	<h3>兼容性</h3>
-        <p>BizUI 支持 IE9+、Chrome、Firefox、Safari。</p>
         <h3>依赖</h3>
         <p>jQuery 1.11.0+</p>
         <h3>使用方法</h3>
@@ -46,7 +44,7 @@
         <p>然后在任意模块或全局环境中使用即可：
         <pre><code class="js">
     $('button').bizButton();
-    $('button').bizButton('destroy');
+    $('input').bizCalendar();
         </code></pre>
         <p>每个组件的具体使用方法请参见 <a href="components.html">示例代码</a>。</p>
         <h3>主题</h3>
@@ -67,11 +65,24 @@
         </code></pre>
         <h3>图标</h3>
         <div class="icon-font"></div>
-        <p>BizUI 提供了 900 余种 Iconfont，详见 <a href="https://material.io/icons/" target="_blank">Google Material Design Icons</a>。对于 IE 浏览器，请使用 codepoints（src/codepoints.js）代替图标名称。使用方法如下：</p>
+        <p>BizUI 提供了 900 余种 Iconfont，详见 <a href="https://material.io/icons/" target="_blank">Google Material Design Icons</a>。对于 IE 浏览器，请使用 codepoints（src/codepoints.js）代替图标名称。<br>可直接在 HTML 中使用：</p>
         <pre><code class="html">
-    &lt;i class="biz-icon"&gt;3d_rotation&lt;/i&gt;
-    &lt;i class="biz-icon"&gt;&amp;#xE84D;&lt;/i&gt; &lt;!-- for IE --&gt;
+    &lt;i class="biz-icon"&gt;add&lt;/i&gt;
+    &lt;i class="biz-icon"&gt;&amp;#xe145;&lt;/i&gt; &lt;!-- for IE --&gt;
         </code></pre>
+        <p>也可在 CSS 中使用：</p>
+        <pre><code class="css">
+    a.add:before {
+        font-family: "BizIcon" !important;
+        content: '\e145';
+        width: 24px;
+        height: 24px;
+        margin-right: 5px;
+        color: #ccc;
+    }
+        </code></pre>
+        <h3>浏览器支持</h3>
+        <p>BizUI 支持 IE9+、Chrome、Firefox、Safari 等主流浏览器。</p>
         <h3>构建</h3>
         <p>如果对源代码进行了修改，运行如下命令，目标代码将生成在 dist 目录。</p>
         <pre><code class="bash">

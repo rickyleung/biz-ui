@@ -15,10 +15,6 @@ BizUI - A jQuery plugin for business UI components
 [npm-stat-image]: https://nodei.co/npm/biz-ui.png?downloads=true
 [npm-stat-url]: https://nodei.co/npm/biz-ui
 
-Browser support
---------
-IE9+, Firefox, Chrome and Safari.
-
 Dependence
 --------
 jQuery 1.11.0+
@@ -43,28 +39,32 @@ If you're not using a build system, just include the css file and the js file to
     <script src="jquery.js"></script>
     <script src="jquery.bizui.js"></script>
 
-Use it in any module or global environment as a common jQuery plugin:
+Use it in any module or global environment as jQuery plugins:
 
     $('button').bizButton();
-    $('button').bizButton('destroy');
+	$('input').bizCalendar();
 
 Themes
 --------
-Provided 19 themes, setting by the `theme` field:
+BizUI provides 19 themes, set the `theme` field in each component:
 
     $('button').bizButton({
 	    theme: 'light-blue'
     });
 
-or you can set `bizui.theme` all at once:
+or set `bizui.theme` all at once:
 
     bizui.theme = 'light-blue';
 
 Iconfonts
 --------
-Supported iconfonts via [Google Material Design Icons](https://material.io/icons/), for example:
+Use iconfonts just like [Google Material Design Icons](https://material.io/icons/) in BizUI, for example:
 
     <i class="biz-icon">3d_rotation</i>
+
+Browser support
+--------
+IE9+, Firefox, Chrome and Safari.
 
 Build
 --------
