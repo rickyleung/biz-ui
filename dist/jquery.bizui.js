@@ -12730,7 +12730,6 @@
                             this.rowSpan = col.content.length;
                         }
                         var th = $('<th nowrap></th>').attr({
-                                'data-width': col.width,
                                 width: col.width,
                                 field: col.field
                             });
@@ -12860,7 +12859,7 @@
                             }
                         });
                     }
-                    var th = $('<th nowrap data-width="24" width="24" class="select-col"><input type="checkbox" title=" "></th>');
+                    var th = $('<th nowrap width="24" class="select-col"><input type="checkbox" title=" "></th>');
                     this.$tableHead.find('tr').prepend(th);
                     if (!headEnabled) {
                         th.find(':checkbox').prop('disabled', true);
